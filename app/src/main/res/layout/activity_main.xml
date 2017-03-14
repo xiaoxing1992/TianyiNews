@@ -69,17 +69,7 @@
                 android:textColor="@color/bottom_textcolor_selector"
                 android:textSize="12sp" />
 
-            <RadioButton
-                android:id="@+id/buttom_login_rb_id"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@null"
-                android:drawableTop="@drawable/login_bottom_rb_selector"
-                android:gravity="center"
-                android:text="未登录"
-                android:textColor="@color/bottom_textcolor_selector"
-                android:textSize="12sp" />
+
         </RadioGroup>
     </LinearLayout>
 </LinearLayout>
