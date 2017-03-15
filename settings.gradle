@@ -1,1 +1,1 @@
-include ':app', ':slidingmenulibrary'
+include ':app', ':slidingmenulibrary', ':magicindicator'

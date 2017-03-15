@@ -7,9 +7,9 @@
     android:orientation="vertical"
     tools:context="tianyinews.tianyi.com.tianyinews.MainActivity">
 
-    <include layout="@layout/title_layout" />
 
     <FrameLayout
+        android:id="@+id/main_fl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"></FrameLayout>
@@ -29,6 +29,7 @@
             android:background="#33000000" />
 
         <RadioGroup
+            android:id="@+id/main_rb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -36,10 +37,12 @@
             android:padding="3dp">
 
             <RadioButton
+                android:drawablePadding="-7dp"
                 android:id="@+id/buttom_home_rb_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/touming"
                 android:button="@null"
                 android:drawableTop="@drawable/home_bottom_rb_selector"
                 android:gravity="center"
@@ -48,6 +51,9 @@
                 android:textSize="12sp" />
 
             <RadioButton
+                android:drawablePadding="-7dp"
+                android:background="@color/touming"
+                android:id="@+id/buttom_video_rb_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -59,6 +65,9 @@
                 android:textSize="12sp" />
 
             <RadioButton
+                android:drawablePadding="-7dp"
+                android:background="@color/touming"
+                android:id="@+id/buttom_care_rb_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

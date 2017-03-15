@@ -5,4 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="bottomTextPress">#D43D3D</color>
     <color name="bottomTextNormal">#6D6D6D</color>
+    <color name="tabIndicatorColor">#D43D3D</color>
+    <color name="tabSelectedTextColor">#D43D3D</color>
+    <color name="tabTextColor">#000000</color>
+    <color name="touming">#00000000</color>
 </resources>
