@@ -1,19 +1,29 @@
-package tianyinews.tianyi.com.tianyinews;
+package tianyinews.tianyi.com.tianyinews.activity;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.ImageView;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
+import thinkfreely.changemodelibrary.ChangeModeController;
+import tianyinews.tianyi.com.tianyinews.R;
+import tianyinews.tianyi.com.tianyinews.base.PullPushLayout;
+import tianyinews.tianyi.com.tianyinews.base.ThemeManager;
 import tianyinews.tianyi.com.tianyinews.fragment.HomeFragment;
+import tianyinews.tianyi.com.tianyinews.fragment.LeftFragment;
 import tianyinews.tianyi.com.tianyinews.fragment.VideoFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,13 +34,18 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager manager;
     private HomeFragment homeFragment;
     private VideoFragment videoFragment;
+    private ActionBar supportActionBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ChangeModeController.getInstance().init(this, R.attr.class).setTheme(this, R.style.DayTheme, R.style.NightTheme);
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-
+        //注册
+        // ThemeManager.registerThemeChangeListener(this);
+        //  supportActionBar = getSupportActionBar();
         initView();
         initData();
         //初始化侧滑界面
@@ -87,10 +102,16 @@ public class MainActivity extends AppCompatActivity {
     private void initLeftMenu() {
         slidingMenu = new SlidingMenu(MainActivity.this);
         slidingMenu.setMode(SlidingMenu.LEFT);
-        slidingMenu.setBehindOffset(200);
+        slidingMenu.setBehindOffset(100);
         slidingMenu.setOffsetFadeDegree(0.4f);
         slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-        slidingMenu.setMenu(R.layout.left_layout);
+        slidingMenu.setMenu(R.layout.left_frame_layout);
+        // 得到transaction对象
+        FragmentTransaction transaction = getSupportFragmentManager()
+                .beginTransaction();
+        //添加一个Fragment
+        transaction.add(R.id.left_frame_layout_fl, new LeftFragment());
+        transaction.commit();
 
 
     }
@@ -99,5 +120,12 @@ public class MainActivity extends AppCompatActivity {
     //显示侧滑的方法
     public void showLeftMenu() {
         slidingMenu.showMenu();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //3. 在onDestroy调用
+        ChangeModeController.onDestory();
     }
 }

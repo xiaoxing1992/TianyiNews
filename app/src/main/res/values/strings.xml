@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TianyiNews</string>
+    <string name="left_drawer_no_login_tip">登录后，将推荐给你更多感兴趣的文章</string>
 </resources>

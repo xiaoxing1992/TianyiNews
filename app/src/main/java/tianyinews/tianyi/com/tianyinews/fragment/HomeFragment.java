@@ -2,11 +2,11 @@ package tianyinews.tianyi.com.tianyinews.fragment;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
@@ -26,10 +26,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import tianyinews.tianyi.com.tianyinews.MainActivity;
+import thinkfreely.changemodelibrary.ChangeModeController;
+import tianyinews.tianyi.com.tianyinews.activity.MainActivity;
 import tianyinews.tianyi.com.tianyinews.R;
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment;
-import tianyinews.tianyi.com.tianyinews.ext.titles.ColorFlipPagerTitleView;
 import tianyinews.tianyi.com.tianyinews.ext.titles.ScaleTransitionPagerTitleView;
 
 /**
@@ -50,6 +50,7 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected View initView() {
+
         View view = View.inflate(mContext, R.layout.homefragment, null);
         //     home_tab_layout = (TabLayout) view.findViewById(R.id.home_tab_layout);
         main_magic_indicator = (MagicIndicator) view.findViewById(R.id.main_magic_indicator);
@@ -84,9 +85,14 @@ public class HomeFragment extends BaseFragment {
         }*/
 
 
-        main_magic_indicator.setBackgroundColor(Color.parseColor("#fafafa"));
+        //  main_magic_indicator.setBackgroundColor(Color.parseColor("#fafafa"));
+
+        ChangeModeController.getInstance().addBackgroundColor(main_magic_indicator, R.attr.zzbackground);
+
+
         CommonNavigator commonNavigator = new CommonNavigator(getActivity());
         commonNavigator.setScrollPivotX(0.8f);
+
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override
             public int getCount() {
@@ -97,6 +103,7 @@ public class HomeFragment extends BaseFragment {
             public IPagerTitleView getTitleView(Context context, final int index) {
                 SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
                 // SimplePagerTitleView simplePagerTitleView = new ColorFlipPagerTitleView(context);
+
                 simplePagerTitleView.setText(mDataList.get(index));
                 simplePagerTitleView.setTextSize(18);
                 simplePagerTitleView.setNormalColor(Color.parseColor("#9e9e9e"));

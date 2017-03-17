@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="zzbackground" format="color|reference" />
+    <attr name="zzbackgroundDrawable" format="reference" />
+    <attr name="zztextColor" format="color" />
+    <attr name="zzItemBackground" format="color" />
+    <attr name="ttbackground" format="color|reference" />
+    <attr name="ttbackgroundDrawable" format="reference" />
+    <attr name="ttsearchbackgroundDrawable" format="reference" />
+    <attr name="homebackgroundSelector" format="reference" />
+</resources>

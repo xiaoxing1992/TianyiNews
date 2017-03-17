@@ -31,4 +31,7 @@ dependencies {
     compile project(':slidingmenulibrary')
     compile 'com.android.support:design:23.2.0'
     compile project(':magicindicator')
+    compile project(':changemodelibrary')
+    compile project(':xlistviewlibrary')
+    compile 'com.loopj.android:android-async-http:1.4.9'
 }

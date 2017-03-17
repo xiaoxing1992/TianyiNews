@@ -3,10 +3,46 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="textColor">#FF000000</color>
+    <color name="darker_grays">#aaa</color>
+    <color name="backgroundColor">#FFFFFF</color>
+    <color name="colorPrimaryNight">#263238</color>
+    <color name="colorPrimaryDarkNight">#1E282D</color>
+    <color name="colorAccentNight">#73432A</color>
+
+
+
+
     <color name="bottomTextPress">#D43D3D</color>
     <color name="bottomTextNormal">#6D6D6D</color>
     <color name="tabIndicatorColor">#D43D3D</color>
     <color name="tabSelectedTextColor">#D43D3D</color>
     <color name="tabTextColor">#000000</color>
     <color name="touming">#00000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="DCDCDC">#dcdcdc</color>
+    <color name="left_drawer_user_name">#ffd4d4d4</color>
+    <color name="left_drawer_no_login_tip_text">#ffb8b8b8</color>
+    <color name="left_drawer_item_line">#666</color>
+    <color name="left_drawer_item_text_normal">#000</color>
+    <color name="left_drawer_item_text_pressed">#ff4e4e4e</color>
+    <color name="left_drawer_offline_hint">#ff6699cc</color>
+    <color name="left_drawer_night_mode_text">#ffb8b8b8</color>
+
+
+
+
+
+
+    <!--新的模式-->
+    <color name="dayBackground">#F2F4F7</color>
+    <color name="dayTextColor">#000</color>
+    <color name="dayItemBackground">#fff</color>
+    <color name="dayTitleBackground">#ffcc3131</color>
+
+    <color name="nightItemBackground">#37474F</color>
+    <color name="nightBackground">#263238</color>
+    <color name="nightTextColor">#fff</color>
+    <color name="nightTitleBackground">#893F3F</color>
+
 </resources>

@@ -2,4 +2,13 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="left_drawer_avatar_size">48dp</dimen>
+    <dimen name="dp810">180dp</dimen>
+    <dimen name="dp2000">592.6dp</dimen>
+    <dimen name="dp210">62.2dp</dimen>
+    <dimen name="dp300">88.9dp</dimen>
+    <dimen name="dp150">44.4dp</dimen>
+    <dimen name="dp120">35.6dp</dimen>
+    <dimen name="dp40">11.9dp</dimen>
+    <dimen name="dp2">0.6dp</dimen>
 </resources>

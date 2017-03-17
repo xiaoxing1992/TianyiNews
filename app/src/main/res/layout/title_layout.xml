@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/title_bar"
     android:layout_width="fill_parent"
     android:layout_height="48dp"
-    android:background="#ffcc3131"
+    android:background="?attr/ttbackground"
     android:gravity="center"
-    android:orientation="horizontal">
-
+    android:orientation="horizontal"
+    app:backgroundAttr="ttbackground">
+    <!--#893F3F-->
     <FrameLayout
         android:id="@+id/top_head_container"
         android:layout_width="wrap_content"
@@ -33,22 +35,22 @@
         android:orientation="horizontal">
 
         <ImageView
-
             android:id="@+id/title_recent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/widget_title" />
+            android:background="?attr/ttbackgroundDrawable"
+            app:backgroundAttr="ttbackgroundDrawable" />
 
-       <!-- <ImageView
+        <!-- <ImageView
 
-            android:id="@+id/title_refreshicon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/refreshicon_titlebar" />-->
+             android:id="@+id/title_refreshicon"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="center"
+             android:layout_marginLeft="5dp"
+             android:src="@drawable/refreshicon_titlebar" />-->
     </LinearLayout>
 
 
@@ -58,7 +60,8 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/ic_subscibe_search_presseds"
+        android:background="?attr/ttsearchbackgroundDrawable"
+        app:backgroundAttr="ttsearchbackgroundDrawable"
         android:textSize="14sp" />
 
     <ImageView

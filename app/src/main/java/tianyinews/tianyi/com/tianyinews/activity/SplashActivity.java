@@ -1,4 +1,4 @@
-package tianyinews.tianyi.com.tianyinews;
+package tianyinews.tianyi.com.tianyinews.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+
+import tianyinews.tianyi.com.tianyinews.R;
+import tianyinews.tianyi.com.tianyinews.util.CacheUtil;
 
 /**
  * Created by Administrator on 2017/3/10.
@@ -51,7 +54,10 @@ public class SplashActivity extends Activity {
     }
 
     private void startTo() {
+
         startActivity(new Intent(SplashActivity.this, MainActivity.class));
         finish();
+
+
     }
 }

@@ -7,5 +7,64 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <!--日间模式 -->
+    <style name="DayTheme" parent="AppTheme">
+        <item name="zzbackground">@color/dayBackground</item>
+        <item name="zzbackgroundDrawable">@drawable/ic_launcher</item>
+        <item name="zztextColor">@color/dayTextColor</item>
+        <item name="zzItemBackground">@color/dayItemBackground</item>
+        <item name="ttbackground">@color/dayTitleBackground</item>
+        <item name="ttbackgroundDrawable">@drawable/widget_title</item>
+        <item name="ttsearchbackgroundDrawable">@drawable/ic_subscibe_search_presseds</item>
+        <item name="homebackgroundSelector">@drawable/home_bottom_rb_night_selector</item>
+
+
+    </style>
+
+
+    <!--夜间模式 -->
+    <style name="NightTheme" parent="AppTheme">
+        <item name="zzbackground">@color/nightBackground</item>
+        <item name="zzbackgroundDrawable">@color/nightBackground</item>
+        <item name="zztextColor">@color/nightTextColor</item>
+        <item name="zzItemBackground">@color/nightItemBackground</item>
+        <item name="ttbackground">@color/nightTitleBackground</item>
+        <item name="ttbackgroundDrawable">@drawable/widget_title_night</item>
+         <item name="ttsearchbackgroundDrawable">@drawable/ic_subscibe_search_presseds_nights</item>
+        <item name="homebackgroundSelector">@drawable/home_bottom_rb_night_selector</item>
+
+        <item name="colorPrimary">@color/colorPrimaryNight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkNight</item>
+        <item name="colorAccent">@color/colorAccentNight</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="left_drawer_item_layout">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">40.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">50.0dip</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="left_drawer_item_line">
+        <item name="android:background">@color/left_drawer_item_line</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.3dp</item>
+    </style>
+
+    <style name="left_drawer_item_text">
+        <item name="android:textSize">15.0sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">9.0dip</item>
+        <item name="android:paddingBottom">9.0dip</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">25.0dip</item>
+    </style>
 
 </resources>

@@ -10,8 +10,10 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/changemodelibrary" />
             <option value="$PROJECT_DIR$/magicindicator" />
             <option value="$PROJECT_DIR$/slidingmenulibrary" />
+            <option value="$PROJECT_DIR$/xlistviewlibrary" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
