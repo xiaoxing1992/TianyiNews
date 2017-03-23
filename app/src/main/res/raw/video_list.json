@@ -1,0 +1,90 @@
+[
+  {
+    "title": "娱乐",
+    "channelType": 0,
+    "isFix": 1,
+    "isSubscible": 1,
+    "url": "http://c.3g.163.com/nc/video/list/V9LG4CHOR/n/",
+    "url_footer": "-10.html"
+  },
+  {
+    "title": "体育",
+    "channelType": 0,
+    "isFix": 1,
+    "isSubscible": 1,
+    "url": "http://c.3g.163.com/nc/video/list/VBF8F2E94/n/",
+    "url_footer": "-10.html"
+  },
+  {
+    "title": "搞笑",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 1,
+    "url": "http://c.3g.163.com/nc/video/list/VAP4BFE3U/n/",
+    "url_footer": "-10.html"
+  },
+  {
+    "title": "美女",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 1,
+    "url": "http://c.3g.163.com/nc/video/list/VAP4BG6DL/n/",
+    "url_footer": "-10.html"
+  },
+  {
+    "title": "新闻现场",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 1,
+    "url": "http://c.3g.163.com/nc/video/list/VAV3H6JSN/n/",
+    "url_footer": "-10.html"
+  },
+  {
+    "title": "BoBo",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 1,
+    "url": "http://c.3g.163.com/nc/video/list/VBK3JKUIF/n/",
+    "url_footer": "-10.html"
+  },
+  {
+    "title": "二次元",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 1,
+    "url": "http://c.3g.163.com/nc/video/list/VBF8F1PSA/n/",
+    "url_footer": "-10.html"
+  },
+  {
+    "title": "黑科技",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 1,
+    "url": "http://c.3g.163.com/nc/video/list/VBF8F2PKF/n/",
+    "url_footer": "-10.html"
+  },
+  {
+    "title": "军武",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 1,
+    "url": "http://c.3g.163.com/nc/video/list/VBF8F3301/n/",
+    "url_footer": "-10.html"
+  },
+  {
+    "title": "涨知识",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 1,
+    "url": "http://c.3g.163.com/nc/video/list/VBF8F3SGL/n/",
+    "url_footer": "-10.html"
+  },
+  {
+    "title": "八卦",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 1,
+    "url": "http://c.3g.163.com/nc/video/list/VBF8EUDUS/n/",
+    "url_footer": "-10.html"
+  }
+]

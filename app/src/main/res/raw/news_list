@@ -1,0 +1,241 @@
+[
+  {
+    "title": "热点",
+    "channelType": 0,
+    "isFix": 1,
+    "isSubscible": 1,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=1&PageSize=12&Type=1"
+  },
+  {
+    "title": "社会",
+    "channelType": 0,
+    "isFix": 1,
+    "isSubscible": 1,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=2&PageSize=12&Type=1"
+  },
+  {
+    "title": "科技",
+    "channelType": 1,
+    "isFix": 0,
+    "isSubscible": 1,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=3&PageSize=12&Type=1"
+  },
+  {
+    "title": "国际",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 1,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=4&PageSize=12&Type=1"
+  },
+  {
+    "title": "军事",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=5&PageSize=12&Type=1"
+  },
+  {
+    "title": "财经",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=6&PageSize=12&Type=1"
+  },
+  {
+    "title": "时尚",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=7&PageSize=12&Type=1"
+  },
+  {
+    "title": "娱乐",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=8&PageSize=12&Type=1"
+  },
+  {
+    "title": "汽车",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=9&PageSize=12&Type=1"
+  },
+  {
+    "title": "体育",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=10&PageSize=12&Type=1"
+  },
+  {
+    "title": "游戏",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=11&PageSize=12&Type=1"
+  },
+  {
+    "title": "旅游",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=12&PageSize=12&Type=1"
+  },
+  {
+    "title": "历史",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=13&PageSize=12&Type=1"
+  },
+  {
+    "title": "探索",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=14&PageSize=12&Type=1"
+  },
+  {
+    "title": "美食",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=15&PageSize=12&Type=1"
+  },
+  {
+    "title": "育儿",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=16&PageSize=12&Type=1"
+  },
+  {
+    "title": "养生",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=17&PageSize=12&Type=1"
+  },
+  {
+    "title": "故事",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=18&PageSize=12&Type=1"
+  },
+  {
+    "title": "微信",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=20&PageSize=12&Type=1"
+  },
+  {
+    "title": "数码",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=22&PageSize=12&Type=1"
+  },
+  {
+    "title": "心理",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=23&PageSize=12&Type=1"
+  },
+  {
+    "title": "美容",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=24&PageSize=12&Type=1"
+  },
+  {
+    "title": "影视",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=25&PageSize=12&Type=1"
+  },
+  {
+    "title": "风水",
+    "channelType": 0,
+    "isFix": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=29&PageSize=12&Type=1"
+  },
+  {
+    "title": "星座",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=32&PageSize=12&Type=1"
+  },
+  {
+    "title": "情感",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=39&PageSize=12&Type=1"
+  },
+  {
+    "title": "房产",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=41&PageSize=12&Type=1"
+  },
+  {
+    "title": "趣闻",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=45&PageSize=12&Type=1"
+  },
+  {
+    "title": "英语",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=48&PageSize=12&Type=1"
+  },
+  {
+    "title": "国内",
+    "channelType": 0,
+    "isFix": 0,
+    "isSubscible": 0,
+    "url": "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleList?PageIndex=",
+    "url_footer": "&ID=56&PageSize=12&Type=1"
+  }
+]

@@ -1,14 +1,28 @@
 package tianyinews.tianyi.com.tianyinews.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.shareboard.SnsPlatform;
+
+import org.xutils.image.ImageOptions;
+import org.xutils.x;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 import thinkfreely.changemodelibrary.ChangeModeController;
 import tianyinews.tianyi.com.tianyinews.R;
@@ -28,26 +42,28 @@ public class LeftFragment extends Fragment {
     private RelativeLayout ll_content;
     private LinearLayout nights_ll;
     private TextView settrings_tv;
-    private RelativeLayout search_btn;
-    private RelativeLayout message_btn;
-    private RelativeLayout offline_btn;
-    private RelativeLayout app_activity_btn;
-    private RelativeLayout feedback_btn;
-    private RelativeLayout appstore_btn;
-    private TextView message_text;
-    private TextView offline_btn_text;
-    private TextView app_activity_text;
-    private TextView feedback_text;
-    private TextView appstore_text;
-    private TextView calls_tv;
-    private TextView nights_tv;
-    private TextView search_btn_text;
+   /* public ArrayList<SnsPlatform> platforms = new ArrayList<SnsPlatform>();
+    private SHARE_MEDIA[] list = {SHARE_MEDIA.QQ};*/
     private boolean flag = false;
+    private boolean isauth;
+    private ImageView qq_login_img;
+    private RelativeLayout qq_user_login_jicheng;
+    private RelativeLayout qq_user_rl;
+    private ImageView qq_user_img;
+    private TextView qq_user_name;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = LayoutInflater.from(getActivity()).inflate(R.layout.left_layout, container, false);
+        nights_ll = (LinearLayout) view.findViewById(R.id.nights_ll);
+      /*  qq_login_img = (ImageView) view.findViewById(R.id.qq_login_img);
+        qq_user_login_jicheng = (RelativeLayout) view.findViewById(R.id.qq_user_login_jicheng);
+        qq_user_rl = (RelativeLayout) view.findViewById(R.id.qq_user_rl);
+        qq_user_img = (ImageView) view.findViewById(R.id.qq_user_img);
+        qq_user_name = (TextView) view.findViewById(R.id.qq_user_name);*/
+     //   initPlatforms();
+       /* isauth = UMShareAPI.get(getActivity()).isAuthorize(getActivity(), platforms.get(0).mPlatform);*/
 
         return view;
     }
@@ -59,8 +75,28 @@ public class LeftFragment extends Fragment {
         getViews();
     }
 
+  /*  private void initPlatforms() {
+        platforms.clear();
+        for (SHARE_MEDIA e : list) {
+            if (!e.toString().equals(SHARE_MEDIA.GENERIC.toString())) {
+                platforms.add(e.toSnsPlatform());
+            }
+        }
+    }*/
+
     public void getViews() {
-        nights_ll = (LinearLayout) view.findViewById(R.id.nights_ll);
+
+
+        /*qq_login_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                UMShareAPI.get(getActivity()).doOauthVerify(getActivity(), platforms.get(0).mPlatform, authListener);
+            }
+        });*/
+
+
+
         /*
         left_mian_rl = (RelativeLayout) view.findViewById(R.id.left_mian_rl);
         header_tv = (TextView) view.findViewById(R.id.header_tv);
@@ -103,4 +139,73 @@ public class LeftFragment extends Fragment {
         });
 
     }
+
+   /* UMAuthListener authListener = new UMAuthListener() {
+
+        @Override
+        public void onStart(SHARE_MEDIA share_media) {
+
+        }
+
+        @Override
+        public void onComplete(SHARE_MEDIA share_media, int action, Map<String, String> data) {
+            Toast.makeText(getActivity(), "请求成功", Toast.LENGTH_SHORT).show();
+
+            switch (action) {
+                case ACTION_AUTHORIZE:
+                    UMShareAPI.get(getActivity()).getPlatformInfo(getActivity(), platforms.get(0).mPlatform, authListener);
+                    break;
+                case ACTION_DELETE:
+                    break;
+                case ACTION_GET_PROFILE:
+
+
+                    qq_user_login_jicheng.setVisibility(View.GONE);
+                    qq_user_rl.setVisibility(View.VISIBLE);
+                    String name = data.get("screen_name");
+                    qq_user_name.setText(name);
+                   *//* String gender = data.get("gender");
+                    tvvv_tv.setText(gender);*//*
+                    String iconurl = data.get("iconurl");
+                    ImageOptions options = new ImageOptions.Builder()
+                            .setCircular(true)
+                            .setSize(100, 100)
+                            .setLoadingDrawableId(R.mipmap.ic_launcher)
+                            .build();
+                    x.image().bind(qq_user_img, iconurl, options);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+            Toast.makeText(getActivity(), "请求失败", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA share_media, int i) {
+            Toast.makeText(getActivity(), "请求取消", Toast.LENGTH_SHORT).show();
+        }
+    };*/
+
+  /*  @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(getActivity()).onActivityResult(requestCode, resultCode, data);
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        UMShareAPI.get(getActivity()).release();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        UMShareAPI.get(getActivity()).onSaveInstanceState(outState);
+    }*/
 }

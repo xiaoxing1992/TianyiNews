@@ -1,1 +1,1 @@
-include ':app', ':slidingmenulibrary', ':magicindicator', ':changemodelibrary', ':xlistviewlibrary'
+include ':app', ':slidingmenulibrary', ':magicindicator', ':changemodelibrary', ':xlistviewlibrary', ':channellib'

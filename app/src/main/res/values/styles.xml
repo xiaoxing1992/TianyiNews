@@ -30,7 +30,7 @@
         <item name="zzItemBackground">@color/nightItemBackground</item>
         <item name="ttbackground">@color/nightTitleBackground</item>
         <item name="ttbackgroundDrawable">@drawable/widget_title_night</item>
-         <item name="ttsearchbackgroundDrawable">@drawable/ic_subscibe_search_presseds_nights</item>
+        <item name="ttsearchbackgroundDrawable">@drawable/ic_subscibe_search_presseds_nights</item>
         <item name="homebackgroundSelector">@drawable/home_bottom_rb_night_selector</item>
 
         <item name="colorPrimary">@color/colorPrimaryNight</item>

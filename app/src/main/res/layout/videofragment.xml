@@ -6,7 +6,9 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/rl_ll"
+        android:id="@+id/rl_ll_video"
+        android:background="?attr/zzbackground"
+        app:backgroundAttr="zzbackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -28,12 +30,6 @@
 
         </android.support.design.widget.TabLayout>
 
-        <ImageView
-            android:id="@+id/button_more_columns"
-            android:layout_width="40.0dip"
-            android:layout_height="40.0dip"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/channel_glide_day_bg" />
     </LinearLayout>
 
 

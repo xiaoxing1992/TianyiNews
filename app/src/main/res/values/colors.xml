@@ -9,15 +9,15 @@
     <color name="colorPrimaryNight">#263238</color>
     <color name="colorPrimaryDarkNight">#1E282D</color>
     <color name="colorAccentNight">#73432A</color>
-
-
+    <color name="default_text_night">#ff747474</color>
+    <color name="default_text">#ff454545</color>
 
 
     <color name="bottomTextPress">#D43D3D</color>
     <color name="bottomTextNormal">#6D6D6D</color>
     <color name="tabIndicatorColor">#D43D3D</color>
     <color name="tabSelectedTextColor">#D43D3D</color>
-    <color name="tabTextColor">#000000</color>
+    <color name="tabTextColor">#666</color>
     <color name="touming">#00000000</color>
     <color name="white">#FFFFFF</color>
     <color name="DCDCDC">#dcdcdc</color>
@@ -28,10 +28,6 @@
     <color name="left_drawer_item_text_pressed">#ff4e4e4e</color>
     <color name="left_drawer_offline_hint">#ff6699cc</color>
     <color name="left_drawer_night_mode_text">#ffb8b8b8</color>
-
-
-
-
 
 
     <!--新的模式-->
