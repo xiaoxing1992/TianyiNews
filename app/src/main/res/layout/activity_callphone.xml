@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/regist_top_close_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="7dp"
+        android:background="@drawable/add_channels_close_selector"
+        android:padding="11dp" />
+
+    <TextView
+        android:id="@+id/callphoness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:text="登录你的头条，精彩永不丢失"
+        android:textColor="#666"
+        android:textSize="18sp" />
+
+
+    <Button
+        android:id="@+id/callphone_login_button"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/callphone_button_shape"
+        android:text="进入头条"
+        android:textColor="#ffffff"
+        android:textSize="19sp" />
+
+    <TextView
+        android:id="@+id/bianhua_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/callphone_login_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:text="未注册手机验证后自动注册"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:id="@+id/callphone_pwd_ll"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_above="@id/bianhua_tv"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/callphone_edtext_shape"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/callphone_pwd_ed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="2"
+            android:background="@null"
+            android:hint="请输入验证码"
+            android:maxLength="8"
+            android:phoneNumber="true" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/callphone_number_ll"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_above="@id/callphone_pwd_ll"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/callphone_edtext_shape"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/callphone_number_ed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="2"
+            android:background="@null"
+            android:hint="手机号"
+            android:maxLength="11"
+            android:phoneNumber="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="0.2dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="8dp"
+            android:background="#666" />
+
+        <TextView
+            android:id="@+id/btn_get"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="发送验证码"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+
+    <TextView
+
+        android:id="@+id/qiehuan_login_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/callphone_login_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:text="账号密码登录"
+        android:textColor="#336699"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="0.2dp"
+                android:background="#666" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:text="更多登录方式" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="0.2dp"
+                android:background="#666" />
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="13dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/bottom_qqorweibo_selector"
+                    android:src="@drawable/weixin_sdk_login" />
+
+                <ImageView
+                    android:id="@+id/bottom_qq_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:background="@drawable/bottom_qqorweibo_selector"
+                    android:src="@drawable/qq_sdk_login" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:background="@drawable/bottom_qqorweibo_selector"
+                    android:src="@drawable/sina_sdk_login" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:background="@drawable/bottom_qqorweibo_selector"
+                    android:src="@drawable/account_icon_meizu" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:background="@drawable/bottom_qqorweibo_selector"
+                    android:src="@drawable/tianyi_login" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:background="@drawable/bottom_qqorweibo_selector"
+                    android:src="@drawable/weibo_sdk_login" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:background="@drawable/bottom_qqorweibo_selector"
+                    android:src="@drawable/renren_sdk_login" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:background="@drawable/bottom_qqorweibo_selector"
+                    android:src="@drawable/xiaomi_sdk_login" />
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+</RelativeLayout>

@@ -2,6 +2,7 @@ package tianyinews.tianyi.com.tianyinews.fragment;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.media.JetPlayer;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -180,24 +181,6 @@ public class VideoFragment extends BaseFragment {
         public CharSequence getPageTitle(int position) {
             return alldata.get(position).title;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         /* @Override
         public long getItemId(int position) {
             return IdsMap.get(getPageTitle(position));
@@ -241,4 +224,6 @@ public class VideoFragment extends BaseFragment {
             }
         }*/
     }
+
+
 }

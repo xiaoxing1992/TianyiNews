@@ -1,11 +1,17 @@
 package tianyinews.tianyi.com.tianyinews.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
+import android.media.JetPlayer;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,13 +41,22 @@ import thinkfreely.changemodelibrary.ChangeModeController;
 import tianyinews.tianyi.com.tianyinews.R;
 import tianyinews.tianyi.com.tianyinews.base.PullPushLayout;
 import tianyinews.tianyi.com.tianyinews.base.ThemeManager;
+import tianyinews.tianyi.com.tianyinews.bean.PhoneUserBean;
+import tianyinews.tianyi.com.tianyinews.bean.UserBean;
+import tianyinews.tianyi.com.tianyinews.db.MyDataBaseHelper;
+import tianyinews.tianyi.com.tianyinews.db.UserDao;
+import tianyinews.tianyi.com.tianyinews.fragment.CareFragment;
 import tianyinews.tianyi.com.tianyinews.fragment.HomeFragment;
 import tianyinews.tianyi.com.tianyinews.fragment.LeftFragment;
 import tianyinews.tianyi.com.tianyinews.fragment.VideoFragment;
+import tianyinews.tianyi.com.tianyinews.util.ConnUtil;
+import tianyinews.tianyi.com.tianyinews.util.SharedPreferencesUtil;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
+    private static final int CALLPHONE_CODE = 1;
+    private static final int SETTINGS_CODE = 2;
     protected SlidingMenu slidingMenu;
     private RadioGroup main_rb;
     private FragmentManager manager;
@@ -54,11 +69,12 @@ public class MainActivity extends AppCompatActivity {
     private ImageView qq_user_img;
     private TextView qq_user_name;
     private boolean flag = false;
-    private LinearLayout nights_ll;
     //  private boolean isauth;
+    UserOnListener userOnListener;
     public ArrayList<SnsPlatform> platforms = new ArrayList<SnsPlatform>();
     private SHARE_MEDIA[] list = {SHARE_MEDIA.QQ};
     private RelativeLayout qq_user_login_jicheng_tv;
+    private CareFragment careFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +82,53 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        //进入主界面判断网络状态
+        boolean netWorkAvailable = ConnUtil.isNetWorkAvailable(this);
+        if (!netWorkAvailable) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setMessage("网络未连接，是否开启网络连接？");
+            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    final String items[] = new String[]{"WiFi", "移动数据"};
+                    boolean isWifi = ConnUtil.isWiFi(MainActivity.this);
+                    boolean isMobile = ConnUtil.isMobile(MainActivity.this);
+                    if (!isWifi || !isMobile) {
+                        new AlertDialog.Builder(MainActivity.this).setTitle("网络设置").setCancelable(false)
+                                .setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        switch (i) {
+                                            case 0:
+                                                Intent intent = null;
+                                                intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+                                                startActivity(intent);
+
+                                                break;
+                                            case 1:
+                                                Intent intent2 = null;
+                                                intent2 = new Intent(Settings.ACTION_SETTINGS);
+                                                startActivity(intent2);
+                                                break;
+                                        }
+                                        dialogInterface.dismiss();
+                                    }
+                                }).create().show();
+                    }
+                }
+            });
+            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+
+                }
+            });
+            builder.show();
+        }
+        MyDataBaseHelper dataBaseHelper = new MyDataBaseHelper(this);
+        SQLiteDatabase writableDatabase = dataBaseHelper.getWritableDatabase();
+
         //注册
         // ThemeManager.registerThemeChangeListener(this);
         //  supportActionBar = getSupportActionBar();
@@ -73,6 +136,48 @@ public class MainActivity extends AppCompatActivity {
         initData();
         //初始化侧滑界面
         initLeftMenu();
+
+        boolean config = SharedPreferencesUtil.getSharedConfig(MainActivity.this);
+        if (config) {
+            int sharedFlag = SharedPreferencesUtil.getSharedFlag(MainActivity.this);
+            switch (sharedFlag) {
+                case 1:
+                    UserDao dao = new UserDao(MainActivity.this);
+                    ArrayList<UserBean> userBeen = dao.queryUserByQQ();
+                    for (UserBean ub : userBeen) {
+                        qq_user_login_jicheng_tv.setVisibility(View.INVISIBLE);
+                        qq_user_login_jicheng.setVisibility(View.GONE);
+                        qq_user_rl.setVisibility(View.VISIBLE);
+                        qq_user_name.setText(ub.name);
+
+                        ImageOptions options = new ImageOptions.Builder()
+                                .setCircular(true)
+                                .setSize(400, 400)
+                                .setLoadingDrawableId(R.mipmap.ic_launcher)
+                                .build();
+                        x.image().bind(qq_user_img, ub.imgUrl, options);
+                        //       userOnListener.setUrl(ub.imgUrl);
+                    }
+                    break;
+                case 2:
+                    UserDao dao2 = new UserDao(MainActivity.this);
+                    ArrayList<PhoneUserBean> phoneUserBeen = dao2.queryUserByPhone();
+                    for (PhoneUserBean pb : phoneUserBeen) {
+                        qq_user_login_jicheng_tv.setVisibility(View.INVISIBLE);
+                        qq_user_login_jicheng.setVisibility(View.GONE);
+                        qq_user_rl.setVisibility(View.VISIBLE);
+                        qq_user_name.setText(pb.phonenumber);
+                        qq_user_img.setImageResource(R.mipmap.ic_launcher);
+                        //       userOnListener.setIdImg(R.mipmap.ic_launcher);
+                    }
+
+                    break;
+            }
+
+
+        }
+
+
         initPlatforms();
     }
 
@@ -91,12 +196,14 @@ public class MainActivity extends AppCompatActivity {
 
         homeFragment = new HomeFragment();
         videoFragment = new VideoFragment();
+        careFragment = new CareFragment();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.main_fl, homeFragment);
-        transaction.add(R.id.main_fl, videoFragment);
-
+        transaction.add(R.id.main_fl, homeFragment, "f1");
+        transaction.add(R.id.main_fl, videoFragment, "f2");
+        transaction.add(R.id.main_fl, careFragment, "f3");
         transaction.show(homeFragment);
         transaction.hide(videoFragment);
+        transaction.hide(careFragment);
         transaction.commit();
 
         //默认选中首页
@@ -110,17 +217,24 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.buttom_home_rb_id:
                         FragmentTransaction transaction = manager.beginTransaction();
                         transaction.show(homeFragment);
+
                         transaction.hide(videoFragment);
+                        transaction.hide(careFragment);
                         transaction.commit();
                         break;
                     case R.id.buttom_video_rb_id:
                         FragmentTransaction transaction1 = manager.beginTransaction();
                         transaction1.show(videoFragment);
                         transaction1.hide(homeFragment);
+                        transaction1.hide(careFragment);
                         transaction1.commit();
                         break;
                     case R.id.buttom_care_rb_id:
-
+                        FragmentTransaction transaction2 = manager.beginTransaction();
+                        transaction2.show(careFragment);
+                        transaction2.hide(videoFragment);
+                        transaction2.hide(homeFragment);
+                        transaction2.commit();
                         break;
                 }
             }
@@ -141,48 +255,29 @@ public class MainActivity extends AppCompatActivity {
         //添加一个Fragment
         transaction.add(R.id.left_frame_layout_fl, new LeftFragment(), "f1");
         transaction.commit();*/
-        nights_ll = (LinearLayout) slidingMenu.findViewById(R.id.nights_ll);
-
+        LinearLayout nights_ll = (LinearLayout) slidingMenu.findViewById(R.id.nights_ll);
+        LinearLayout settrings_ll = (LinearLayout) slidingMenu.findViewById(R.id.settrings_ll);
+        ImageView cellphone_login_img = (ImageView) slidingMenu.findViewById(R.id.cellphone_login_img);
         //设置QQ登录授权操作
         setQqLogin();
 
 
-        nights_ll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (flag) {
+        nights_ll.setOnClickListener(this);
 
-                    ChangeModeController.changeNight(MainActivity.this, R.style.NightTheme);
-                    flag = false;
-                } else {
-                    ChangeModeController.changeDay(MainActivity.this, R.style.DayTheme);
-                    flag = true;
-
-                }
-
-               /* attrTypedValue = ChangeModeController.getAttrTypedValue(this, R.attr.zztextColor);
-                toolbar.setTitleTextColor(getResources().getColor(attrTypedValue.resourceId));*/
-
-                /*attrTypedValue = ChangeModeController.getAttrTypedValue(this, R.attr.zztextColor);
-                toolbar.setTitleTextColor(getResources().getColor(attrTypedValue.resourceId));*/
-            }
-        });
+        settrings_ll.setOnClickListener(this);
+        cellphone_login_img.setOnClickListener(this);
     }
 
+    //设置QQ登录授权操作
     private void setQqLogin() {
         qq_login_img = (ImageView) slidingMenu.findViewById(R.id.qq_login_img);
+        qq_login_img.setOnClickListener(this);
         qq_user_login_jicheng = (RelativeLayout) slidingMenu.findViewById(R.id.qq_user_login_jicheng);
         qq_user_rl = (RelativeLayout) slidingMenu.findViewById(R.id.qq_user_rl);
         qq_user_img = (ImageView) slidingMenu.findViewById(R.id.qq_user_img);
         qq_user_name = (TextView) slidingMenu.findViewById(R.id.qq_user_name);
         qq_user_login_jicheng_tv = (RelativeLayout) slidingMenu.findViewById(R.id.qq_user_login_jicheng_tv);
-        qq_login_img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                UMShareAPI.get(MainActivity.this).doOauthVerify(MainActivity.this, platforms.get(0).mPlatform, authListener);
-            }
-        });
     }
 
     UMAuthListener authListener = new UMAuthListener() {
@@ -212,12 +307,19 @@ public class MainActivity extends AppCompatActivity {
                     tvvv_tv.setText(gender);*/
                     String iconurl = data.get("iconurl");
                     userOnListener.setUrl(iconurl);
+                    skinOnListener.setSkin(1002);
                     ImageOptions options = new ImageOptions.Builder()
                             .setCircular(true)
                             .setSize(400, 400)
                             .setLoadingDrawableId(R.mipmap.ic_launcher)
                             .build();
                     x.image().bind(qq_user_img, iconurl, options);
+
+                    //登录成功后将数据保存到本地数据库
+                    SharedPreferencesUtil.putSharedConfig(MainActivity.this, true);
+                    SharedPreferencesUtil.putSharedFlag(MainActivity.this, 1);
+                    UserDao dao = new UserDao(MainActivity.this);
+                    dao.insertUserByQQ(data.get("uid"), name, iconurl);
                     break;
                 default:
                     break;
@@ -256,13 +358,54 @@ public class MainActivity extends AppCompatActivity {
 
         ChangeModeController.onDestory();
         UMShareAPI.get(MainActivity.this).release();
+
+
+        //  JetPlayer.getJetPlayer().pause();
+        // JetPlayer.getJetPlayer().release();
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(MainActivity.this).onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CALLPHONE_CODE && resultCode == RESULT_OK) {
+            SharedPreferencesUtil.putSharedFlag(MainActivity.this, 2);
+            SharedPreferencesUtil.putSharedConfig(MainActivity.this, true);
+            qq_user_login_jicheng_tv.setVisibility(View.INVISIBLE);
+            qq_user_login_jicheng.setVisibility(View.GONE);
+            qq_user_rl.setVisibility(View.VISIBLE);
+            int telephone = data.getIntExtra("telephone", 0);
+            qq_user_name.setText(telephone + "");
+            qq_user_img.setImageResource(R.mipmap.ic_launcher);
+            userOnListener.setImg(101);
+            skinOnListener.setSkin(1000);
+            /*  ImageOptions options = new ImageOptions.Builder()
+                    .setCircular(true)
+                    .setSize(400, 400)
+                    .setLoadingDrawableId(R.mipmap.ic_launcher)
+                    .build();
+            x.image().bind(qq_user_img, R.mipmap.ic_launcher, options);*/
+            //将数据存入数据库
+            UserDao dao = new UserDao(MainActivity.this);
+            dao.insertUserByPhone(telephone, "Tianyi", "");
+        } else if (requestCode == SETTINGS_CODE && resultCode == SettingActivity.RESULT_SETTRINGS_CODE) {
+            SharedPreferencesUtil.putSharedConfig(MainActivity.this, false);
+            UMShareAPI.get(MainActivity.this).deleteOauth(MainActivity.this, platforms.get(0).mPlatform, authListener);
+            qq_user_rl.setVisibility(View.GONE);
+            qq_user_login_jicheng_tv.setVisibility(View.VISIBLE);
+            qq_user_login_jicheng.setVisibility(View.VISIBLE);
+            userOnListener.setUrl("");
+            skinOnListener.setSkin(1001);
 
+        } else if (requestCode == SETTINGS_CODE && resultCode == SettingActivity.RESULT_SETTRINGS_CODE_PHONE) {
+            SharedPreferencesUtil.putSharedConfig(MainActivity.this, false);
+            qq_user_rl.setVisibility(View.GONE);
+            qq_user_login_jicheng_tv.setVisibility(View.VISIBLE);
+            qq_user_login_jicheng.setVisibility(View.VISIBLE);
+            userOnListener.setUrl("");
+            skinOnListener.setSkin(1003);
+        }
     }
 
 
@@ -272,13 +415,61 @@ public class MainActivity extends AppCompatActivity {
         UMShareAPI.get(MainActivity.this).onSaveInstanceState(outState);
     }
 
-    UserOnListener userOnListener;
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.qq_login_img:
+                UMShareAPI.get(MainActivity.this).doOauthVerify(MainActivity.this, platforms.get(0).mPlatform, authListener);
+                break;
+            case R.id.nights_ll:
+                if (flag) {
+
+                    ChangeModeController.changeNight(MainActivity.this, R.style.NightTheme);
+                    flag = false;
+                } else {
+                    ChangeModeController.changeDay(MainActivity.this, R.style.DayTheme);
+                    flag = true;
+
+                }
+
+                break;
+            case R.id.cellphone_login_img:
+                Intent intent = new Intent(MainActivity.this, CallphoneActivity.class);
+                startActivityForResult(intent, CALLPHONE_CODE);
+                overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom);
+
+
+                break;
+
+            case R.id.settrings_ll:
+                Intent intent2 = new Intent(MainActivity.this, SettingActivity.class);
+                startActivityForResult(intent2, SETTINGS_CODE);
+                overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom);
+
+                break;
+        }
+    }
+
 
     public interface UserOnListener {
         void setUrl(String url);
+
+        void setImg(int i);
+
     }
 
     public void getUrl(UserOnListener userOnListener) {
         this.userOnListener = userOnListener;
+    }
+
+    SkinOnListener skinOnListener;
+
+    public interface SkinOnListener {
+        void setSkin(int i);
+    }
+
+    public void getSkin(SkinOnListener skinOnListener) {
+        this.skinOnListener = skinOnListener;
     }
 }

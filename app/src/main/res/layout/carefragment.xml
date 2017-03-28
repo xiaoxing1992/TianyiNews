@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+
+    >
+
+    <include
+        android:id="@+id/care_title"
+        layout="@layout/system_settings_titlelayout" />
+
+    <ListView
+        android:id="@+id/care_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/care_title"></ListView>
+
+    <ImageView
+        android:id="@+id/care_zhuantai_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/nologin_loading"
+        android:visibility="gone" />
+</RelativeLayout>

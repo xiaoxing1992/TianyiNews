@@ -10,6 +10,7 @@ import com.umeng.socialize.UMShareAPI;
 
 import org.xutils.x;
 
+import cn.smssdk.SMSSDK;
 import tianyinews.tianyi.com.tianyinews.R;
 
 /**
@@ -33,6 +34,7 @@ public class MyApplication extends Application {
         myApplication = this;
         UMShareAPI.get(this);
         x.Ext.init(this);
+        SMSSDK.initSDK(this, "1c65790672734", "bd4224b54238bd1a08663da7db8bfd70");
     }
 
 

@@ -60,5 +60,6 @@ public class HoltBean {
         public int praises;
         public long time;
         public int articleType;
+        public String newUrl;
     }
 }

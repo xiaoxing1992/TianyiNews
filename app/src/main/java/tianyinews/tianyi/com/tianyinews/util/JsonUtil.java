@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import tianyinews.tianyi.com.tianyinews.bean.HoltBean;
+import tianyinews.tianyi.com.tianyinews.bean.NewBean;
 import tianyinews.tianyi.com.tianyinews.bean.VideoBean;
 
 /**
@@ -27,13 +28,13 @@ public class JsonUtil {
         return data;
     }
 
-    public static List<VideoBean> getVideoJson(String url) {
+    public static List<VideoBean> getVideoJson(String json) {
         Gson gson = new Gson();
 
         List<VideoBean> list = new ArrayList<>();
         try {
 
-            JSONObject jsonObject = new JSONObject(url);
+            JSONObject jsonObject = new JSONObject(json);
             Iterator<String> iterator = jsonObject.keys();
             while (iterator.hasNext()) {
                 String next = iterator.next();//每个key
@@ -49,5 +50,13 @@ public class JsonUtil {
             e.printStackTrace();
         }
         return list;
+    }
+
+
+    public static String getWebviewJson(String json) {
+        Gson gson = new Gson();
+        NewBean newBean = gson.fromJson(json, NewBean.class);
+        String url = newBean.data.url;
+        return url;
     }
 }

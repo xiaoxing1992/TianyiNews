@@ -13,6 +13,9 @@
     <color name="default_text">#ff454545</color>
 
 
+    <color name="bottom_login_pressed">#c9c1c0</color>
+    <color name="bottom_login_normal">#00000000</color>
+
     <color name="bottomTextPress">#D43D3D</color>
     <color name="bottomTextNormal">#6D6D6D</color>
     <color name="tabIndicatorColor">#D43D3D</color>

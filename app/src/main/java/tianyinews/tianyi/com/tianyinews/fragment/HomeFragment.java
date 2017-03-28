@@ -39,9 +39,13 @@ import tianyinews.tianyi.com.tianyinews.activity.MainActivity;
 import tianyinews.tianyi.com.tianyinews.R;
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment;
 import tianyinews.tianyi.com.tianyinews.bean.MyChannel;
+import tianyinews.tianyi.com.tianyinews.bean.PhoneUserBean;
+import tianyinews.tianyi.com.tianyinews.bean.UserBean;
+import tianyinews.tianyi.com.tianyinews.db.UserDao;
 import tianyinews.tianyi.com.tianyinews.ext.titles.ScaleTransitionPagerTitleView;
 import tianyinews.tianyi.com.tianyinews.fragment.childfragment.HomeChildFragment;
 import tianyinews.tianyi.com.tianyinews.util.GsonUtil;
+import tianyinews.tianyi.com.tianyinews.util.SharedPreferencesUtil;
 
 
 /**
@@ -61,7 +65,7 @@ public class HomeFragment extends BaseFragment implements ChannelDataHelepr.Chan
     List<String> preIds = new ArrayList<>();
     private ViewPager home_view_pager;
     private MagicIndicator main_magic_indicator;
-    private ImageView top_head;
+    public ImageView top_head;
     private ImageView button_more_columns;
     private MyHomeListViewPager adapter;
     ChannelDataHelepr<MyChannel> dataHelepr;
@@ -77,12 +81,57 @@ public class HomeFragment extends BaseFragment implements ChannelDataHelepr.Chan
         myChannels = new ArrayList<>();
         home_view_pager = (ViewPager) view.findViewById(R.id.home_view_pager);
         top_head = (ImageView) view.findViewById(R.id.top_head);
+
+        //  homeFragmentOnListener.setView(top_head);
+
         button_more_columns = (ImageView) view.findViewById(R.id.button_more_columns);
         dataHelepr = new ChannelDataHelepr(mContext, HomeFragment.this, view.findViewById(R.id.rl_ll));
         dataHelepr.setSwitchView(button_more_columns);
+        boolean config = SharedPreferencesUtil.getSharedConfig(mContext);
+        if (config) {
+            int sharedFlag = SharedPreferencesUtil.getSharedFlag(mContext);
+            switch (sharedFlag) {
+                case 1:
+
+                    UserDao dao = new UserDao(mContext);
+                    ArrayList<UserBean> userBeen = dao.queryUserByQQ();
+                    for (UserBean ub : userBeen) {
+
+                        ImageOptions options = new ImageOptions.Builder()
+                                .setCircular(true)
+                                .setSize(400, 400)
+                                .setLoadingDrawableId(R.mipmap.ic_launcher)
+                                .build();
+
+                        //   userOnListener.setUrl(ub.imgUrl);
+             /*   ImageOptions options = new ImageOptions.Builder()
+                        .setCircular(true)
+                        .setSize(400, 400)
+                        .setLoadingDrawableId(R.mipmap.ic_launcher)
+                        .build();*/
+                        x.image().bind(top_head, ub.imgUrl, options);
+                    }
+                    break;
+                case 2:
+                    UserDao dao2 = new UserDao(mContext);
+                    ArrayList<PhoneUserBean> phoneUserBeen = dao2.queryUserByPhone();
+                    for (PhoneUserBean pb : phoneUserBeen) {
+                        top_head.setImageResource(R.mipmap.ic_launcher);
+                        //       userOnListener.setIdImg(R.mipmap.ic_launcher);
+                    }
+
+                    break;
+            }
+
+
+        }
+
+
         loadData();
+
         return view;
     }
+
 
     @Override
     protected void initData() {
@@ -103,14 +152,32 @@ public class HomeFragment extends BaseFragment implements ChannelDataHelepr.Chan
         mainActivity.getUrl(new MainActivity.UserOnListener() {
             @Override
             public void setUrl(String url) {
-                ImageOptions options = new ImageOptions.Builder()
-                        .setCircular(true)
-                        .setSize(400, 400)
-                        .setLoadingDrawableId(R.mipmap.ic_launcher)
-                        .build();
-                x.image().bind(top_head, url, options);
-              //  top_head.setImageResource();
+                if (url != null) {
+                    if (url.equals("")) {
+                        top_head.setImageResource(R.drawable.default_round_head);
+                    } else {
+                        ImageOptions options = new ImageOptions.Builder()
+                                .setCircular(true)
+                                .setSize(400, 400)
+                                .setLoadingDrawableId(R.mipmap.ic_launcher)
+                                .build();
+                        x.image().bind(top_head, url, options);
+                    }
+                }
+                //  top_head.setImageResource();
             }
+
+            @Override
+            public void setImg(int i) {
+                if (i == 101) {
+                    top_head.setImageResource(R.mipmap.ic_launcher);
+                }
+            }
+
+           /* @Override
+            public void setIdImg(int i) {
+                top_head.setImageResource(i);
+            }*/
         });
     }
 
@@ -165,6 +232,7 @@ public class HomeFragment extends BaseFragment implements ChannelDataHelepr.Chan
         commonNavigatorAdapter.notifyDataSetChanged();
         main_magic_indicator.setNavigator(commonNavigator);
         ViewPagerHelper.bind(main_magic_indicator, home_view_pager);
+        adapter.notifyDataSetChanged();
         mDataList.clear();
     }
 
@@ -298,5 +366,17 @@ public class HomeFragment extends BaseFragment implements ChannelDataHelepr.Chan
             e.printStackTrace();
         }
         return result;
+    }
+
+
+    public interface HomeFragmentOnListener {
+        void setView(ImageView view);
+
+    }
+
+    HomeFragmentOnListener homeFragmentOnListener;
+
+    public void getMyView(HomeFragmentOnListener homeFragmentOnListener) {
+        this.homeFragmentOnListener = homeFragmentOnListener;
     }
 }

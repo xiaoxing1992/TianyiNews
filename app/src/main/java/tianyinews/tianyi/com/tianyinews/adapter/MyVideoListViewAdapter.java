@@ -75,7 +75,7 @@ public class MyVideoListViewAdapter extends BaseAdapter {
             Glide.with(context).load(videoBeenList.get(i).cover).into(viewHolderOne.player_list_video.thumbImageView);
 
         }
-//直接进入全屏
+        //直接进入全屏
         //    viewHolderOne.player_list_video.startFullscreen(context, JCVideoPlayerStandard.class, videoBeenList.get(i).mp4_url, "");
         //模拟用户点击开始按钮，NORMAL状态下点击开始播放视频，播放中点击暂停视频
         //  viewHolderOne.player_list_video.startButton.performClick();
