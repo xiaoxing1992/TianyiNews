@@ -181,8 +181,7 @@ public class SlidingMenu extends RelativeLayout {
 		this.attachToActivity(activity, slideStyle);
 	}
 	public void setOffsetFadeDegree(float f) {
-		mViewBehind.setOffsetFadeDegree(f);
-	}
+		mViewBehind.setOffsetFadeDegree(f);}
 	/**
 	 * Instantiates a new SlidingMenu.
 	 *
