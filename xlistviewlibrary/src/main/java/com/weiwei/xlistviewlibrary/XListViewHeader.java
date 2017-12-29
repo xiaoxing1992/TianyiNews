@@ -20,15 +20,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class XListViewHeader extends LinearLayout {
 	private LinearLayout mContainer;
-	private ImageView mArrowImageView;
 	private ProgressBar mProgressBar;
+	private ProgressBar mProgressBar2;
 	private TextView mHintTextView;
 	private int mState = STATE_NORMAL;
 
@@ -64,9 +63,11 @@ public class XListViewHeader extends LinearLayout {
 		addView(mContainer, lp);
 		setGravity(Gravity.BOTTOM);
 
-		mArrowImageView = (ImageView)findViewById(R.id.xlistview_header_arrow);
 		mHintTextView = (TextView)findViewById(R.id.xlistview_header_hint_textview);
 		mProgressBar = (ProgressBar)findViewById(R.id.xlistview_header_progressbar);
+		mProgressBar2 = (ProgressBar)findViewById(R.id.xlistview_header_progressbar2);
+
+
 
 		mRotateUpAnim = new RotateAnimation(0.0f, -180.0f,
 				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
@@ -84,33 +85,26 @@ public class XListViewHeader extends LinearLayout {
 		if (state == mState) return ;
 
 		if (state == STATE_REFRESHING) {    // 显示进度
-			mArrowImageView.clearAnimation();
-			mArrowImageView.setVisibility(View.INVISIBLE);
 			mProgressBar.setVisibility(View.VISIBLE);
+			mProgressBar2.setVisibility(View.VISIBLE);
 		} else {    // 显示箭头图片
-			mArrowImageView.setVisibility(View.VISIBLE);
 			mProgressBar.setVisibility(View.INVISIBLE);
+			mProgressBar2.setVisibility(View.INVISIBLE);
 		}
 
 		switch(state){
 			case STATE_NORMAL:
-				if (mState == STATE_READY) {
-					mArrowImageView.startAnimation(mRotateDownAnim);
-				}
-				if (mState == STATE_REFRESHING) {
-					mArrowImageView.clearAnimation();
-				}
+				mHintTextView.setVisibility(View.VISIBLE);
 				mHintTextView.setText(R.string.xlistview_header_hint_normal);
 				break;
 			case STATE_READY:
 				if (mState != STATE_READY) {
-					mArrowImageView.clearAnimation();
-					mArrowImageView.startAnimation(mRotateUpAnim);
+					mHintTextView.setVisibility(View.VISIBLE);
 					mHintTextView.setText(R.string.xlistview_header_hint_ready);
 				}
 				break;
 			case STATE_REFRESHING:
-				mHintTextView.setText(R.string.xlistview_header_hint_loading);
+				mHintTextView.setVisibility(View.INVISIBLE);
 				break;
 			default:
 		}

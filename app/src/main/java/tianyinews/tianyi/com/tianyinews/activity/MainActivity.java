@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         main_rb.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                JZVideoPlayer.releaseAllVideos(); 
+                JZVideoPlayer.releaseAllVideos();
                 switch (i) {
                     case R.id.buttom_home_rb_id:
                         FragmentTransaction transaction = manager.beginTransaction();

@@ -20,7 +20,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Scroller;
-import android.widget.TextView;
 
 public class XListView extends ListView implements OnScrollListener {
 
@@ -36,7 +35,6 @@ public class XListView extends ListView implements OnScrollListener {
 	// header view content, use it to calculate the Header's height. And hide it
 	// when disable pull refresh.
 	private RelativeLayout mHeaderViewContent;
-	private TextView mHeaderTimeView;
 	private int mHeaderViewHeight; // header view's height
 	private boolean mEnablePullRefresh = true;
 	private boolean mPullRefreshing = false; // is refreashing.
@@ -90,8 +88,6 @@ public class XListView extends ListView implements OnScrollListener {
 		mHeaderView = new XListViewHeader(context);
 		mHeaderViewContent = (RelativeLayout) mHeaderView
 				.findViewById(R.id.xlistview_header_content);
-		mHeaderTimeView = (TextView) mHeaderView
-				.findViewById(R.id.xlistview_header_time);
 		addHeaderView(mHeaderView);
 
 		// init footer view
@@ -181,14 +177,6 @@ public class XListView extends ListView implements OnScrollListener {
 		}
 	}
 
-	/**
-	 * set last refresh time
-	 *
-	 * @param time
-	 */
-	public void setRefreshTime(String time) {
-		mHeaderTimeView.setText(time);
-	}
 
 	private void invokeOnScrolling() {
 		if (mScrollListener instanceof OnXScrollListener) {
