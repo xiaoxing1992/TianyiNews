@@ -5,22 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.weiwei.xlistviewlibrary.XListView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
@@ -125,7 +117,7 @@ public class HomeChildFragment extends BaseFragment {
                     int id = data.get(i).id;
                     int categoryID = data.get(i).categoryID;
                     String newUrl = "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleDetail?CategoryID=" + categoryID + "&UserID=864394010080028&ArticleID=" + id + "&ArticleType=0";
-                    data.get(i).newUrl = newUrl;
+                    data.get(i).url = newUrl;
                 }
                 newData.addAll(data);
                 adapter.notifyDataSetChanged();
@@ -136,7 +128,7 @@ public class HomeChildFragment extends BaseFragment {
         home_xlist_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String newUrl = newData.get(i - 1).newUrl;
+                String newUrl = (String) newData.get(i - 1).url;
                 //    Log.e("Ssssssss",newUrl);
                 Intent intent = new Intent(getActivity(), WebActivity.class);
                 intent.putExtra("newUrl", newUrl);

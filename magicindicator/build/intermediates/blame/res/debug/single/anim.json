@@ -4,6 +4,10 @@
         "source": "E:\\MyAndroidTest\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\anim\\abc_fade_in.xml"
     },
     {
+        "merged": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
+        "source": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\anim\\abc_popup_enter.xml"
+    },
+    {
         "merged": "E:\\MyAndroidTest\\TianyiNews\\magicindicator\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_top.xml",
         "source": "E:\\MyAndroidTest\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\anim\\abc_slide_out_top.xml"
     },
@@ -16,8 +20,20 @@
         "source": "E:\\MyAndroidTest\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\anim\\abc_popup_enter.xml"
     },
     {
+        "merged": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
+        "source": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\anim\\abc_fade_in.xml"
+    },
+    {
+        "merged": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
+        "source": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\anim\\abc_slide_out_bottom.xml"
+    },
+    {
         "merged": "E:\\MyAndroidTest\\TianyiNews\\magicindicator\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
         "source": "E:\\MyAndroidTest\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
+        "source": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
     },
     {
         "merged": "E:\\MyAndroidTest\\TianyiNews\\magicindicator\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
@@ -28,8 +44,24 @@
         "source": "E:\\MyAndroidTest\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\anim\\abc_slide_in_bottom.xml"
     },
     {
+        "merged": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_exit.xml",
+        "source": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\anim\\abc_popup_exit.xml"
+    },
+    {
+        "merged": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_bottom.xml",
+        "source": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\anim\\abc_slide_in_bottom.xml"
+    },
+    {
         "merged": "E:\\MyAndroidTest\\TianyiNews\\magicindicator\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
         "source": "E:\\MyAndroidTest\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\anim\\abc_slide_out_bottom.xml"
+    },
+    {
+        "merged": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\res\\merged\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
+        "source": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
+        "source": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\anim\\abc_slide_in_top.xml"
     },
     {
         "merged": "E:\\MyAndroidTest\\TianyiNews\\magicindicator\\build\\intermediates\\res\\merged\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
@@ -38,5 +70,13 @@
     {
         "merged": "E:\\MyAndroidTest\\TianyiNews\\magicindicator\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
         "source": "E:\\MyAndroidTest\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\anim\\abc_fade_out.xml"
+    },
+    {
+        "merged": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_top.xml",
+        "source": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\anim\\abc_slide_out_top.xml"
+    },
+    {
+        "merged": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
+        "source": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\anim\\abc_fade_out.xml"
     }
 ]

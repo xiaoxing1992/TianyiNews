@@ -27,7 +27,10 @@
             android:name="UMENG_APPKEY"
             android:value="58c68118f5ade421e0001ae7" />
 
-        <activity android:name=".activity.MainActivity" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
         <activity android:name=".activity.SplashActivity" />
         <activity android:name=".activity.GuideActivity">
             <intent-filter>

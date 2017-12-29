@@ -2,24 +2,18 @@ package tianyinews.tianyi.com.tianyinews.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.ColorDrawable;
-import android.media.JetPlayer;
-import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -37,17 +31,15 @@ import org.xutils.x;
 import java.util.ArrayList;
 import java.util.Map;
 
+import cn.jzvd.JZVideoPlayer;
 import thinkfreely.changemodelibrary.ChangeModeController;
 import tianyinews.tianyi.com.tianyinews.R;
-import tianyinews.tianyi.com.tianyinews.base.PullPushLayout;
-import tianyinews.tianyi.com.tianyinews.base.ThemeManager;
 import tianyinews.tianyi.com.tianyinews.bean.PhoneUserBean;
 import tianyinews.tianyi.com.tianyinews.bean.UserBean;
 import tianyinews.tianyi.com.tianyinews.db.MyDataBaseHelper;
 import tianyinews.tianyi.com.tianyinews.db.UserDao;
 import tianyinews.tianyi.com.tianyinews.fragment.CareFragment;
 import tianyinews.tianyi.com.tianyinews.fragment.HomeFragment;
-import tianyinews.tianyi.com.tianyinews.fragment.LeftFragment;
 import tianyinews.tianyi.com.tianyinews.fragment.VideoFragment;
 import tianyinews.tianyi.com.tianyinews.util.ConnUtil;
 import tianyinews.tianyi.com.tianyinews.util.SharedPreferencesUtil;
@@ -184,10 +176,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initView() {
         main_rb = (RadioGroup) findViewById(R.id.main_rb);
-        RadioButton buttom_home_rb_id = (RadioButton) findViewById(R.id.buttom_home_rb_id);
-
-        RadioButton buttom_video_rb_id = (RadioButton) findViewById(R.id.buttom_video_rb_id);
-        RadioButton buttom_care_rb_id = (RadioButton) findViewById(R.id.buttom_care_rb_id);
         //   isauth = UMShareAPI.get(MainActivity.this).isAuthorize(MainActivity.this, platforms.get(0).mPlatform);
     }
 
@@ -213,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         main_rb.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                JZVideoPlayer.releaseAllVideos();
                 switch (i) {
                     case R.id.buttom_home_rb_id:
                         FragmentTransaction transaction = manager.beginTransaction();
@@ -471,5 +460,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void getSkin(SkinOnListener skinOnListener) {
         this.skinOnListener = skinOnListener;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (JZVideoPlayer.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JZVideoPlayer.releaseAllVideos();
     }
 }

@@ -1,9 +1,7 @@
 package tianyinews.tianyi.com.tianyinews.fragment.childfragment;
 
-import android.media.JetPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -15,10 +13,8 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import tianyinews.tianyi.com.tianyinews.R;
-import tianyinews.tianyi.com.tianyinews.adapter.MyHomeListViewAdapter;
 import tianyinews.tianyi.com.tianyinews.adapter.MyVideoListViewAdapter;
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment;
-import tianyinews.tianyi.com.tianyinews.bean.HoltBean;
 import tianyinews.tianyi.com.tianyinews.bean.VideoBean;
 import tianyinews.tianyi.com.tianyinews.util.JsonUtil;
 

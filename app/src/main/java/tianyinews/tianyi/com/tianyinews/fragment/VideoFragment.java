@@ -1,8 +1,5 @@
 package tianyinews.tianyi.com.tianyinews.fragment;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.media.JetPlayer;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -10,35 +7,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.ImageView;
-
-import com.trs.channellib.channel.channel.helper.ChannelDataHelepr;
-
-import net.lucode.hackware.magicindicator.ViewPagerHelper;
-import net.lucode.hackware.magicindicator.buildins.UIUtil;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import thinkfreely.changemodelibrary.ChangeModeController;
+import cn.jzvd.JZVideoPlayer;
 import tianyinews.tianyi.com.tianyinews.R;
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment;
 import tianyinews.tianyi.com.tianyinews.bean.MyChannel;
-import tianyinews.tianyi.com.tianyinews.ext.titles.ScaleTransitionPagerTitleView;
-import tianyinews.tianyi.com.tianyinews.fragment.childfragment.HomeChildFragment;
 import tianyinews.tianyi.com.tianyinews.fragment.childfragment.VideoChildFragment;
 import tianyinews.tianyi.com.tianyinews.util.GsonUtil;
 
@@ -99,6 +77,23 @@ public class VideoFragment extends BaseFragment {
         video_view_pager.setAdapter(adapter);
         video_tab_layout.setupWithViewPager(video_view_pager);
         video_tab_layout.setTabsFromPagerAdapter(adapter);
+
+        video_view_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                JZVideoPlayer.releaseAllVideos();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
    /* @Override
@@ -225,5 +220,10 @@ public class VideoFragment extends BaseFragment {
         }*/
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        JZVideoPlayer.releaseAllVideos();
+    }
 
 }

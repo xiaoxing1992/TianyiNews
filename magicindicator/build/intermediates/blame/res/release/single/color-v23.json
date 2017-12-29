@@ -2,5 +2,9 @@
     {
         "merged": "E:\\MyAndroidTest\\TianyiNews\\magicindicator\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_color_highlight_material.xml",
         "source": "E:\\MyAndroidTest\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\color-v23\\abc_color_highlight_material.xml"
+    },
+    {
+        "merged": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\res\\merged\\release\\color-v23\\abc_color_highlight_material.xml",
+        "source": "G:\\example\\work\\TianyiNews\\magicindicator\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\color-v23\\abc_color_highlight_material.xml"
     }
 ]

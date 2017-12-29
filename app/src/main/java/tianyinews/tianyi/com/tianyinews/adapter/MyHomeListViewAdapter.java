@@ -1,19 +1,14 @@
 package tianyinews.tianyi.com.tianyinews.adapter;
 
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import tianyinews.tianyi.com.tianyinews.R;
@@ -57,9 +52,6 @@ public class MyHomeListViewAdapter extends BaseAdapter {
 
             }
         }
-
-        // Log.d(TAG, "getItemViewType: "+urls[0]+urls[1]+urls[2]);
-
     }
 
     @Override

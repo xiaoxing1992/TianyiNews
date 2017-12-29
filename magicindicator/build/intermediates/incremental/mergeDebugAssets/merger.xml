@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="E:\MyAndroidTest\TianyiNews\magicindicator\src\main\assets"/><source path="E:\MyAndroidTest\TianyiNews\magicindicator\build\generated\assets\shaders\debug"/></dataSet><dataSet config="debug"><source path="E:\MyAndroidTest\TianyiNews\magicindicator\src\debug\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="G:\example\work\TianyiNews\magicindicator\src\main\assets"/><source path="G:\example\work\TianyiNews\magicindicator\build\generated\assets\shaders\debug"/></dataSet><dataSet config="debug"><source path="G:\example\work\TianyiNews\magicindicator\src\debug\assets"/></dataSet></merger>
