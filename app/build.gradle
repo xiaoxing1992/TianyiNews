@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 30
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "tianyinews.tianyi.com.tianyinews"
-        minSdkVersion 16
-        targetSdkVersion 23
+        minSdkVersion 19
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -46,10 +46,10 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:23.4.0'
+    api 'androidx.appcompat:appcompat:1.2.0'
     testCompile 'junit:junit:4.12'
     compile project(':slidingmenulibrary')
-    compile 'com.android.support:design:23.2.0'
+    compile 'com.google.android.material:material:1.3.0'
     compile project(':magicindicator')
     compile project(':changemodelibrary')
     compile project(':xlistviewlibrary')
@@ -58,4 +58,6 @@ dependencies {
     compile project(':channellib')
     compile 'org.xutils:xutils:3.3.36'
     compile 'cn.jzvd:jiaozivideoplayer:6.2.3'
+    compile 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 }

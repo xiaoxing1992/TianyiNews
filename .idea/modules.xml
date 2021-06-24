@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TianyiNews.iml" filepath="$PROJECT_DIR$/TianyiNews.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/changemodelibrary/changemodelibrary.iml" filepath="$PROJECT_DIR$/changemodelibrary/changemodelibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/channellib/channellib.iml" filepath="$PROJECT_DIR$/channellib/channellib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/magicindicator/magicindicator.iml" filepath="$PROJECT_DIR$/magicindicator/magicindicator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/slidingmenulibrary/slidingmenulibrary.iml" filepath="$PROJECT_DIR$/slidingmenulibrary/slidingmenulibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/xlistviewlibrary/xlistviewlibrary.iml" filepath="$PROJECT_DIR$/xlistviewlibrary/xlistviewlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/TianyiNews.iml" filepath="$PROJECT_DIR$/.idea/TianyiNews.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TianyiNews.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TianyiNews.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/changemodelibrary/TianyiNews.changemodelibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/changemodelibrary/TianyiNews.changemodelibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/channellib/TianyiNews.channellib.iml" filepath="$PROJECT_DIR$/.idea/modules/channellib/TianyiNews.channellib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/magicindicator/TianyiNews.magicindicator.iml" filepath="$PROJECT_DIR$/.idea/modules/magicindicator/TianyiNews.magicindicator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/slidingmenulibrary/TianyiNews.slidingmenulibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/slidingmenulibrary/TianyiNews.slidingmenulibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/xlistviewlibrary/TianyiNews.xlistviewlibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/xlistviewlibrary/TianyiNews.xlistviewlibrary.iml" />
     </modules>
   </component>
 </project>

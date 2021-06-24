@@ -12,6 +12,7 @@ import java.util.List;
 
 import tianyinews.tianyi.com.tianyinews.bean.HoltBean;
 import tianyinews.tianyi.com.tianyinews.bean.NewBean;
+import tianyinews.tianyi.com.tianyinews.bean.NewsBean;
 import tianyinews.tianyi.com.tianyinews.bean.VideoBean;
 
 /**
@@ -21,10 +22,10 @@ import tianyinews.tianyi.com.tianyinews.bean.VideoBean;
  */
 
 public class JsonUtil {
-    public static List<HoltBean.DataBean> getJson(String url) {
+    public static List<NewsBean.ResultBean.DataBean> getJson(String url) {
         Gson gson = new Gson();
-        HoltBean holtBean = gson.fromJson(url, HoltBean.class);
-        List<HoltBean.DataBean> data = holtBean.data;
+        NewsBean holtBean = gson.fromJson(url, NewsBean.class);
+        List<NewsBean.ResultBean.DataBean> data = holtBean.result.data;
         return data;
     }
 

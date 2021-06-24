@@ -71,7 +71,7 @@ public class MyVideoListViewAdapter extends BaseAdapter {
 
         viewHolderOne.player_list_video.setUp(videoBeenList.get(i).mp4_url
                 , JZVideoPlayerStandard.SCREEN_WINDOW_LIST, "");
-        Glide.with(context).load(videoBeenList.get(i).cover).into(viewHolderOne.player_list_video.thumbImageView);
+        Glide.with(viewHolderOne.player_list_video.thumbImageView.getContext()).load(videoBeenList.get(i).cover).into(viewHolderOne.player_list_video.thumbImageView);
 
         return view;
     }

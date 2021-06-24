@@ -1,9 +1,6 @@
 package tianyinews.tianyi.com.tianyinews.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,22 +8,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.umeng.socialize.UMAuthListener;
-import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.shareboard.SnsPlatform;
-
-import org.xutils.image.ImageOptions;
-import org.xutils.x;
-
-import java.util.ArrayList;
-import java.util.Map;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import thinkfreely.changemodelibrary.ChangeModeController;
 import tianyinews.tianyi.com.tianyinews.R;
-import tianyinews.tianyi.com.tianyinews.base.BaseFragment;
 
 /**
  * @类的用途:

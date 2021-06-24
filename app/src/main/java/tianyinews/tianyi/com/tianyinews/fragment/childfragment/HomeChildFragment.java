@@ -4,9 +4,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -21,6 +22,8 @@ import tianyinews.tianyi.com.tianyinews.activity.WebActivity;
 import tianyinews.tianyi.com.tianyinews.adapter.MyHomeListViewAdapter;
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment;
 import tianyinews.tianyi.com.tianyinews.bean.HoltBean;
+import tianyinews.tianyi.com.tianyinews.bean.MyChannel;
+import tianyinews.tianyi.com.tianyinews.bean.NewsBean;
 import tianyinews.tianyi.com.tianyinews.util.JsonUtil;
 
 /**
@@ -30,17 +33,13 @@ import tianyinews.tianyi.com.tianyinews.util.JsonUtil;
  */
 
 public class HomeChildFragment extends BaseFragment {
-    public static final java.lang.String KEY_TITLE = "key_title";
-    public static final java.lang.String KEY_URL = "key_url";
-    public static final java.lang.String KEY_URL_FOOTER = "url_footer";
+    public static final java.lang.String MODEL_KEY = "model_key";
     private XListView home_xlist_view;
     private Handler handler = new Handler();
     private int PageIndex = 1;
-    private List<HoltBean.DataBean> newData = new ArrayList<>();
+    private List<NewsBean.ResultBean.DataBean> newData = new ArrayList<>();
     private MyHomeListViewAdapter adapter;
-    private String title;
-    private String url;
-    private String url_footer;
+    private MyChannel mChannel;
 
     @Override
     protected View initView() {
@@ -49,9 +48,7 @@ public class HomeChildFragment extends BaseFragment {
 
 
         Bundle bundle = getArguments();
-        title = bundle.getString(KEY_TITLE, "");
-        url = bundle.getString(KEY_URL, "");
-        url_footer = bundle.getString(KEY_URL_FOOTER, "");
+        mChannel = (MyChannel) bundle.getSerializable(MODEL_KEY);
         adapter = new MyHomeListViewAdapter(getActivity(), newData);
         home_xlist_view.setAdapter(adapter);
         return view;
@@ -101,24 +98,17 @@ public class HomeChildFragment extends BaseFragment {
 
     private void getServerData() {
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-        String http_url = url + PageIndex + url_footer;
+        String http_url = mChannel.url + "?" + "type=" + mChannel.requestTitle + "&" + "page=" + PageIndex + "&" + mChannel.url_footer;
         //   Log.e("sadddddddddd", http_url);
         asyncHttpClient.get(getContext(), http_url, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-
+                String url = "";
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                List<HoltBean.DataBean> data = JsonUtil.getJson(responseString);
-
-                for (int i = 0; i < data.size(); i++) {
-                    int id = data.get(i).id;
-                    int categoryID = data.get(i).categoryID;
-                    String newUrl = "http://sight.urundata.com:5004/v1.0.0/Article/GetArticleDetail?CategoryID=" + categoryID + "&UserID=864394010080028&ArticleID=" + id + "&ArticleType=0";
-                    data.get(i).url = newUrl;
-                }
+                List<NewsBean.ResultBean.DataBean> data = JsonUtil.getJson(responseString);
                 newData.addAll(data);
                 adapter.notifyDataSetChanged();
 
@@ -162,7 +152,7 @@ public class HomeChildFragment extends BaseFragment {
     }
 
     public String getTitle() {
-        return title;
+        return mChannel.title;
     }
 
 }

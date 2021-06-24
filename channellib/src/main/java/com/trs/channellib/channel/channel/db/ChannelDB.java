@@ -1,7 +1,8 @@
 package com.trs.channellib.channel.channel.db;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import com.trs.channellib.channel.channel.base.AbsChannel;
 

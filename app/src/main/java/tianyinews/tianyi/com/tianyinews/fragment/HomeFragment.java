@@ -3,14 +3,15 @@ package tianyinews.tianyi.com.tianyinews.fragment;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.trs.channellib.channel.channel.helper.ChannelDataHelepr;
 
@@ -287,9 +288,7 @@ public class HomeFragment extends BaseFragment implements ChannelDataHelepr.Chan
         public Fragment getItem(int position) {
             HomeChildFragment homeChildFragment = new HomeChildFragment();
             Bundle bundle = new Bundle();
-            bundle.putString(HomeChildFragment.KEY_TITLE, myChannels.get(position).title);
-            bundle.putString(HomeChildFragment.KEY_URL, myChannels.get(position).url);
-            bundle.putString(HomeChildFragment.KEY_URL_FOOTER, myChannels.get(position).url_footer);
+            bundle.putSerializable(HomeChildFragment.MODEL_KEY, myChannels.get(position));
             homeChildFragment.setArguments(bundle);
             return homeChildFragment;
         }
