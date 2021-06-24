@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class JsonUtil {
     public static List<NewsBean.ResultBean.DataBean> getJson(String url) {
         Gson gson = new Gson();
         NewsBean holtBean = gson.fromJson(url, NewsBean.class);
+        if (holtBean.result == null) return Collections.emptyList();
         List<NewsBean.ResultBean.DataBean> data = holtBean.result.data;
         return data;
     }

@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
+import com.gyf.immersionbar.ImmersionBar;
+
 import tianyinews.tianyi.com.tianyinews.R;
 import tianyinews.tianyi.com.tianyinews.util.CacheUtil;
 
@@ -23,6 +25,7 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         view = View.inflate(SplashActivity.this, R.layout.splash_layout, null);
+        ImmersionBar.with(this).transparentStatusBar().init();
         setContentView(view);
         initData();
     }

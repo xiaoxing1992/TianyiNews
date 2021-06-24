@@ -1,231 +1,120 @@
-package tianyinews.tianyi.com.tianyinews.fragment;
+package tianyinews.tianyi.com.tianyinews.fragment
 
-import android.os.Bundle;
-import android.view.View;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
-import com.google.android.material.tabs.TabLayout;
-
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import cn.jzvd.JZVideoPlayer;
-import tianyinews.tianyi.com.tianyinews.R;
-import tianyinews.tianyi.com.tianyinews.base.BaseFragment;
-import tianyinews.tianyi.com.tianyinews.bean.MyChannel;
-import tianyinews.tianyi.com.tianyinews.fragment.childfragment.VideoChildFragment;
-import tianyinews.tianyi.com.tianyinews.util.GsonUtil;
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
+import cn.jzvd.Jzvd
+import com.google.android.material.tabs.TabLayout
+import com.gyf.immersionbar.ImmersionBar
+import kotlinx.android.synthetic.main.videofragment.*
+import tianyinews.tianyi.com.tianyinews.R
+import tianyinews.tianyi.com.tianyinews.base.BaseFragment
+import tianyinews.tianyi.com.tianyinews.bean.MyChannel
+import tianyinews.tianyi.com.tianyinews.fragment.childfragment.VideoChildFragment
+import tianyinews.tianyi.com.tianyinews.util.GsonUtil
+import java.io.ByteArrayOutputStream
+import java.util.*
 
 /**
  * @类的用途:
  * @作者: 任正威
  * @date: 2017/3/14.
  */
-
-public class VideoFragment extends BaseFragment {
-    // implements ChannelDataHelepr.ChannelDataRefreshListenter
-  /*  private String tabtitles[] = new String[]{"娱乐", "体育", "搞笑", "黑科技", "美女", "新闻现场", "BoBo", "军武", "涨知识", "八卦"};
-    private List<String> mDataList = Arrays.asList(tabtitles);*/
-    private TabLayout video_tab_layout;
-    private ViewPager video_view_pager;
-    //  private ImageView button_more_video_columns;
-    private ArrayList<BaseFragment> fragList;
-    // int id = 1;
-    // Map<String, Integer> IdsMap = new HashMap<>();
-    // List<String> preIds = new ArrayList<>();
-    // List<MyChannel> myChannels;
-    //  private int needShowPosition = -1;
-    //   private MyHomeListViewPager adapter;
-    // ChannelDataHelepr<MyChannel> dataHelepr;
-    MyHomeListViewPager adapter;
-    private List<MyChannel> alldata;
-
-    @Override
-    protected View initView() {
-        View view = View.inflate(mContext, R.layout.videofragment, null);
-        video_tab_layout = (TabLayout) view.findViewById(R.id.video_tab_layout);
-        video_view_pager = (ViewPager) view.findViewById(R.id.video_view_pager);
-        alldata = new ArrayList<>();
-        //   button_more_video_columns = (ImageView) view.findViewById(R.id.button_more_video_columns);
-        //     dataHelepr = new ChannelDataHelepr(mContext, VideoFragment.this, view.findViewById(R.id.rl_ll_video));
-        //     dataHelepr.setSwitchView(button_more_video_columns);
-        //    loadData();
-        return view;
+class VideoFragment : BaseFragment() {
+    private var fragList: ArrayList<BaseFragment>? = null
+    var adapter: MyHomeListViewPager? = null
+    private var alldata: List<MyChannel>? = null
+    override fun initView(): View {
+        val view = View.inflate(mContext, R.layout.videofragment, null)
+        ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayBackground).statusBarDarkFont(true).init()
+        alldata = ArrayList()
+        return view
     }
 
-    @Override
-    protected void initData() {
-        super.initData();
-        loadData();
-        fragList = new ArrayList<>();
-        adapter = new MyHomeListViewPager(getActivity().getSupportFragmentManager());
-        video_view_pager.setAdapter(adapter);
-
-        adapter.notifyDataSetChanged();
-
-
-        video_tab_layout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        for (int i = 0; i < alldata.size(); i++) {
-            video_tab_layout.addTab(video_tab_layout.newTab().setText(alldata.get(i).title));
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+            ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayBackground).statusBarDarkFont(true).init()
         }
-
-        MyHomeListViewPager adapter = new MyHomeListViewPager(getActivity().getSupportFragmentManager());
-        video_view_pager.setAdapter(adapter);
-        video_tab_layout.setupWithViewPager(video_view_pager);
-        video_tab_layout.setTabsFromPagerAdapter(adapter);
-
-        video_view_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                JZVideoPlayer.releaseAllVideos();
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 
-   /* @Override
-    public void updateData() {
-        loadData();
-    }*/
-/*
-    @Override
-    public void onChannelSeleted(boolean update, int posisiton) {
-
-    }*/
-
-    private void loadData() {
-
-
-        String data = getFromRaw();
-        alldata = GsonUtil.jsonToBeanList(data, MyChannel.class);
-
-
-    }
-
-    /*private void setPointer() {
-
-        video_tab_layout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        for (int i = 0; i < mDataList.size(); i++) {
-            video_tab_layout.addTab(video_tab_layout.newTab().setText(mDataList.get(i)));
+    override fun initData() {
+        super.initData()
+        loadData()
+        fragList = ArrayList()
+        adapter = MyHomeListViewPager(activity!!.supportFragmentManager)
+        video_view_pager?.adapter = adapter
+        adapter?.notifyDataSetChanged()
+        video_tab_layout?.tabMode = TabLayout.MODE_SCROLLABLE
+        for (i in alldata?.indices!!) {
+            video_tab_layout?.addTab(video_tab_layout!!.newTab().setText(alldata!![i].title))
         }
-
-        MyHomeListViewPager adapter = new MyHomeListViewPager(getActivity().getSupportFragmentManager());
-        video_view_pager.setAdapter(adapter);
-        video_tab_layout.setupWithViewPager(video_view_pager);
-        video_tab_layout.setTabsFromPagerAdapter(adapter);
-
-            mDataList.clear();
-    }*/
-
-    private String getFromRaw() {
-        String result = "";
-        try {
-            InputStream input = getResources().openRawResource(R.raw.video_list);
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            int length = 0;
-            while ((length = input.read(buffer)) != -1) {
-                output.write(buffer, 0, length);
+        val adapter: MyHomeListViewPager = MyHomeListViewPager(
+            activity!!.supportFragmentManager
+        )
+        video_view_pager?.adapter = adapter
+        video_tab_layout?.setupWithViewPager(video_view_pager)
+        video_tab_layout?.setTabsFromPagerAdapter(adapter)
+        video_view_pager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+            override fun onPageSelected(position: Int) {
+                Jzvd.releaseAllVideos()
             }
-            output.close();
-            input.close();
 
-            return output.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
+            override fun onPageScrollStateChanged(state: Int) {}
+        })
     }
 
-    class MyHomeListViewPager extends FragmentPagerAdapter {
+    private fun loadData() {
+        val data = fromRaw
+        alldata = GsonUtil.jsonToBeanList(data, MyChannel::class.java)
+    }
 
-        public MyHomeListViewPager(FragmentManager fm) {
-            super(fm);
+    private val fromRaw: String
+        private get() {
+            val result = ""
+            try {
+                val input = resources.openRawResource(R.raw.video_list)
+                val output = ByteArrayOutputStream()
+                val buffer = ByteArray(1024)
+                var length = 0
+                while (input.read(buffer).also { length = it } != -1) {
+                    output.write(buffer, 0, length)
+                }
+                output.close()
+                input.close()
+                return output.toString()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            return result
         }
 
-        @Override
-        public Fragment getItem(int position) {
-            VideoChildFragment videoChildFragment = new VideoChildFragment();
-            Bundle bundle = new Bundle();
+    inner class MyHomeListViewPager(fm: FragmentManager?) : FragmentPagerAdapter(fm!!) {
+        override fun getItem(position: Int): Fragment {
+            val videoChildFragment = VideoChildFragment()
+            val bundle = Bundle()
             //      bundle.putString(HomeChildFragment.KEY_TITLE, alldata.get(position));
-            bundle.putString(VideoChildFragment.KEY_URL, alldata.get(position).url);
-            bundle.putString(VideoChildFragment.KEY_URL_FOOTER, alldata.get(position).url_footer);
-            videoChildFragment.setArguments(bundle);
-            return videoChildFragment;
+            bundle.putString(VideoChildFragment.KEY_URL, alldata!![position].url)
+            bundle.putString(VideoChildFragment.KEY_URL_FOOTER, alldata!![position].url_footer)
+            videoChildFragment.arguments = bundle
+            return videoChildFragment
         }
 
-        @Override
-        public int getCount() {
-            return alldata.size();
+        override fun getCount(): Int {
+            return alldata!!.size
         }
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return alldata.get(position).title;
+        override fun getPageTitle(position: Int): CharSequence? {
+            return alldata!![position].title
         }
-        /* @Override
-        public long getItemId(int position) {
-            return IdsMap.get(getPageTitle(position));
-        }
-
-        @Override
-        public int getItemPosition(Object object) {
-            VideoChildFragment fragment = (VideoChildFragment) object;
-            String title = fragment.getTitle();
-            int preId = preIds.indexOf(title);
-            int newId = -1;
-            int i = 0;
-            int size = getCount();
-            for (; i < size; i++) {
-                if (getPageTitle(i).equals(title)) {
-                    newId = i;
-                    break;
-                }
-            }
-            if (newId != -1 && newId == preId) {
-                return POSITION_UNCHANGED;
-            }
-            if (newId != -1) {
-                return newId;
-            }
-            return POSITION_NONE;
-        }
-
-        @Override
-        public void notifyDataSetChanged() {
-            for (MyChannel info : myChannels) {
-                if (!IdsMap.containsKey(info.title)) {
-                    IdsMap.put(info.title, id++);
-                }
-            }
-            super.notifyDataSetChanged();
-            preIds.clear();
-            int size = getCount();
-            for (int i = 0; i < size; i++) {
-                preIds.add((String) getPageTitle(i));
-            }
-        }*/
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        JZVideoPlayer.releaseAllVideos();
+    override fun onPause() {
+        super.onPause()
+        Jzvd.releaseAllVideos()
     }
-
 }

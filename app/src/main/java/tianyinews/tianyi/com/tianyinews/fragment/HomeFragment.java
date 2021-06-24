@@ -13,6 +13,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.gyf.immersionbar.ImmersionBar;
+import com.gyf.immersionbar.components.SimpleImmersionOwner;
 import com.trs.channellib.channel.channel.helper.ChannelDataHelepr;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -78,6 +80,10 @@ public class HomeFragment extends BaseFragment implements ChannelDataHelepr.Chan
     protected View initView() {
 
         view = View.inflate(mContext, R.layout.homefragment, null);
+
+
+        ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayTitleBackground).init();
+
         main_magic_indicator = (MagicIndicator) view.findViewById(R.id.main_magic_indicator);
         myChannels = new ArrayList<>();
         home_view_pager = (ViewPager) view.findViewById(R.id.home_view_pager);
@@ -133,6 +139,19 @@ public class HomeFragment extends BaseFragment implements ChannelDataHelepr.Chan
         return view;
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayTitleBackground).init();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayTitleBackground).init();
+    }
 
     @Override
     protected void initData() {

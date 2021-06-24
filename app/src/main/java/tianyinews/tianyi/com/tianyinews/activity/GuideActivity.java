@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.gyf.immersionbar.ImmersionBar;
+
 import java.util.ArrayList;
 
 import tianyinews.tianyi.com.tianyinews.R;
@@ -37,6 +39,7 @@ public class GuideActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_guide);
+        ImmersionBar.with(this).transparentStatusBar().init();
         boolean b = CacheUtil.getBooleans(GuideActivity.this, false);
         if(b){
             Intent intent = new Intent(GuideActivity.this, SplashActivity.class);

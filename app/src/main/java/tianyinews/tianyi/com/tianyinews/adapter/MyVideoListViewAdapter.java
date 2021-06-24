@@ -10,7 +10,8 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import cn.jzvd.JZVideoPlayerStandard;
+import cn.jzvd.Jzvd;
+import cn.jzvd.JzvdStd;
 import tianyinews.tianyi.com.tianyinews.R;
 import tianyinews.tianyi.com.tianyinews.bean.VideoBean;
 
@@ -53,7 +54,7 @@ public class MyVideoListViewAdapter extends BaseAdapter {
         if (view == null) {
             viewHolderOne = new ViewHolderOne();
             view = View.inflate(context, R.layout.videochildfragment, null);
-            viewHolderOne.player_list_video = (JZVideoPlayerStandard) view.findViewById(R.id.player_list_video);
+            viewHolderOne.player_list_video = view.findViewById(R.id.player_list_video);
             viewHolderOne.img_video_title = (TextView) view.findViewById(R.id.img_video_title);
             viewHolderOne.tv_video_topicname = (TextView) view.findViewById(R.id.tv_video_topicname);
             viewHolderOne.tv_video_ptime = (TextView) view.findViewById(R.id.tv_video_ptime);
@@ -70,15 +71,15 @@ public class MyVideoListViewAdapter extends BaseAdapter {
 
 
         viewHolderOne.player_list_video.setUp(videoBeenList.get(i).mp4_url
-                , JZVideoPlayerStandard.SCREEN_WINDOW_LIST, "");
-        Glide.with(viewHolderOne.player_list_video.thumbImageView.getContext()).load(videoBeenList.get(i).cover).into(viewHolderOne.player_list_video.thumbImageView);
+                , videoBeenList.get(i).title, Jzvd.SCREEN_NORMAL);
+        Glide.with(viewHolderOne.player_list_video.posterImageView.getContext()).load(videoBeenList.get(i).cover).into(viewHolderOne.player_list_video.posterImageView);
 
         return view;
     }
 
 
     class ViewHolderOne {
-        JZVideoPlayerStandard player_list_video;
+        JzvdStd player_list_video;
         TextView img_video_title;
         TextView tv_video_topicname;
         TextView tv_video_ptime;
