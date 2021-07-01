@@ -8,6 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
+import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -16,6 +20,9 @@ import java.util.List;
 import tianyinews.tianyi.com.tianyinews.R;
 import tianyinews.tianyi.com.tianyinews.bean.HoltBean;
 import tianyinews.tianyi.com.tianyinews.bean.NewsBean;
+import tianyinews.tianyi.com.tianyinews.bean.NewsMultiItemEntity;
+
+import static tianyinews.tianyi.com.tianyinews.bean.NewsMultiItemEntity.IMG_TWO;
 
 /**
  * @类的用途:
@@ -23,212 +30,44 @@ import tianyinews.tianyi.com.tianyinews.bean.NewsBean;
  * @date: 2017/3/17.
  */
 
-public class MyHomeListViewAdapter extends BaseAdapter {
+public class MyHomeListViewAdapter extends BaseMultiItemQuickAdapter<NewsBean.ResultBean.DataBean, BaseViewHolder> {
     private static final String TAG = "MyHomeListViewAdapter";
 
-    Context context;
-    List<NewsBean.ResultBean.DataBean> holtBeanList;
-    public static final int TYPE_TEXT = 0;
-    public static final int TYPE_ONE = 1;
-    public static final int TYPE_TWO = 2;
-    public static final int TYPE_THREE = 3;
-
-    public MyHomeListViewAdapter(Context context, List<NewsBean.ResultBean.DataBean> holtBeanList) {
-        this.context = context;
-        this.holtBeanList = holtBeanList;
-    }
-
-
-    @Override
-
-    public int getItemViewType(int position) {
-        String imageUrl = holtBeanList.get(position).thumbnail_pic_s;
-        String imageUrl2 = holtBeanList.get(position).thumbnail_pic_s02;
-        String imageUrl3 = holtBeanList.get(position).thumbnail_pic_s03;
-        List<String> urls = new ArrayList<>();
-        if (!TextUtils.isEmpty(imageUrl)) {
-            urls.add(imageUrl);
-        }
-        if (!TextUtils.isEmpty(imageUrl2)) {
-            urls.add(imageUrl2);
-        }
-        if (!TextUtils.isEmpty(imageUrl3)) {
-            urls.add(imageUrl3);
-        }
-        if (urls.size() <= 0) {
-            return TYPE_TEXT;
-        } else if (urls.size() == 1) {
-            return TYPE_ONE;
-        } else if (urls.size() == 2) {
-            return TYPE_TWO;
-        } else if (urls.size() >= 3) {
-            return TYPE_THREE;
-        } else {
-            return TYPE_TEXT;
-        }
+    public MyHomeListViewAdapter(){
+        addItemType(NewsMultiItemEntity.TEXT,R.layout.hometype_one);
+        addItemType(NewsMultiItemEntity.IMG,R.layout.hometype_one);
+        addItemType(NewsMultiItemEntity.IMG_TWO,R.layout.hometype_one_two);
+        addItemType(NewsMultiItemEntity.IMG_THREE,R.layout.hometype_one_three);
     }
 
     @Override
-    public int getViewTypeCount() {
-        return 4;
-    }
-
-    @Override
-    public int getCount() {
-        return holtBeanList.size();
-    }
-
-    @Override
-    public Object getItem(int i) {
-        return holtBeanList.get(i);
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return i;
-    }
-
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolderText viewHoldertext = null;
-        ViewHolderOne viewHolderOne = null;
-        ViewHolderTwo viewHolderTwo = null;
-        ViewHolderThree viewHolderThree = null;
-        int type = getItemViewType(i);
-        if (view == null) {
-            switch (type) {
-                case TYPE_TEXT:
-                    viewHoldertext = new ViewHolderText();
-                    view = View.inflate(context, R.layout.hometype_one, null);
-                    viewHoldertext.type_one_title = (TextView) view.findViewById(R.id.type_one_title);
-                    viewHoldertext.type_one_groupname = (TextView) view.findViewById(R.id.type_one_groupname);
-                    viewHoldertext.type_one_comments = (TextView) view.findViewById(R.id.type_one_comments);
-                    view.setTag(viewHoldertext);
-
-                    break;
-                case TYPE_ONE:
-                    viewHolderOne = new ViewHolderOne();
-                    view = View.inflate(context, R.layout.hometype_one, null);
-                    viewHolderOne.type_one_title = (TextView) view.findViewById(R.id.type_one_title);
-                    viewHolderOne.type_one_groupname = (TextView) view.findViewById(R.id.type_one_groupname);
-                    viewHolderOne.type_one_comments = (TextView) view.findViewById(R.id.type_one_comments);
-                    view.setTag(viewHolderOne);
-
-                    break;
-                case TYPE_TWO:
-                    viewHolderTwo = new ViewHolderTwo();
-                    view = View.inflate(context, R.layout.hometype_one_two, null);
-                    viewHolderTwo.type_one_two_img = (ImageView) view.findViewById(R.id.type_one_two_img);
-                    viewHolderTwo.type_one_two_title = (TextView) view.findViewById(R.id.type_one_two_title);
-                    viewHolderTwo.type_one_two_groupname = (TextView) view.findViewById(R.id.type_one_two_groupname);
-                    viewHolderTwo.type_one_two_comments = (TextView) view.findViewById(R.id.type_one_two_comments);
-                    view.setTag(viewHolderTwo);
-                    break;
-                case TYPE_THREE:
-                    viewHolderThree = new ViewHolderThree();
-                    view = View.inflate(context, R.layout.hometype_one_three, null);
-                    viewHolderThree.type_one_three_title = (TextView) view.findViewById(R.id.type_one_three_title);
-                    viewHolderThree.type_one_three_img = (ImageView) view.findViewById(R.id.type_one_three_img);
-                    viewHolderThree.type_one_three_img02 = (ImageView) view.findViewById(R.id.type_one_three_img02);
-                    viewHolderThree.type_one_three_img03 = (ImageView) view.findViewById(R.id.type_one_three_img03);
-                    viewHolderThree.type_one_three_groupname = (TextView) view.findViewById(R.id.type_one_three_groupname);
-                    viewHolderThree.type_one_three_comments = (TextView) view.findViewById(R.id.type_one_three_comments);
-                    view.setTag(viewHolderThree);
-                    break;
-            }
-        } else {
-            switch (type) {
-                case TYPE_ONE:
-                    viewHolderOne = (ViewHolderOne) view.getTag();
-
-                    break;
-                case TYPE_TEXT:
-                    viewHoldertext = (ViewHolderText) view.getTag();
-
-                    break;
-                case TYPE_TWO:
-                    viewHolderTwo = (ViewHolderTwo) view.getTag();
-                    break;
-                case TYPE_THREE:
-                    viewHolderThree = (ViewHolderThree) view.getTag();
-                    break;
-            }
-        }
-        switch (type) {
-            case TYPE_TEXT:
-                viewHoldertext.type_one_title.setText(holtBeanList.get(i).title);
-                viewHoldertext.type_one_groupname.setText(holtBeanList.get(i).author_name);
-                viewHoldertext.type_one_comments.setText(holtBeanList.get(i).category);
+    protected void convert(@NonNull BaseViewHolder helper, NewsBean.ResultBean.DataBean item) {
+        // 根据返回的 type 分别设置数据
+        switch (helper.getItemViewType()) {
+            case NewsMultiItemEntity.IMG:
+                helper.setText(R.id.type_one_title, item.title);
+                helper.setText(R.id.type_one_groupname, item.author_name);
+                helper.setText(R.id.type_one_comments, item.category);
                 break;
-            case TYPE_ONE:
-                viewHolderOne.type_one_title.setText(holtBeanList.get(i).title);
-                viewHolderOne.type_one_groupname.setText(holtBeanList.get(i).author_name);
-                viewHolderOne.type_one_comments.setText(holtBeanList.get(i).category);
+            case NewsMultiItemEntity.IMG_TWO:
+                helper.setText(R.id.type_one_two_title, item.title);
+                helper.setText(R.id.type_one_two_groupname, item.author_name);
+                helper.setText(R.id.type_one_two_comments, item.category);
+                ImageLoader.getInstance().displayImage(item.thumbnail_pic_s, (ImageView) helper.getView(R.id.type_one_two_img));
                 break;
-            case TYPE_TWO:
-
-                try {
-                    String imageUrl = holtBeanList.get(i).thumbnail_pic_s02;
-                    ImageLoader.getInstance().displayImage(imageUrl, viewHolderTwo.type_one_two_img);
-                    viewHolderTwo.type_one_two_title.setText(holtBeanList.get(i).title);
-                    viewHolderTwo.type_one_two_groupname.setText(holtBeanList.get(i).author_name);
-                    viewHolderTwo.type_one_two_comments.setText(holtBeanList.get(i).category);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
+            case NewsMultiItemEntity.IMG_THREE:
+                helper.setText(R.id.type_one_three_title, item.title);
+                helper.setText(R.id.type_one_three_groupname, item.author_name);
+                helper.setText(R.id.type_one_three_comments, item.category);
+                ImageLoader.getInstance().displayImage(item.thumbnail_pic_s, (ImageView) helper.getView(R.id.type_one_three_img));
+                ImageLoader.getInstance().displayImage(item.thumbnail_pic_s02, (ImageView) helper.getView(R.id.type_one_three_img02));
+                ImageLoader.getInstance().displayImage(item.thumbnail_pic_s03, (ImageView) helper.getView(R.id.type_one_three_img03));
                 break;
-            case TYPE_THREE:
-
-                try {
-                    viewHolderThree.type_one_three_title.setText(holtBeanList.get(i).title);
-                    String imageUrls = holtBeanList.get(i).thumbnail_pic_s;
-                    String imageUrls2 = holtBeanList.get(i).thumbnail_pic_s02;
-                    String imageUrls3 = holtBeanList.get(i).thumbnail_pic_s03;
-                    ImageLoader.getInstance().displayImage(imageUrls, viewHolderThree.type_one_three_img);
-                    ImageLoader.getInstance().displayImage(imageUrls2, viewHolderThree.type_one_three_img02);
-                    ImageLoader.getInstance().displayImage(imageUrls3, viewHolderThree.type_one_three_img03);
-                    viewHolderThree.type_one_three_groupname.setText(holtBeanList.get(i).author_name);
-                    viewHolderThree.type_one_three_comments.setText(holtBeanList.get(i).category);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
+            default:
+                helper.setText(R.id.type_one_title, item.title);
+                helper.setText(R.id.type_one_groupname, item.author_name);
+                helper.setText(R.id.type_one_comments, item.category);
                 break;
         }
-        return view;
-    }
-
-
-    class ViewHolderText {
-        TextView type_one_title;
-        TextView type_one_groupname;
-        TextView type_one_comments;
-    }
-
-
-    class ViewHolderOne {
-        TextView type_one_title;
-        TextView type_one_groupname;
-        TextView type_one_comments;
-    }
-
-
-    class ViewHolderTwo {
-        ImageView type_one_two_img;
-        TextView type_one_two_title;
-        TextView type_one_two_groupname;
-        TextView type_one_two_comments;
-    }
-
-    class ViewHolderThree {
-        TextView type_one_three_title;
-        ImageView type_one_three_img;
-        ImageView type_one_three_img02;
-        ImageView type_one_three_img03;
-        TextView type_one_three_groupname;
-        TextView type_one_three_comments;
-
-
     }
 }

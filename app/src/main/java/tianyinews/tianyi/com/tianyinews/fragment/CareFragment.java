@@ -29,11 +29,14 @@ public class CareFragment extends BaseFragment {
     public static ImageView care_zhuantai_img;
     private MainActivity mainActivity;
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.carefragment;
+    }
+
 
     @Override
-    protected View initView() {
-        View view = View.inflate(mContext, R.layout.carefragment, null);
-
+    protected void initView(View view) {
         settings_title_name = (TextView) view.findViewById(R.id.settings_title_name);
         care_zhuantai_img = (ImageView) view.findViewById(R.id.care_zhuantai_img);
         boolean config = SharedPreferencesUtil.getSharedConfig(mContext);
@@ -47,8 +50,9 @@ public class CareFragment extends BaseFragment {
             care_zhuantai_img.setVisibility(View.VISIBLE);
             care_zhuantai_img.setImageResource(R.drawable.nologin_loading);
         }
-        return view;
     }
+
+
 
     @Override
     protected void initData() {

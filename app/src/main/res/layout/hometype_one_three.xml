@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="?attr/zzbackground"
-    app:backgroundAttr="zzbackground"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:backgroundAttr="zzbackground">
 
 
     <TextView
-        android:textColor="?attr/zztextColor"
-        app:textColorAttr="zztextColor"
         android:id="@+id/type_one_three_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,15 +16,17 @@
         android:layout_marginTop="5dp"
         android:singleLine="true"
         android:text="测试"
-        android:textSize="19sp" />
+        android:textColor="?attr/zztextColor"
+        android:textSize="19sp"
+        app:textColorAttr="zztextColor" />
 
     <LinearLayout
-        android:background="?attr/zzbackground"
-        app:backgroundAttr="zzbackground"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="5dp"
-        android:orientation="horizontal">
+        android:background="?attr/zzbackground"
+        android:orientation="horizontal"
+        app:backgroundAttr="zzbackground">
 
         <ImageView
             android:id="@+id/type_one_three_img"
@@ -53,22 +53,22 @@
     </LinearLayout>
 
     <LinearLayout
-        android:background="?attr/zzbackground"
-        app:backgroundAttr="zzbackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
-        android:orientation="horizontal">
+        android:layout_marginBottom="5dp"
+        android:background="?attr/zzbackground"
+        android:orientation="horizontal"
+        app:backgroundAttr="zzbackground">
 
         <TextView
-            android:textColor="?attr/zztextColor"
-            app:textColorAttr="zztextColor"
             android:id="@+id/type_one_three_groupname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:text="测试" />
+            android:text="测试"
+            android:textColor="?attr/zztextColor"
+            app:textColorAttr="zztextColor" />
 
 
         <ImageView
@@ -77,13 +77,13 @@
             android:layout_weight="1" />
 
         <TextView
-            android:textColor="?attr/zztextColor"
-            app:textColorAttr="zztextColor"
             android:id="@+id/type_one_three_comments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:text="测试1" />
+            android:text="测试1"
+            android:textColor="?attr/zztextColor"
+            app:textColorAttr="zztextColor" />
     </LinearLayout>
 
 

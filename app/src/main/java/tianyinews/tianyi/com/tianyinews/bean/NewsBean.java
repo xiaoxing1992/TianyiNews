@@ -1,8 +1,12 @@
 package tianyinews.tianyi.com.tianyinews.bean;
 
+import android.text.TextUtils;
+
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +38,7 @@ public class NewsBean implements Serializable {
         public String pageSize;
         public List<DataBean> data;
 
-        public static class DataBean implements Serializable {
+        public static class DataBean implements Serializable, MultiItemEntity {
             /**
              * uniquekey : c35a47286d3839e0b4591fe357538277
              * title : 曹云金强行拽美女上车？女方当事人晒亲密合影辟谣：恋人日常打闹
@@ -58,6 +62,30 @@ public class NewsBean implements Serializable {
             public String thumbnail_pic_s02;
             public String thumbnail_pic_s03;
             public String is_content;
+
+            @Override
+            public int getItemType() {
+                List<String> urls = new ArrayList<>();
+                if (!TextUtils.isEmpty(thumbnail_pic_s)) {
+                    urls.add(thumbnail_pic_s);
+                }
+                if (!TextUtils.isEmpty(thumbnail_pic_s02)) {
+                    urls.add(thumbnail_pic_s02);
+                }
+                if (!TextUtils.isEmpty(thumbnail_pic_s03)) {
+                    urls.add(thumbnail_pic_s03);
+                }
+
+                if (urls.size() == 1) {
+                    return NewsMultiItemEntity.IMG;
+                } else if (urls.size() == 2) {
+                    return NewsMultiItemEntity.IMG_TWO;
+                } else if (urls.size() >= 3) {
+                    return NewsMultiItemEntity.IMG_THREE;
+                } else {
+                    return NewsMultiItemEntity.TEXT;
+                }
+            }
         }
     }
 }

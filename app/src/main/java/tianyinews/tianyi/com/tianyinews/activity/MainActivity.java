@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FragmentManager manager;
     private HomeFragment homeFragment;
     private VideoFragment videoFragment;
-    private ActionBar supportActionBar;
     private ImageView qq_login_img;
     private RelativeLayout qq_user_login_jicheng;
     private RelativeLayout qq_user_rl;
@@ -122,9 +121,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MyDataBaseHelper dataBaseHelper = new MyDataBaseHelper(this);
         SQLiteDatabase writableDatabase = dataBaseHelper.getWritableDatabase();
 
-        //注册
-        // ThemeManager.registerThemeChangeListener(this);
-        //  supportActionBar = getSupportActionBar();
         initView();
         initData();
         //初始化侧滑界面

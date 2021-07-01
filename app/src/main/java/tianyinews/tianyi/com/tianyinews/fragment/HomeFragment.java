@@ -8,6 +8,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -76,12 +77,14 @@ public class HomeFragment extends BaseFragment implements ChannelDataHelepr.Chan
     List<MyChannel> myChannels;
     private int needShowPosition = -1;
 
+
     @Override
-    protected View initView() {
+    protected int getLayoutId() {
+        return R.layout.homefragment;
+    }
 
-        view = View.inflate(mContext, R.layout.homefragment, null);
-
-
+    @Override
+    protected void initView(@NonNull View view) {
         ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayTitleBackground).init();
 
         main_magic_indicator = (MagicIndicator) view.findViewById(R.id.main_magic_indicator);
@@ -135,14 +138,12 @@ public class HomeFragment extends BaseFragment implements ChannelDataHelepr.Chan
 
 
         loadData();
-
-        return view;
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if(!hidden){
+        if (!hidden) {
             ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayTitleBackground).init();
         }
     }

@@ -2,6 +2,8 @@ package tianyinews.tianyi.com.tianyinews.application;
 
 import android.app.Application;
 
+import androidx.multidex.MultiDexApplication;
+
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -19,7 +21,7 @@ import tianyinews.tianyi.com.tianyinews.R;
  * @date: 2017/3/17.
  */
 
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
     private static MyApplication myApplication;
 
     {

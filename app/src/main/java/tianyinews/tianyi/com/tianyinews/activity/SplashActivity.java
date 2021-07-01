@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.gyf.immersionbar.ImmersionBar;
 
 import tianyinews.tianyi.com.tianyinews.R;
@@ -16,7 +18,7 @@ import tianyinews.tianyi.com.tianyinews.util.CacheUtil;
  * Created by Administrator on 2017/3/10.
  */
 
-public class SplashActivity extends Activity {
+public class SplashActivity extends AppCompatActivity {
 
     private AlphaAnimation alphaAnimation;
     private View view;

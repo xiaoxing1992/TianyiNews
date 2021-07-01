@@ -4,9 +4,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
-import com.weiwei.xlistviewlibrary.XListView;
+import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,99 +31,73 @@ import tianyinews.tianyi.com.tianyinews.util.JsonUtil;
  */
 
 public class VideoChildFragment extends BaseFragment {
-    public static final String KEY_TITLE = "key_title";
     public static final String KEY_URL = "key_url";
     public static final String KEY_URL_FOOTER = "key_url_footer";
-    private XListView home_xlist_view;
-    private Handler handler = new Handler();
     private int PageIndex = 0;
-    private List<VideoBean> newData = new ArrayList<>();
     private MyVideoListViewAdapter adapter;
-    private String title;
     private String url;
     private String url_footer;
+    private RecyclerView recyclerView;
+    private SmartRefreshLayout refreshLayout;
+
 
     @Override
-    protected View initView() {
-        View view = View.inflate(mContext, R.layout.homechildfragment, null);
-        home_xlist_view = (XListView) view.findViewById(R.id.home_xlist_view);
+    protected int getLayoutId() {
+        return R.layout.homechildfragment;
+    }
 
+    @Override
+    protected void initView(View view) {
+        refreshLayout = view.findViewById(R.id.refreshLayout);
+        recyclerView = view.findViewById(R.id.recyclerView);
 
         Bundle bundle = getArguments();
-        //   title = bundle.getString(KEY_TITLE, "");
         url = bundle.getString(KEY_URL, "");
         url_footer = bundle.getString(KEY_URL_FOOTER, "");
-        adapter = new MyVideoListViewAdapter(getActivity(), newData);
-        home_xlist_view.setAdapter(adapter);
-        return view;
+        adapter = new MyVideoListViewAdapter();
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
     protected void initData() {
         super.initData();
-
-
-        home_xlist_view.setPullRefreshEnable(true);
-        home_xlist_view.setPullLoadEnable(true);
-        home_xlist_view.setXListViewListener(new XListView.IXListViewListener() {
-            @Override
-            public void onRefresh() {
-                newData.clear();
-                PageIndex = 0;
-
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        getServerData();
-
-                        home_xlist_view.stopRefresh();
-
-                    }
-                }, 1000);
-            }
-
-            @Override
-            public void onLoadMore() {
-                PageIndex += 10;
-
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        getServerData();
-                        home_xlist_view.stopLoadMore();
-                    }
-                }, 1000);
-            }
-        });
         //获取网络数据
-        getServerData();
-
+        getServerData(true);
     }
 
-    private void getServerData() {
+
+    @Override
+    protected void initListener() {
+        super.initListener();
+        refreshLayout.setOnRefreshListener(refreshLayout -> {
+            PageIndex = 0;
+            getServerData(true);
+        });
+
+        refreshLayout.setOnLoadMoreListener(refreshLayout -> {
+            PageIndex++;
+            getServerData(false);
+        });
+    }
+
+    private void getServerData(boolean isRefresh) {
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
         String http_url = url + PageIndex + url_footer;
         //  Log.e("sadddddddddd", http_url);
         asyncHttpClient.get(getContext(), http_url, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 List<VideoBean> videoJson = JsonUtil.getVideoJson(responseString);
-
-                newData.addAll(videoJson);
-                adapter.notifyDataSetChanged();
-
-
+                if(isRefresh){
+                    adapter.setList(videoJson);
+                }else{
+                    adapter.addData(videoJson);
+                }
             }
         });
     }
-
-   /* public String getTitle() {
-        return title;
-    }*/
-
 }
