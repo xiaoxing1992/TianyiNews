@@ -10,7 +10,7 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 public class SlidingActivity extends Activity implements SlidingActivityBase {
 
-    private SlidingActivityHelper mHelper;
+    private SlidingActivityHelper mHelper;//sss
 
     /* (non-Javadoc)
      * @see android.app.Activity#onCreate(android.os.Bundle)
