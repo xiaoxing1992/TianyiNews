@@ -282,11 +282,7 @@ public class HomeOldFragment extends BaseOldFragment implements ChannelDataHelep
 
         @Override
         public Fragment getItem(int position) {
-            HomeChildFragment homeChildFragment = new HomeChildFragment();
-            Bundle bundle = new Bundle();
-            bundle.putSerializable(HomeChildFragment.MODEL_KEY, myChannels.get(position));
-            homeChildFragment.setArguments(bundle);
-            return homeChildFragment;
+            return HomeChildFragment.newInstance(myChannels.get(position));
         }
 
         @Override

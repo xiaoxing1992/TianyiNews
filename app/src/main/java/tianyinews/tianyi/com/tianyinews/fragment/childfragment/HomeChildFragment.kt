@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.kingja.loadsir.core.LoadService
 import kotlinx.android.synthetic.main.homechildfragment.*
 import tianyinews.tianyi.com.tianyinews.R
 import tianyinews.tianyi.com.tianyinews.activity.WebActivity
@@ -14,6 +15,8 @@ import tianyinews.tianyi.com.tianyinews.adapter.MyHomeListViewAdapter
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment
 import tianyinews.tianyi.com.tianyinews.bean.MyChannel
 import tianyinews.tianyi.com.tianyinews.databinding.HomechildfragmentBinding
+import tianyinews.tianyi.com.tianyinews.ext.loadServiceInit
+import tianyinews.tianyi.com.tianyinews.ext.showLoading
 import tianyinews.tianyi.com.tianyinews.ext.showMessage
 import tianyinews.tianyi.com.tianyinews.viewmodel.HomeChildViewModel
 
@@ -29,26 +32,39 @@ class HomeChildFragment : BaseFragment<HomeChildViewModel, HomechildfragmentBind
     private val headerView: View by lazy { LayoutInflater.from(requireContext()).inflate(R.layout.header_message_update, null) }
     private val tv_title: TextView by lazy { headerView.findViewById(R.id.tv_title) }
 
+    //界面状态管理者
+    private lateinit var loadsir: LoadService<Any>
+
     override fun layoutId(): Int = R.layout.homechildfragment
 
     override fun initView(savedInstanceState: Bundle?) {
+        //状态页配置
+        loadsir = loadServiceInit(mDatabind.refreshLayout) {
+            //点击重试时触发的操作
+            loadsir.showLoading()
+            mViewModel.reuqestData(true, mChannel!!.requestTitle)
+        }
+
+
         val bundle = arguments
         mChannel = bundle!!.getSerializable(MODEL_KEY) as MyChannel?
-        recyclerView.adapter = adapter
+        mDatabind.recyclerView.adapter = adapter
         adapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.AlphaIn)
     }
 
     override fun lazyLoadData() {
+        //设置界面 加载中
+        loadsir.showLoading()
         //获取网络数据
         mViewModel.reuqestData(true, mChannel!!.requestTitle)
     }
 
     override fun initData() {
 
-        refreshLayout?.setOnRefreshListener {
+        mDatabind.refreshLayout?.setOnRefreshListener {
             mViewModel.reuqestData(true, mChannel!!.requestTitle)
         }
-        refreshLayout?.setOnLoadMoreListener {
+        mDatabind.refreshLayout?.setOnLoadMoreListener {
             mViewModel.reuqestData(false, mChannel!!.requestTitle)
         }
         adapter.setOnItemClickListener { ada: BaseQuickAdapter<*, *>, view: View?, position: Int ->
@@ -74,6 +90,7 @@ class HomeChildFragment : BaseFragment<HomeChildViewModel, HomechildfragmentBind
             homeDataState.observe(viewLifecycleOwner, Observer {
                 if (it.isRefresh) {
                     adapter.setList(it.listData)
+                    loadsir.showSuccess()
                     refreshLayout!!.finishRefresh()
                     if (adapter.hasHeaderLayout()) {
                         adapter.removeAllHeaderView()
@@ -86,9 +103,10 @@ class HomeChildFragment : BaseFragment<HomeChildViewModel, HomechildfragmentBind
                 } else {
                     it.listData?.let {
                         adapter.addData(it)
+                        loadsir.showSuccess()
                     }
 
-                    refreshLayout!!.finishLoadMore()
+                    mDatabind.refreshLayout.finishLoadMore()
                 }
 
             })
@@ -100,6 +118,15 @@ class HomeChildFragment : BaseFragment<HomeChildViewModel, HomechildfragmentBind
 
     companion object {
         const val MODEL_KEY = "model_key"
+
+        @JvmStatic
+        fun newInstance(channel: MyChannel): HomeChildFragment {
+            val args = Bundle()
+            args.putSerializable(MODEL_KEY, channel)
+            val fragment = HomeChildFragment()
+            fragment.arguments = args
+            return fragment
+        }
     }
 
 

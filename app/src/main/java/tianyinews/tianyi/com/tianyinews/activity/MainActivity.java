@@ -464,7 +464,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (Jzvd.backPress()) {
             return;
         }
-        super.onBackPressed();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
     }
 
     @Override
