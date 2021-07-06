@@ -25,8 +25,12 @@
         android:supportsRtl="true"
         android:resizeableActivity="true"
         android:maxAspectRatio="2.4"
+        android:usesCleartextTraffic="true"
         android:theme="@style/MBTheme">
 
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="375"/>
         <meta-data
             android:name="android.max_aspect"
             android:value="2.4" />

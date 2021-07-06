@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/changemodelibrary" />
             <option value="$PROJECT_DIR$/channellib" />
+            <option value="$PROJECT_DIR$/commonlibrary" />
             <option value="$PROJECT_DIR$/slidingmenulibrary" />
           </set>
         </option>

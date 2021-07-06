@@ -22,10 +22,10 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTit
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView
 import tianyinews.tianyi.com.tianyinews.R
-import tianyinews.tianyi.com.tianyinews.base.BaseFragment
+import tianyinews.tianyi.com.tianyinews.base.BaseOldFragment
 import tianyinews.tianyi.com.tianyinews.bean.MyChannel
 import tianyinews.tianyi.com.tianyinews.ext.titles.ScaleTransitionPagerTitleView
-import tianyinews.tianyi.com.tianyinews.fragment.childfragment.VideoChildFragment
+import tianyinews.tianyi.com.tianyinews.fragment.childfragment.VideoChildOldFragment
 import tianyinews.tianyi.com.tianyinews.util.GsonUtil
 import java.io.ByteArrayOutputStream
 import java.util.*
@@ -35,8 +35,8 @@ import java.util.*
  * @作者: 任正威
  * @date: 2017/3/14.
  */
-class VideoFragment : BaseFragment() {
-    private var fragList: ArrayList<BaseFragment>? = null
+class VideoOldFragment : BaseOldFragment() {
+    private var fragList: ArrayList<BaseOldFragment>? = null
     private val adapter: MyHomeListViewPager by lazy { MyHomeListViewPager(fragmentManager) }
     private var alldata: List<MyChannel> = mutableListOf()
 
@@ -131,11 +131,11 @@ class VideoFragment : BaseFragment() {
 
     inner class MyHomeListViewPager(fm: FragmentManager?) : FragmentPagerAdapter(fm!!) {
         override fun getItem(position: Int): Fragment {
-            val videoChildFragment = VideoChildFragment()
+            val videoChildFragment = VideoChildOldFragment()
             val bundle = Bundle()
             //      bundle.putString(HomeChildFragment.KEY_TITLE, alldata.get(position));
-            bundle.putString(VideoChildFragment.KEY_URL, alldata!![position].url)
-            bundle.putString(VideoChildFragment.KEY_URL_FOOTER, alldata!![position].url_footer)
+            bundle.putString(VideoChildOldFragment.KEY_URL, alldata!![position].url)
+            bundle.putString(VideoChildOldFragment.KEY_URL_FOOTER, alldata!![position].url_footer)
             videoChildFragment.arguments = bundle
             return videoChildFragment
         }

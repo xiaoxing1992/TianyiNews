@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
  * @date: 2017/3/14.
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseOldFragment extends Fragment {
 
     protected Context mContext;
 

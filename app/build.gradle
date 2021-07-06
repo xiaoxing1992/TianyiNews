@@ -15,6 +15,11 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -33,6 +38,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     signingConfigs {
         debug {
             storeFile file('debug.keystore')
@@ -41,6 +50,13 @@ android {
             keyPassword "android"
         }
     }
+
+
+
+    dataBinding {
+        enabled = true
+    }
+
     productFlavors {
     }
 }
@@ -50,25 +66,28 @@ repositories{
     }
 }
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile name:'SMSSDK-2.1.3',ext:'aar'
-    compile name:'SMSSDKGUI-2.1.3',ext:'aar'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation name:'SMSSDK-2.1.3',ext:'aar'
+    implementation name:'SMSSDKGUI-2.1.3',ext:'aar'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    api 'androidx.appcompat:appcompat:1.2.0'
-    testCompile 'junit:junit:4.12'
-    compile project(':slidingmenulibrary')
-    compile 'com.google.android.material:material:1.3.0'
-    compile project(':changemodelibrary')
-    compile 'com.loopj.android:android-async-http:1.4.9'
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.2'
-    compile project(':channellib')
-    compile 'org.xutils:xutils:3.3.36'
-    compile 'cn.jzvd:jiaozivideoplayer:7.6.0'
-    compile 'com.github.bumptech.glide:glide:4.12.0'
-    compile 'org.jetbrains.kotlin:kotlin-stdlib:1.4.21'
-    compile 'androidx.core:core-ktx:1.5.0'
+    api 'androidx.appcompat:appcompat:1.3.0'
+    testImplementation 'junit:junit:4.13.2'
+    implementation project(':slidingmenulibrary')
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation project(':changemodelibrary')
+    implementation 'com.loopj.android:android-async-http:1.4.9'
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.2'
+    implementation project(':channellib')
+    implementation 'org.xutils:xutils:3.3.36'
+    implementation 'cn.jzvd:jiaozivideoplayer:7.6.0'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+
+    //项目核心框架
+    implementation project(path: ':commonlibrary')
+
+
     // 基础依赖包，必须要依赖
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
 // fragment快速实现（可选）
@@ -87,4 +106,11 @@ dependencies {
     implementation  'com.scwang.smart:refresh-footer-classics:2.0.3'    //经典加载
     implementation  'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'    //经典加载
     implementation  'androidx.multidex:multidex:2.0.1'
+    implementation  'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
+    implementation  'org.jetbrains.kotlin:kotlin-stdlib:1.5.10'
+    implementation "com.afollestad.material-dialogs:lifecycle:3.3.0"
+    implementation "com.afollestad.material-dialogs:core:3.3.0"
+    implementation "com.afollestad.material-dialogs:color:3.3.0"
+    implementation 'com.blankj:utilcodex:1.30.6'
+    implementation 'com.google.code.gson:gson:2.8.7'
 }

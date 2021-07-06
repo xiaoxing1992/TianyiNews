@@ -4,17 +4,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.xutils.image.ImageOptions;
-import org.xutils.x;
-
-import java.util.ArrayList;
-
 import tianyinews.tianyi.com.tianyinews.R;
 import tianyinews.tianyi.com.tianyinews.activity.MainActivity;
-import tianyinews.tianyi.com.tianyinews.base.BaseFragment;
-import tianyinews.tianyi.com.tianyinews.bean.PhoneUserBean;
-import tianyinews.tianyi.com.tianyinews.bean.UserBean;
-import tianyinews.tianyi.com.tianyinews.db.UserDao;
+import tianyinews.tianyi.com.tianyinews.base.BaseOldFragment;
 import tianyinews.tianyi.com.tianyinews.util.SharedPreferencesUtil;
 
 /**
@@ -23,7 +15,7 @@ import tianyinews.tianyi.com.tianyinews.util.SharedPreferencesUtil;
  * @date: 2017/3/27.
  */
 
-public class CareFragment extends BaseFragment {
+public class CareOldFragment extends BaseOldFragment {
 
     private TextView settings_title_name;
     public static ImageView care_zhuantai_img;

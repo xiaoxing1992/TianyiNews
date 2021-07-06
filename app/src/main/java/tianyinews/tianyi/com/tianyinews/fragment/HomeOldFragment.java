@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.gyf.immersionbar.ImmersionBar;
-import com.gyf.immersionbar.components.SimpleImmersionOwner;
 import com.trs.channellib.channel.channel.helper.ChannelDataHelepr;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -41,7 +40,7 @@ import java.util.Map;
 import thinkfreely.changemodelibrary.ChangeModeController;
 import tianyinews.tianyi.com.tianyinews.activity.MainActivity;
 import tianyinews.tianyi.com.tianyinews.R;
-import tianyinews.tianyi.com.tianyinews.base.BaseFragment;
+import tianyinews.tianyi.com.tianyinews.base.BaseOldFragment;
 import tianyinews.tianyi.com.tianyinews.bean.MyChannel;
 import tianyinews.tianyi.com.tianyinews.bean.PhoneUserBean;
 import tianyinews.tianyi.com.tianyinews.bean.UserBean;
@@ -58,12 +57,8 @@ import tianyinews.tianyi.com.tianyinews.util.SharedPreferencesUtil;
  * @date: 2017/3/14.
  */
 
-public class HomeFragment extends BaseFragment implements ChannelDataHelepr.ChannelDataRefreshListenter {
-    private static final int CHANNELREQUEST = 1;
-    //  private String tabtitles[] = new String[]{"热点", "社会", "科技", "国际", "军事", "财经", "时尚", "娱乐", "汽车", "汽车", "体育", "游戏", "旅游", "历史", "本地"};
+public class HomeOldFragment extends BaseOldFragment implements ChannelDataHelepr.ChannelDataRefreshListenter {
     private List<String> mDataList = new ArrayList<>();
-    // private ArrayList<String> tabTitleList = new ArrayList<>();
-    //  private TabLayout home_tab_layout;
     int id = 1;
     Map<String, Integer> IdsMap = new HashMap<>();
     List<String> preIds = new ArrayList<>();
@@ -73,7 +68,6 @@ public class HomeFragment extends BaseFragment implements ChannelDataHelepr.Chan
     private ImageView button_more_columns;
     private MyHomeListViewPager adapter;
     ChannelDataHelepr<MyChannel> dataHelepr;
-    private View view;
     List<MyChannel> myChannels;
     private int needShowPosition = -1;
 
@@ -87,15 +81,13 @@ public class HomeFragment extends BaseFragment implements ChannelDataHelepr.Chan
     protected void initView(@NonNull View view) {
         ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayTitleBackground).init();
 
-        main_magic_indicator = (MagicIndicator) view.findViewById(R.id.main_magic_indicator);
+        main_magic_indicator =  view.findViewById(R.id.main_magic_indicator);
         myChannels = new ArrayList<>();
-        home_view_pager = (ViewPager) view.findViewById(R.id.home_view_pager);
-        top_head = (ImageView) view.findViewById(R.id.top_head);
-
-        //  homeFragmentOnListener.setView(top_head);
+        home_view_pager =  view.findViewById(R.id.home_view_pager);
+        top_head =  view.findViewById(R.id.top_head);
 
         button_more_columns = (ImageView) view.findViewById(R.id.button_more_columns);
-        dataHelepr = new ChannelDataHelepr(mContext, HomeFragment.this, view.findViewById(R.id.rl_ll));
+        dataHelepr = new ChannelDataHelepr(mContext, HomeOldFragment.this, view.findViewById(R.id.rl_ll));
         dataHelepr.setSwitchView(button_more_columns);
         boolean config = SharedPreferencesUtil.getSharedConfig(mContext);
         if (config) {
@@ -112,13 +104,6 @@ public class HomeFragment extends BaseFragment implements ChannelDataHelepr.Chan
                                 .setSize(400, 400)
                                 .setLoadingDrawableId(R.mipmap.ic_launcher)
                                 .build();
-
-                        //   userOnListener.setUrl(ub.imgUrl);
-             /*   ImageOptions options = new ImageOptions.Builder()
-                        .setCircular(true)
-                        .setSize(400, 400)
-                        .setLoadingDrawableId(R.mipmap.ic_launcher)
-                        .build();*/
                         x.image().bind(top_head, ub.imgUrl, options);
                     }
                     break;
@@ -185,7 +170,6 @@ public class HomeFragment extends BaseFragment implements ChannelDataHelepr.Chan
                         x.image().bind(top_head, url, options);
                     }
                 }
-                //  top_head.setImageResource();
             }
 
             @Override
@@ -194,19 +178,11 @@ public class HomeFragment extends BaseFragment implements ChannelDataHelepr.Chan
                     top_head.setImageResource(R.mipmap.ic_launcher);
                 }
             }
-
-           /* @Override
-            public void setIdImg(int i) {
-                top_head.setImageResource(i);
-            }*/
         });
     }
 
     private void setPointer() {
         //代码设置指示器背景颜色,会出现夜间模式不应用
-
-        //  main_magic_indicator.setBackgroundColor(Color.parseColor("#fafafa"));
-
         ChangeModeController.getInstance().addBackgroundColor(main_magic_indicator, R.attr.zzbackground);
 
 

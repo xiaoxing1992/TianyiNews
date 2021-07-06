@@ -1,1 +1,1 @@
-include ':app', ':slidingmenulibrary', ':changemodelibrary', ':channellib'
+include ':app', ':commonlibrary', ':slidingmenulibrary', ':changemodelibrary', ':channellib'

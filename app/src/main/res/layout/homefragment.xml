@@ -21,17 +21,6 @@
             android:layout_height="45dp"
             app:backgroundAttr="zzbackground"
             android:layout_weight="1" />
-        <!--<android.support.design.widget.TabLayout
-            android:id="@+id/home_tab_layout"
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:layout_weight="1"
-            app:tabIndicatorColor="@color/tabIndicatorColor"
-            app:tabIndicatorHeight="3dp"
-            app:tabSelectedTextColor="@color/tabSelectedTextColor"
-            app:tabTextColor="@color/tabTextColor">
-
-        </android.support.design.widget.TabLayout>-->
 
         <ImageView
             android:id="@+id/button_more_columns"

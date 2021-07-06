@@ -1,26 +1,20 @@
 package tianyinews.tianyi.com.tianyinews.fragment.childfragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
-import com.scwang.smart.refresh.layout.api.RefreshLayout;
-import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import tianyinews.tianyi.com.tianyinews.R;
 import tianyinews.tianyi.com.tianyinews.adapter.MyVideoListViewAdapter;
-import tianyinews.tianyi.com.tianyinews.base.BaseFragment;
+import tianyinews.tianyi.com.tianyinews.base.BaseOldFragment;
 import tianyinews.tianyi.com.tianyinews.bean.VideoBean;
 import tianyinews.tianyi.com.tianyinews.util.JsonUtil;
 
@@ -30,7 +24,7 @@ import tianyinews.tianyi.com.tianyinews.util.JsonUtil;
  * @date: 2017/3/14.
  */
 
-public class VideoChildFragment extends BaseFragment {
+public class VideoChildOldFragment extends BaseOldFragment {
     public static final String KEY_URL = "key_url";
     public static final String KEY_URL_FOOTER = "key_url_footer";
     private int PageIndex = 0;

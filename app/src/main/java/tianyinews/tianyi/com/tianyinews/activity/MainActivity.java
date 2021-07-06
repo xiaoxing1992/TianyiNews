@@ -14,7 +14,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -39,9 +38,9 @@ import tianyinews.tianyi.com.tianyinews.bean.PhoneUserBean;
 import tianyinews.tianyi.com.tianyinews.bean.UserBean;
 import tianyinews.tianyi.com.tianyinews.db.MyDataBaseHelper;
 import tianyinews.tianyi.com.tianyinews.db.UserDao;
-import tianyinews.tianyi.com.tianyinews.fragment.CareFragment;
-import tianyinews.tianyi.com.tianyinews.fragment.HomeFragment;
-import tianyinews.tianyi.com.tianyinews.fragment.VideoFragment;
+import tianyinews.tianyi.com.tianyinews.fragment.CareOldFragment;
+import tianyinews.tianyi.com.tianyinews.fragment.HomeOldFragment;
+import tianyinews.tianyi.com.tianyinews.fragment.VideoOldFragment;
 import tianyinews.tianyi.com.tianyinews.util.ConnUtil;
 import tianyinews.tianyi.com.tianyinews.util.SharedPreferencesUtil;
 
@@ -53,8 +52,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected SlidingMenu slidingMenu;
     private RadioGroup main_rb;
     private FragmentManager manager;
-    private HomeFragment homeFragment;
-    private VideoFragment videoFragment;
+    private HomeOldFragment homeFragment;
+    private VideoOldFragment videoFragment;
     private ImageView qq_login_img;
     private RelativeLayout qq_user_login_jicheng;
     private RelativeLayout qq_user_rl;
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public ArrayList<SnsPlatform> platforms = new ArrayList<SnsPlatform>();
     private SHARE_MEDIA[] list = {SHARE_MEDIA.QQ};
     private RelativeLayout qq_user_login_jicheng_tv;
-    private CareFragment careFragment;
+    private CareOldFragment careFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,9 +178,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initData() {
         manager = getSupportFragmentManager();
 
-        homeFragment = new HomeFragment();
-        videoFragment = new VideoFragment();
-        careFragment = new CareFragment();
+        homeFragment = new HomeOldFragment();
+        videoFragment = new VideoOldFragment();
+        careFragment = new CareOldFragment();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.main_fl, homeFragment, "f1");
         transaction.add(R.id.main_fl, videoFragment, "f2");

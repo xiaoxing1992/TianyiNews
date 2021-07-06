@@ -11,9 +11,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import tianyinews.tianyi.com.tianyinews.bean.HoltBean;
-import tianyinews.tianyi.com.tianyinews.bean.NewBean;
-import tianyinews.tianyi.com.tianyinews.bean.NewsBean;
 import tianyinews.tianyi.com.tianyinews.bean.VideoBean;
 
 /**
@@ -23,13 +20,7 @@ import tianyinews.tianyi.com.tianyinews.bean.VideoBean;
  */
 
 public class JsonUtil {
-    public static List<NewsBean.ResultBean.DataBean> getJson(String url) {
-        Gson gson = new Gson();
-        NewsBean holtBean = gson.fromJson(url, NewsBean.class);
-        if (holtBean.result == null) return Collections.emptyList();
-        List<NewsBean.ResultBean.DataBean> data = holtBean.result.data;
-        return data;
-    }
+
 
     public static List<VideoBean> getVideoJson(String json) {
         Gson gson = new Gson();
@@ -53,13 +44,5 @@ public class JsonUtil {
             e.printStackTrace();
         }
         return list;
-    }
-
-
-    public static String getWebviewJson(String json) {
-        Gson gson = new Gson();
-        NewBean newBean = gson.fromJson(json, NewBean.class);
-        String url = newBean.data.url;
-        return url;
     }
 }
