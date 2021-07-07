@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_web"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="tianyinews.tianyi.com.tianyinews.activity.WebActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <WebView
-        android:id="@+id/web_view"
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/activity_web"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></WebView>
-</RelativeLayout>
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context="tianyinews.tianyi.com.tianyinews.activity.WebActivity">
+
+        <WebView
+            android:id="@+id/web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+</layout>

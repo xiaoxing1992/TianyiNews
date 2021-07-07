@@ -5,14 +5,9 @@ import cat.ereza.customactivityoncrash.config.CaocConfig
 import cn.smssdk.SMSSDK
 import com.kingja.loadsir.callback.SuccessCallback
 import com.kingja.loadsir.core.LoadSir
-import com.nostra13.universalimageloader.core.DisplayImageOptions
-import com.nostra13.universalimageloader.core.ImageLoader
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration
 import com.rz.commonlibrary.base.BaseApp
 import com.umeng.socialize.PlatformConfig
 import com.umeng.socialize.UMShareAPI
-import org.xutils.x
-import tianyinews.tianyi.com.tianyinews.R
 import tianyinews.tianyi.com.tianyinews.activity.MainActivity
 import tianyinews.tianyi.com.tianyinews.activity.SplashActivity
 import tianyinews.tianyi.com.tianyinews.weight.EmptyCallback
@@ -35,10 +30,8 @@ class MyApplication : BaseApp() {
             .addCallback(EmptyCallback()) //空
             .setDefaultCallback(SuccessCallback::class.java)
             .commit()
-        imageLoaderInit()
         myApplication = this
         UMShareAPI.get(this)
-        x.Ext.init(this)
         SMSSDK.initSDK(this, "1c65790672734", "bd4224b54238bd1a08663da7db8bfd70")
 
         //防止项目崩溃，崩溃后打开错误界面
@@ -53,25 +46,6 @@ class MyApplication : BaseApp() {
             .restartActivity(SplashActivity::class.java) // 重启的activity
             .errorActivity(MainActivity::class.java) //发生错误跳转的activity
             .apply()
-    }
-
-    private fun imageLoaderInit() {
-        val options = DisplayImageOptions.Builder()
-            .showImageForEmptyUri(R.drawable.not_found_loading)
-            .showImageOnFail(R.drawable.not_found_loading)
-            .showImageOnLoading(R.drawable.not_found_loading)
-            .cacheInMemory(true)
-            .cacheOnDisk(true) //        .displayer(new RoundedBitmapDisplayer(20))  //这三句会产生图片不加载
-            //至于为什么   请高手赐教
-            //    .showImageOnFail(R.mipmap.ic_launcher)
-            //   .bitmapConfig(Bitmap.Config.RGB_565)
-            .build()
-        val loaderConfiguration = ImageLoaderConfiguration.Builder(applicationContext)
-            .memoryCacheSizePercentage(20).diskCacheFileCount(1000).diskCacheSize(5 * 1024 * 1024)
-            .defaultDisplayImageOptions(options)
-            .memoryCacheExtraOptions(480, 800)
-            .build()
-        ImageLoader.getInstance().init(loaderConfiguration)
     }
 
     companion object {

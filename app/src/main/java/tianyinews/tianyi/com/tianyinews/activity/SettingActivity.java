@@ -11,24 +11,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.TextHttpResponseHandler;
-import com.nostra13.universalimageloader.core.ImageLoader;
-
-import org.xutils.image.ImageOptions;
-import org.xutils.x;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import cz.msebera.android.httpclient.Header;
+import coil.Coil;
 import tianyinews.tianyi.com.tianyinews.R;
-import tianyinews.tianyi.com.tianyinews.bean.HoltBean;
-import tianyinews.tianyi.com.tianyinews.bean.PhoneUserBean;
-import tianyinews.tianyi.com.tianyinews.bean.UserBean;
-import tianyinews.tianyi.com.tianyinews.db.UserDao;
-import tianyinews.tianyi.com.tianyinews.util.JsonUtil;
 import tianyinews.tianyi.com.tianyinews.util.SharedPreferencesUtil;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
@@ -83,8 +67,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        ImageLoader.getInstance().clearDiskCache();
-                        ImageLoader.getInstance().clearMemoryCache();
+                        Coil.imageLoader(getBaseContext()).getMemoryCache().clear();
                         huancunsize_tv.setText("0M");
 
                     }
