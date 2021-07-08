@@ -25,6 +25,11 @@ val apiService: HomeService by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
     NetworkApi.INSTANCE.getApi(HomeService::class.java, HomeService.NEWS_URL)
 }
 
+//双重校验锁式-单例 封装NetApiService 方便直接快速调用简单的接口
+val apiVideoService: HomeService by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+    NetworkApi.INSTANCE.getApi(HomeService::class.java, HomeService.VIDEO_URL)
+}
+
 
 
 class NetworkApi: BaseNetworkApi() {

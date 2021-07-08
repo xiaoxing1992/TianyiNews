@@ -25,6 +25,7 @@ import tianyinews.tianyi.com.tianyinews.db.MyDataBaseHelper
 import tianyinews.tianyi.com.tianyinews.db.UserDao
 import tianyinews.tianyi.com.tianyinews.fragment.CareOldFragment
 import tianyinews.tianyi.com.tianyinews.fragment.HomeFragment
+import tianyinews.tianyi.com.tianyinews.fragment.KaiyanFragment
 import tianyinews.tianyi.com.tianyinews.fragment.VideoOldFragment
 import tianyinews.tianyi.com.tianyinews.util.ConnUtil
 import tianyinews.tianyi.com.tianyinews.util.SharedPreferencesUtil
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var main_rb: RadioGroup? = null
     private var manager: FragmentManager? = null
     private var homeFragment: HomeFragment? = null
+    private var kyFragment: KaiyanFragment? = null
     private var videoFragment: VideoOldFragment? = null
     private var qq_login_img: ImageView? = null
     private var qq_user_login_jicheng: RelativeLayout? = null
@@ -142,13 +144,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun initData() {
         manager = supportFragmentManager
         homeFragment = HomeFragment()
+        kyFragment = KaiyanFragment()
         videoFragment = VideoOldFragment()
         careFragment = CareOldFragment()
         val transaction = manager!!.beginTransaction()
         transaction.add(R.id.main_fl, homeFragment!!, "f1")
-        transaction.add(R.id.main_fl, videoFragment!!, "f2")
-        transaction.add(R.id.main_fl, careFragment!!, "f3")
+        transaction.add(R.id.main_fl, kyFragment!!, "f2")
+        transaction.add(R.id.main_fl, videoFragment!!, "f3")
+        transaction.add(R.id.main_fl, careFragment!!, "f4")
         transaction.show(homeFragment!!)
+        transaction.hide(kyFragment!!)
         transaction.hide(videoFragment!!)
         transaction.hide(careFragment!!)
         transaction.commit()
@@ -161,13 +166,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 R.id.buttom_home_rb_id -> {
                     val transaction = manager!!.beginTransaction()
                     transaction.show(homeFragment!!)
+                    transaction.hide(kyFragment!!)
                     transaction.hide(videoFragment!!)
                     transaction.hide(careFragment!!)
                     transaction.commit()
                 }
-                R.id.buttom_video_rb_id -> {
+                R.id.buttom_kaiyan_rb_id -> {
+                    val transaction1 = manager!!.beginTransaction()
+                    transaction1.show(kyFragment!!)
+                    transaction1.hide(videoFragment!!)
+                    transaction1.hide(homeFragment!!)
+                    transaction1.hide(careFragment!!)
+                    transaction1.commit()
+                }
+                 R.id.buttom_video_rb_id -> {
                     val transaction1 = manager!!.beginTransaction()
                     transaction1.show(videoFragment!!)
+                    transaction1.hide(kyFragment!!)
                     transaction1.hide(homeFragment!!)
                     transaction1.hide(careFragment!!)
                     transaction1.commit()
@@ -175,6 +190,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 R.id.buttom_care_rb_id -> {
                     val transaction2 = manager!!.beginTransaction()
                     transaction2.show(careFragment!!)
+                    transaction2.hide(kyFragment!!)
                     transaction2.hide(videoFragment!!)
                     transaction2.hide(homeFragment!!)
                     transaction2.commit()

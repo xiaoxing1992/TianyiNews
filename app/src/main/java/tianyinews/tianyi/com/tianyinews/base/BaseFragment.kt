@@ -39,6 +39,12 @@ abstract class BaseFragment<VM:BaseViewModel,DB:ViewDataBinding>: BaseVmDbFragme
     }
 
     /**
+     * Fragment执行onViewCreated后触发
+     */
+    override fun initListener() {
+    }
+
+    /**
      * 打开等待框
      */
     override fun showLoading(message: String) {

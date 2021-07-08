@@ -77,7 +77,6 @@ dependencies {
     implementation project(':slidingmenulibrary')
     implementation 'com.google.android.material:material:1.3.0'
     implementation project(':changemodelibrary')
-    implementation 'com.loopj.android:android-async-http:1.4.9'
     implementation project(':channellib')
     implementation 'cn.jzvd:jiaozivideoplayer:7.6.0'
 

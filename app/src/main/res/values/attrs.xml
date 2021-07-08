@@ -8,5 +8,9 @@
     <attr name="ttbackgroundDrawable" format="reference" />
     <attr name="ttsearchbackgroundDrawable" format="reference" />
     <attr name="homebackgroundSelector" format="reference" />
+
+    <declare-styleable name="PercentTextView">
+        <attr name="baseScreenHeight" format="integer" />
+    </declare-styleable>
 </resources>
 

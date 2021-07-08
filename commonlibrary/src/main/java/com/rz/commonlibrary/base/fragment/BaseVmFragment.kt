@@ -21,7 +21,7 @@ import com.rz.commonlibrary.network.manager.NetworkStateManager
  * @CreateDate:     2021/7/5 11:12 上午
  * @Description:    ViewModelFragment基类，自动把ViewModel注入Fragment
  */
-abstract class BaseVmFragment<VM: BaseViewModel>: Fragment() {
+abstract class BaseVmFragment<VM : BaseViewModel> : Fragment() {
 
     private val handler = Handler()
 
@@ -36,7 +36,7 @@ abstract class BaseVmFragment<VM: BaseViewModel>: Fragment() {
     abstract fun layoutId(): Int
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(layoutId(),container,false)
+        return inflater.inflate(layoutId(), container, false)
     }
 
     override fun onAttach(context: Context) {
@@ -52,6 +52,7 @@ abstract class BaseVmFragment<VM: BaseViewModel>: Fragment() {
         createObserver()
         registorDefUIChange()
         initData()
+        initListener()
     }
 
     /**
@@ -102,6 +103,11 @@ abstract class BaseVmFragment<VM: BaseViewModel>: Fragment() {
     open fun initData() {}
 
     /**
+     * Fragment执行onCreate后触发的方法
+     */
+    open fun initListener() {}
+
+    /**
      * 懒加载
      */
     abstract fun lazyLoadData()
@@ -112,7 +118,7 @@ abstract class BaseVmFragment<VM: BaseViewModel>: Fragment() {
     private fun onVisible() {
         if (lifecycle.currentState == Lifecycle.State.STARTED && isFirst) {
             // 延迟加载 防止 切换动画还没执行完毕时数据就已经加载好了，这时页面会有渲染卡顿
-            handler.postDelayed( {
+            handler.postDelayed({
                 lazyLoadData()
                 //在Fragment中，只有懒加载过了才能开启网络变化监听
                 NetworkStateManager.instance.mNetworkStateCallback.observe(
@@ -124,7 +130,7 @@ abstract class BaseVmFragment<VM: BaseViewModel>: Fragment() {
                         }
                     })
                 isFirst = false
-            },lazyLoadTime())
+            }, lazyLoadTime())
         }
     }
 

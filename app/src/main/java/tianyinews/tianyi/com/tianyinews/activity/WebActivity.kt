@@ -1,5 +1,7 @@
 package tianyinews.tianyi.com.tianyinews.activity
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -71,5 +73,14 @@ class WebActivity : BaseActivity<WebViewModel,ActivityWebBinding>() {
             }
             false
         })
+    }
+
+    companion object{
+        @JvmStatic
+        fun start(context: Context,newUrl:String) {
+            val starter = Intent(context, WebActivity::class.java)
+            starter.putExtra("newUrl", newUrl)
+            context.startActivity(starter)
+        }
     }
 }

@@ -1,0 +1,23 @@
+[
+  {
+    "title": "开眼精选",
+    "channelType": 0,
+    "isFix": 1,
+    "isSubscible": 1,
+    "type": "1"
+  },
+  {
+    "title": "分类",
+    "channelType": 0,
+    "isFix": 1,
+    "isSubscible": 1,
+    "type": "2"
+  },
+  {
+    "title": "热门",
+    "channelType": 0,
+    "isFix": 1,
+    "isSubscible": 1,
+    "type": "3"
+  }
+]

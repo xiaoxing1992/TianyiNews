@@ -1,10 +1,8 @@
 package tianyinews.tianyi.com.network.request
 
 import tianyinews.tianyi.com.network.apiService
-import tianyinews.tianyi.com.tianyinews.bean.ApiResponse
-import tianyinews.tianyi.com.tianyinews.bean.NewsApiResponse
-import tianyinews.tianyi.com.tianyinews.bean.NewsModel
-import tianyinews.tianyi.com.tianyinews.bean.NewsResultModel
+import tianyinews.tianyi.com.network.apiVideoService
+import tianyinews.tianyi.com.tianyinews.bean.*
 
 /**
  * @Author:         renzhengwei
@@ -17,7 +15,18 @@ val HomeRequestCoroutine: HomeReuqestManager by lazy(mode = LazyThreadSafetyMode
 
 class HomeReuqestManager {
     suspend fun getNewsList(type: String, num: Int): NewsApiResponse<NewsResultModel> {
-        val model = apiService.getNewsList(type, num)
-        return model
+        return apiService.getNewsList(type, num)
+    }
+
+//    suspend fun getVideoList(type: String, num: Int): NewsApiResponse<List<VideoResultModel>> {
+////        return apiVideoService.getVideoList(type,num)
+//    }
+
+    suspend fun getVideoData(): VideoApiResponse<List<VideoIssue>> {
+        return apiVideoService.getVideoData(System.currentTimeMillis())
+    }
+
+    suspend fun getVideoMoreData(nextUrl: String): VideoApiResponse<List<VideoIssue>> {
+        return apiVideoService.getVideoMoreData(nextUrl)
     }
 }

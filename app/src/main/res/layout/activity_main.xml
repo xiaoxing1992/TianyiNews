@@ -54,6 +54,20 @@
                 android:textSize="12sp" />
 
             <RadioButton
+                android:id="@+id/buttom_kaiyan_rb_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/touming"
+                android:button="@null"
+                android:drawablePadding="-5dp"
+                android:drawableTop="@drawable/video_bottom_rb_selector"
+                android:gravity="center"
+                android:text="开眼视频"
+                android:textColor="@color/bottom_textcolor_selector"
+                android:textSize="12sp" />
+
+            <RadioButton
                 android:id="@+id/buttom_video_rb_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

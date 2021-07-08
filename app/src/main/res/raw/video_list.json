@@ -1,90 +1,79 @@
 [
   {
-    "title": "娱乐",
+    "title": "热门",
     "channelType": 0,
     "isFix": 1,
     "isSubscible": 1,
-    "url": "http://c.3g.163.com/nc/video/list/V9LG4CHOR/n/",
-    "url_footer": "-10.html"
+    "type": "hot_video"
   },
   {
-    "title": "体育",
+    "title": "搞笑总榜",
     "channelType": 0,
     "isFix": 1,
     "isSubscible": 1,
-    "url": "http://c.3g.163.com/nc/video/list/VBF8F2E94/n/",
-    "url_footer": "-10.html"
+    "type": "amusement_overall"
   },
   {
-    "title": "搞笑",
+    "title": "搞笑新势力榜",
     "channelType": 0,
     "isFix": 0,
     "isSubscible": 1,
-    "url": "http://c.3g.163.com/nc/video/list/VAP4BFE3U/n/",
-    "url_footer": "-10.html"
+    "type": "amusement_new"
   },
   {
-    "title": "美女",
+    "title": "单机主机榜",
     "channelType": 0,
     "isFix": 0,
     "isSubscible": 1,
-    "url": "http://c.3g.163.com/nc/video/list/VAP4BG6DL/n/",
-    "url_footer": "-10.html"
+    "type": "game_console"
   },
   {
-    "title": "新闻现场",
+    "title": "游戏资讯榜",
     "channelType": 0,
     "isFix": 0,
     "isSubscible": 1,
-    "url": "http://c.3g.163.com/nc/video/list/VAV3H6JSN/n/",
-    "url_footer": "-10.html"
+    "type": "game_inf"
   },
   {
-    "title": "BoBo",
+    "title": "美食总榜",
     "channelType": 0,
     "isFix": 0,
     "isSubscible": 1,
-    "url": "http://c.3g.163.com/nc/video/list/VBK3JKUIF/n/",
-    "url_footer": "-10.html"
+    "type": "food_overall"
   },
   {
-    "title": "二次元",
+    "title": "美食新势力榜",
     "channelType": 0,
     "isFix": 0,
     "isSubscible": 1,
-    "url": "http://c.3g.163.com/nc/video/list/VBF8F1PSA/n/",
-    "url_footer": "-10.html"
+    "type": "food_new"
   },
   {
-    "title": "黑科技",
+    "title": "美食教程榜",
     "channelType": 0,
     "isFix": 0,
     "isSubscible": 1,
-    "url": "http://c.3g.163.com/nc/video/list/VBF8F2PKF/n/",
-    "url_footer": "-10.html"
+    "type": "food_tutorial"
   },
   {
-    "title": "军武",
+    "title": "美食探店榜",
     "channelType": 0,
     "isFix": 0,
     "isSubscible": 1,
-    "url": "http://c.3g.163.com/nc/video/list/VBF8F3301/n/",
-    "url_footer": "-10.html"
+    "type": "food_shop"
   },
   {
-    "title": "涨知识",
+    "title": "体育总榜",
     "channelType": 0,
     "isFix": 0,
     "isSubscible": 1,
-    "url": "http://c.3g.163.com/nc/video/list/VBF8F3SGL/n/",
-    "url_footer": "-10.html"
+    "type": "sport_overall"
   },
   {
-    "title": "八卦",
+    "title": "篮球榜",
     "channelType": 0,
     "isFix": 0,
     "isSubscible": 1,
-    "url": "http://c.3g.163.com/nc/video/list/VBF8EUDUS/n/",
-    "url_footer": "-10.html"
+    "type": "sport_basketball"
   }
 ]

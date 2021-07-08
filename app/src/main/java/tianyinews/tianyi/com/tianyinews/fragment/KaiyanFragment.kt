@@ -3,7 +3,6 @@ package tianyinews.tianyi.com.tianyinews.fragment
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import androidx.fragment.app.Fragment
@@ -22,42 +21,30 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTit
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView
 import tianyinews.tianyi.com.tianyinews.R
-import tianyinews.tianyi.com.tianyinews.base.BaseOldFragment
+import tianyinews.tianyi.com.tianyinews.base.BaseFragment
 import tianyinews.tianyi.com.tianyinews.bean.MyChannel
+import tianyinews.tianyi.com.tianyinews.databinding.FragmentKaiyanBinding
 import tianyinews.tianyi.com.tianyinews.ext.titles.ScaleTransitionPagerTitleView
+import tianyinews.tianyi.com.tianyinews.fragment.childfragment.KaiyanHomeFragment
 import tianyinews.tianyi.com.tianyinews.fragment.childfragment.VideoChildFragment
 import tianyinews.tianyi.com.tianyinews.util.GsonUtil
+import tianyinews.tianyi.com.tianyinews.viewmodel.KaiyanViewModel
 import java.io.ByteArrayOutputStream
-import java.util.*
 
 /**
- * @类的用途:
- * @作者: 任正威
- * @date: 2017/3/14.
+ * @Author:         renzhengwei
+ * @CreateDate:     2021/7/7 4:39 下午
+ * @Description:
  */
-class VideoOldFragment : BaseOldFragment() {
-    private var fragList: ArrayList<BaseOldFragment>? = null
-    private val adapter: MyHomeListViewPager by lazy { MyHomeListViewPager(fragmentManager) }
+class KaiyanFragment:BaseFragment<KaiyanViewModel,FragmentKaiyanBinding>() {
+
     private var alldata: List<MyChannel> = mutableListOf()
+    private val adapter: MyHomeListViewPager by lazy { MyHomeListViewPager(childFragmentManager) }
 
-
-    override fun getLayoutId(): Int = R.layout.fragment_video
-
-    override fun initView(view: View) {
+    override fun layoutId(): Int  = R.layout.fragment_kaiyan
+    override fun initView(savedInstanceState: Bundle?) {
         ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayBackground).statusBarDarkFont(true).init()
-    }
-
-    override fun onHiddenChanged(hidden: Boolean) {
-        super.onHiddenChanged(hidden)
-        if (!hidden) {
-            ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayBackground).statusBarDarkFont(true).init()
-        }
-    }
-
-    override fun initData() {
-        super.initData()
         loadData()
-        fragList = ArrayList()
         val commonNavigator = CommonNavigator(activity)
         commonNavigator.scrollPivotX = 0.8f
         video_view_pager?.adapter  = adapter
@@ -73,7 +60,7 @@ class VideoOldFragment : BaseOldFragment() {
                 simplePagerTitleView.textSize = 18f
                 simplePagerTitleView.normalColor = Color.parseColor("#9e9e9e")
                 simplePagerTitleView.selectedColor = Color.parseColor("#D43D3D")
-                simplePagerTitleView.setOnClickListener { video_view_pager.setCurrentItem(index) }
+                simplePagerTitleView.setOnClickListener { video_view_pager.currentItem = index }
                 return simplePagerTitleView
             }
 
@@ -105,6 +92,17 @@ class VideoOldFragment : BaseOldFragment() {
         })
     }
 
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+            ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayBackground).statusBarDarkFont(true).init()
+        }
+    }
+    override fun initData() {
+        super.initData()
+    }
+
+
     private fun loadData() {
         val data = fromRaw
         alldata = GsonUtil.jsonToBeanList(data, MyChannel::class.java)
@@ -114,7 +112,7 @@ class VideoOldFragment : BaseOldFragment() {
         private get() {
             val result = ""
             try {
-                val input = resources.openRawResource(R.raw.video_list)
+                val input = resources.openRawResource(R.raw.kaiyan_list)
                 val output = ByteArrayOutputStream()
                 val buffer = ByteArray(1024)
                 var length = 0
@@ -130,9 +128,21 @@ class VideoOldFragment : BaseOldFragment() {
             return result
         }
 
-    inner class MyHomeListViewPager(fm: FragmentManager?) : FragmentPagerAdapter(fm!!) {
+
+    inner class MyHomeListViewPager(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         override fun getItem(position: Int): Fragment {
-            return VideoChildFragment.newInstance(alldata!![position])
+            when(alldata!![position].type){
+                "1"->{
+                    return KaiyanHomeFragment.newInstance()
+                }
+                "2"->{
+                    return KaiyanHomeFragment.newInstance()
+                }
+                "3"->{
+                    return KaiyanHomeFragment.newInstance()
+                }
+            }
+            return KaiyanHomeFragment.newInstance()
         }
 
         override fun getCount(): Int {
@@ -143,10 +153,4 @@ class VideoOldFragment : BaseOldFragment() {
             return alldata!![position].title
         }
     }
-
-    override fun onPause() {
-        super.onPause()
-        Jzvd.releaseAllVideos()
-    }
-
 }
