@@ -114,4 +114,6 @@ dependencies {
     implementation 'cat.ereza:customactivityoncrash:2.3.0'
 
     implementation 'io.coil-kt:coil:1.2.2'
+    implementation 'com.github.zhpanvip:bannerviewpager:3.5.2'
+    implementation 'com.blankj:utilcodex:1.30.6'
 }

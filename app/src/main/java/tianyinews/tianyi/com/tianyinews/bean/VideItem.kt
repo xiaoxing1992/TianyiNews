@@ -1,6 +1,7 @@
 package tianyinews.tianyi.com.tianyinews.bean
 
 import com.chad.library.adapter.base.entity.MultiItemEntity
+import tianyinews.tianyi.com.tianyinews.adapter.KaiyanRecommendAdapter
 import java.io.Serializable
 
 /**
@@ -8,7 +9,7 @@ import java.io.Serializable
  * @CreateDate:     2021/7/7 4:31 下午
  * @Description:
  */
-class VideItem(val type: String, val data: Data?, val tag: String) : Serializable, MultiItemEntity {
+class VideItem(var type: String, val data: Data?, val tag: String) : Serializable, MultiItemEntity {
 
     data class Data(
         val dataType: String, val text: String, val videoTitle: String, val id: Long, val title: String, val slogan: String?,
@@ -74,9 +75,9 @@ class VideItem(val type: String, val data: Data?, val tag: String) : Serializabl
 
     override val itemType: Int
         get() = when (type) {
-            "banner2" -> 1
-            "textHeader" -> 2
-            "video" -> 3
-            else -> 0
+            "banner2" -> KaiyanRecommendAdapter.TYPE_BANNER
+            "textHeader" -> KaiyanRecommendAdapter.TYPE_HEADER
+            "video" -> KaiyanRecommendAdapter.TYPE_VIDEO
+            else -> KaiyanRecommendAdapter.TYPE_OTHER
         }
 }

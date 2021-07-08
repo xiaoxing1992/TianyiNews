@@ -1,5 +1,6 @@
 package tianyinews.tianyi.com.network.request
 
+import com.xk.eyepetizer.mvp.model.bean.KzCategory
 import tianyinews.tianyi.com.network.apiService
 import tianyinews.tianyi.com.network.apiVideoService
 import tianyinews.tianyi.com.tianyinews.bean.*
@@ -28,5 +29,9 @@ class HomeReuqestManager {
 
     suspend fun getVideoMoreData(nextUrl: String): VideoApiResponse<List<VideoIssue>> {
         return apiVideoService.getVideoMoreData(nextUrl)
+    }
+
+    suspend fun getCategory(): List<KzCategory> {
+        return apiVideoService.getCategory()
     }
 }

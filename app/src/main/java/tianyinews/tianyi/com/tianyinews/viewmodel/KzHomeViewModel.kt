@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import tianyinews.tianyi.com.network.request.HomeRequestCoroutine
+import tianyinews.tianyi.com.tianyinews.adapter.KaiyanRecommendAdapter
 import tianyinews.tianyi.com.tianyinews.bean.*
 
 /**
@@ -17,6 +18,7 @@ import tianyinews.tianyi.com.tianyinews.bean.*
  */
 class KzHomeViewModel : BaseViewModel() {
 
+    var bannerDataState: MutableLiveData<MutableList<VideItem>> = MutableLiveData()
     var homeDataState: MutableLiveData<ListDataUiState<VideItem>> = MutableLiveData()
     var moreDataState: MutableLiveData<ListDataUiState<VideItem>> = MutableLiveData()
     var bannerHomeBean: VideoApiResponse<List<VideoIssue>>? = null
@@ -38,6 +40,19 @@ class KzHomeViewModel : BaseViewModel() {
                 val newItemList = it?.issueList.get(0)?.itemList
                 newItemList?.filter { item -> item.type == "banner2"}?.forEach { item -> newItemList?.remove(item) }
                 bannerHomeBean?.issueList!![0].itemList.addAll(newItemList)
+
+               val bannerList =  mutableListOf<VideItem>()
+                bannerHomeBean?.issueList!![0].itemList.forEachIndexed { index, videItem ->
+                    if(videItem.type=="video"&&index<6){
+                        bannerList.add(videItem)
+                    }
+                }
+
+                bannerDataState.value = bannerList
+                if(bannerHomeBean?.issueList!![0].itemList.size>5){
+                    val subList = bannerHomeBean?.issueList!![0].itemList.subList(5, bannerHomeBean?.issueList!![0].itemList.size)
+                    bannerHomeBean?.issueList!![0].itemList =subList.toMutableList()
+                }
 
                 //请求成功
                 val listDataUiState =

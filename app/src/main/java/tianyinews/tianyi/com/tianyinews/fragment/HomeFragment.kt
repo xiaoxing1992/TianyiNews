@@ -53,6 +53,7 @@ class HomeFragment : BaseFragment<HomeVideModel, HomefragmentBinding>(), Channel
     private val dataHelepr: ChannelDataHelepr<MyChannel> by lazy { ChannelDataHelepr<MyChannel>(requireContext(), this@HomeFragment, mDatabind.rlLl) }
     private var myChannels: MutableList<MyChannel> = mutableListOf()
     private var needShowPosition = -1
+    private var isFirst = false
 
     override fun layoutId(): Int = R.layout.homefragment
 
@@ -95,9 +96,13 @@ class HomeFragment : BaseFragment<HomeVideModel, HomefragmentBinding>(), Channel
         }
     }
 
+
     override fun onResume() {
         super.onResume()
-        ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayTitleBackground).init()
+        if(isFirst.not()){
+            isFirst = true
+            ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayTitleBackground).init()
+        }
     }
 
     override fun initData() {

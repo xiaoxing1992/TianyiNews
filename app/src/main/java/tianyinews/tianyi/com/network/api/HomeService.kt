@@ -1,5 +1,6 @@
 package tianyinews.tianyi.com.network.api
 
+import com.xk.eyepetizer.mvp.model.bean.KzCategory
 import retrofit2.http.*
 import tianyinews.tianyi.com.tianyinews.bean.*
 
@@ -32,4 +33,10 @@ interface HomeService {
      */
     @GET
     suspend fun getVideoMoreData(@Url url: String): VideoApiResponse<List<VideoIssue>>
+
+    /**
+     * 获取分类
+     */
+    @GET("v4/categories")
+    suspend  fun getCategory(): List<KzCategory>
 }

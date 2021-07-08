@@ -1,19 +1,28 @@
 package tianyinews.tianyi.com.tianyinews.fragment.childfragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import com.blankj.utilcode.util.ConvertUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.kingja.loadsir.core.LoadService
+import com.zhpan.bannerview.BannerViewPager
+import com.zhpan.bannerview.constants.IndicatorGravity
+import com.zhpan.bannerview.constants.PageStyle
+import com.zhpan.indicator.enums.IndicatorSlideMode
+import com.zhpan.indicator.enums.IndicatorStyle
 import kotlinx.android.synthetic.main.homechildfragment.*
 import tianyinews.tianyi.com.tianyinews.R
+import tianyinews.tianyi.com.tianyinews.adapter.KaiyanBannerAdapter
 import tianyinews.tianyi.com.tianyinews.adapter.KaiyanHomeAdapter
 import tianyinews.tianyi.com.tianyinews.adapter.KaiyanRecommendAdapter
 import tianyinews.tianyi.com.tianyinews.adapter.MyHomeListViewAdapter
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment
 import tianyinews.tianyi.com.tianyinews.bean.MyChannel
+import tianyinews.tianyi.com.tianyinews.bean.VideItem
 import tianyinews.tianyi.com.tianyinews.databinding.FragmentKaiyanBinding
 import tianyinews.tianyi.com.tianyinews.databinding.FragmentKzHomeBinding
 import tianyinews.tianyi.com.tianyinews.ext.loadServiceInit
@@ -27,7 +36,7 @@ import tianyinews.tianyi.com.tianyinews.viewmodel.KzHomeViewModel
  */
 class KaiyanHomeFragment : BaseFragment<KzHomeViewModel, FragmentKzHomeBinding>() {
 
-    private val adapter: KaiyanRecommendAdapter by lazy { KaiyanRecommendAdapter() }
+    private val mAdapter: KaiyanRecommendAdapter by lazy { KaiyanRecommendAdapter() }
     private val headerView: View by lazy { LayoutInflater.from(requireContext()).inflate(R.layout.header_message_update, null) }
     private val tv_title: TextView by lazy { headerView.findViewById(R.id.tv_title) }
 
@@ -43,7 +52,40 @@ class KaiyanHomeFragment : BaseFragment<KzHomeViewModel, FragmentKzHomeBinding>(
     override fun layoutId(): Int = R.layout.fragment_kz_home
 
     override fun initView(savedInstanceState: Bundle?) {
-        mDatabind.recyclerView.adapter = adapter
+        mDatabind.recyclerView.adapter = mAdapter
+        if (mAdapter.headerLayoutCount > 0) return
+        mAdapter.addHeaderView(createHeadView())
+    }
+
+    private lateinit var mViewPager: BannerViewPager<VideItem>
+
+    private fun createHeadView(): View {
+        val view = LayoutInflater.from(requireContext()).inflate(R.layout.header_kaiyan_home_banner, null)
+        mViewPager = view.findViewById(R.id.banner_view)
+        mViewPager.apply {
+            setLifecycleRegistry(lifecycle)
+            adapter = KaiyanBannerAdapter(ConvertUtils.dp2px(8f))
+            setIndicatorGravity(IndicatorGravity.END)
+            setIndicatorMargin(0,0,ConvertUtils.dp2px(32f),ConvertUtils.dp2px(10f))
+            setIndicatorStyle(IndicatorStyle.ROUND_RECT)
+            setIndicatorSlideMode(IndicatorSlideMode.WORM)
+            setIndicatorSliderColor(
+                resources.getColor(R.color.red_normal_color),
+                resources.getColor(R.color.red_checked_color)
+            )
+            setIndicatorSliderRadius(
+                ConvertUtils.dp2px(5f),
+                ConvertUtils.dp2px(5f)
+            )
+            setPageMargin(ConvertUtils.dp2px(15f))
+            setPageStyle(PageStyle.MULTI_PAGE_SCALE)
+            setScrollDuration(800)
+            setRevealWidth(ConvertUtils.dp2px(10f), ConvertUtils.dp2px(10f))
+//            setOnPageClickListener { _: View, position: Int -> itemClick(position) }
+            setInterval(3000)
+            create()
+        }
+        return view
     }
 
     override fun lazyLoadData() {
@@ -68,22 +110,22 @@ class KaiyanHomeFragment : BaseFragment<KzHomeViewModel, FragmentKzHomeBinding>(
 
     override fun createObserver() {
         mViewModel.run {
+            bannerDataState.observe(viewLifecycleOwner, Observer {
+                mViewPager.refreshData(it)
+            })
             homeDataState.observe(viewLifecycleOwner, Observer {
                 if (it.isRefresh) {
-                    adapter.setList(it.listData)
+                    mAdapter.setList(it.listData)
                     loadsir.showSuccess()
                     refreshLayout!!.finishRefresh()
-                    if (adapter.hasHeaderLayout()) {
-                        adapter.removeAllHeaderView()
-                    }
-                    adapter.addHeaderView(headerView)
-                    tv_title.text = "今日头条推荐引擎有${it.listData?.size}条更新"
-                    tv_title.postDelayed({
-                        adapter.removeHeaderView(headerView)
-                    }, 3000)
+//                    mAdapter.addHeaderView(headerView)
+//                    tv_title.text = "今日头条推荐引擎有${it.listData?.size}条更新"
+//                    tv_title.postDelayed({
+//                        mAdapter.removeHeaderView(headerView)
+//                    }, 3000)
                 } else {
                     it.listData?.let {
-                        adapter.addData(it)
+                        mAdapter.addData(it)
                         loadsir.showSuccess()
                     }
 
@@ -94,7 +136,7 @@ class KaiyanHomeFragment : BaseFragment<KzHomeViewModel, FragmentKzHomeBinding>(
 
             moreDataState.observe(viewLifecycleOwner, Observer {
                 it.listData?.let {
-                    adapter.addData(it)
+                    mAdapter.addData(it)
                 }
 
                 mDatabind.refreshLayout.finishLoadMore()

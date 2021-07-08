@@ -25,6 +25,7 @@ import tianyinews.tianyi.com.tianyinews.base.BaseFragment
 import tianyinews.tianyi.com.tianyinews.bean.MyChannel
 import tianyinews.tianyi.com.tianyinews.databinding.FragmentKaiyanBinding
 import tianyinews.tianyi.com.tianyinews.ext.titles.ScaleTransitionPagerTitleView
+import tianyinews.tianyi.com.tianyinews.fragment.childfragment.KaiyanCategoryFragment
 import tianyinews.tianyi.com.tianyinews.fragment.childfragment.KaiyanHomeFragment
 import tianyinews.tianyi.com.tianyinews.fragment.childfragment.VideoChildFragment
 import tianyinews.tianyi.com.tianyinews.util.GsonUtil
@@ -43,7 +44,9 @@ class KaiyanFragment:BaseFragment<KaiyanViewModel,FragmentKaiyanBinding>() {
 
     override fun layoutId(): Int  = R.layout.fragment_kaiyan
     override fun initView(savedInstanceState: Bundle?) {
-        ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayBackground).statusBarDarkFont(true).init()
+        ImmersionBar.with(this)
+            .statusBarColorTransformEnable(false)
+            .statusBarColor(R.color.white).statusBarDarkFont(true).init()
         loadData()
         val commonNavigator = CommonNavigator(activity)
         commonNavigator.scrollPivotX = 0.8f
@@ -95,7 +98,7 @@ class KaiyanFragment:BaseFragment<KaiyanViewModel,FragmentKaiyanBinding>() {
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         if (!hidden) {
-            ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayBackground).statusBarDarkFont(true).init()
+            ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.white).statusBarDarkFont(true).init()
         }
     }
     override fun initData() {
@@ -136,7 +139,7 @@ class KaiyanFragment:BaseFragment<KaiyanViewModel,FragmentKaiyanBinding>() {
                     return KaiyanHomeFragment.newInstance()
                 }
                 "2"->{
-                    return KaiyanHomeFragment.newInstance()
+                    return KaiyanCategoryFragment.newInstance()
                 }
                 "3"->{
                     return KaiyanHomeFragment.newInstance()

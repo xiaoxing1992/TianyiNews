@@ -96,7 +96,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             builder.setNegativeButton("取消") { dialogInterface, i -> dialogInterface.dismiss() }
             builder.show()
         }
-        val dataBaseHelper = MyDataBaseHelper(this)
         initView()
         initData()
         //初始化侧滑界面

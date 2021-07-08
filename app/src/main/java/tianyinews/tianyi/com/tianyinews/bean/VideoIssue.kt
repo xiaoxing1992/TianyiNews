@@ -11,7 +11,7 @@ data class VideoIssue(
     val date: Long = 0,
     val total: Int = 0,
     val publishTime: Long,
-    val itemList: ArrayList<VideItem>,
+    var itemList:MutableList<VideItem>,
     var count: Int = 0,
     val nextPageUrl: String = ""
 )
