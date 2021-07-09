@@ -1,6 +1,7 @@
 package tianyinews.tianyi.com.network.request
 
 import com.xk.eyepetizer.mvp.model.bean.KzCategory
+import tianyinews.tianyi.com.network.api.HomeService
 import tianyinews.tianyi.com.network.apiService
 import tianyinews.tianyi.com.network.apiVideoService
 import tianyinews.tianyi.com.tianyinews.bean.*
@@ -33,5 +34,14 @@ class HomeReuqestManager {
 
     suspend fun getCategory(): List<KzCategory> {
         return apiVideoService.getCategory()
+    }
+
+    suspend fun getHotCategoryData(): KzCategoryHot {
+        return apiVideoService.getHotCategoryData()
+    }
+
+    suspend fun getIssue(actionUrl: String): VideoIssue {
+        val removePrefix = actionUrl.removePrefix(HomeService.VIDEO_URL)
+        return apiVideoService.getIssue(actionUrl)
     }
 }

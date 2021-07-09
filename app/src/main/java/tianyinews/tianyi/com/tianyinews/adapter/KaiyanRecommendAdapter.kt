@@ -22,6 +22,7 @@ class KaiyanRecommendAdapter  : BaseMultiItemQuickAdapter<VideItem, BaseDataBind
         const val TYPE_BANNER=1
         const val TYPE_HEADER=2
         const val TYPE_VIDEO=3
+        const val TYPE_END=4
         const val TYPE_OTHER=0
     }
 

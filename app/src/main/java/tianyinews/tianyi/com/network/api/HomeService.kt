@@ -39,4 +39,16 @@ interface HomeService {
      */
     @GET("v4/categories")
     suspend  fun getCategory(): List<KzCategory>
+
+    /**
+     * 获取热门分类
+     */
+    @GET("v4/rankList")
+    suspend  fun getHotCategoryData(): KzCategoryHot
+
+    /**
+     * issue里面包了itemlist和nextpageurl
+     */
+    @GET
+    suspend fun getIssue(@Url url: String): VideoIssue
 }

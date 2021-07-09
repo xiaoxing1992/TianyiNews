@@ -11,8 +11,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import cn.jzvd.Jzvd
+import com.alibaba.fastjson.JSON
+import com.blankj.utilcode.util.ConvertUtils
 import com.gyf.immersionbar.ImmersionBar
-import com.rz.commonlibrary.base.fragment.BaseVmDbFragment
+import com.rz.commonlibrary.base.appContext
 import kotlinx.android.synthetic.main.fragment_video.*
 import net.lucode.hackware.magicindicator.ViewPagerHelper
 import net.lucode.hackware.magicindicator.buildins.UIUtil
@@ -38,9 +40,9 @@ import java.util.*
  * @作者: 任正威
  * @date: 2017/3/14.
  */
-class VideoFragment : BaseFragment<VideoViewModel,FragmentVideoBinding>() {
+class VideoFragment : BaseFragment<VideoViewModel, FragmentVideoBinding>() {
 
-    private var fragList: ArrayList<BaseFragment<*,*>>? = null
+    private var fragList: ArrayList<BaseFragment<*, *>>? = null
     private val adapter: MyHomeListViewPager by lazy { MyHomeListViewPager(fragmentManager) }
     private var alldata: List<MyChannel> = mutableListOf()
 
@@ -63,7 +65,7 @@ class VideoFragment : BaseFragment<VideoViewModel,FragmentVideoBinding>() {
         fragList = ArrayList()
         val commonNavigator = CommonNavigator(activity)
         commonNavigator.scrollPivotX = 0.8f
-        video_view_pager?.adapter  = adapter
+        video_view_pager?.adapter = adapter
         val commonNavigatorAdapter: CommonNavigatorAdapter = object : CommonNavigatorAdapter() {
             override fun getCount(): Int {
                 return alldata.size
@@ -109,29 +111,10 @@ class VideoFragment : BaseFragment<VideoViewModel,FragmentVideoBinding>() {
     }
 
     private fun loadData() {
-        val data = fromRaw
-        alldata = GsonUtil.jsonToBeanList(data, MyChannel::class.java)
+        val open = appContext.resources.openRawResource(R.raw.video_list)
+        val json = ConvertUtils.inputStream2String(open, "UTF-8")
+        alldata = JSON.parseArray(json, MyChannel::class.java)
     }
-
-    private val fromRaw: String
-        private get() {
-            val result = ""
-            try {
-                val input = resources.openRawResource(R.raw.video_list)
-                val output = ByteArrayOutputStream()
-                val buffer = ByteArray(1024)
-                var length = 0
-                while (input.read(buffer).also { length = it } != -1) {
-                    output.write(buffer, 0, length)
-                }
-                output.close()
-                input.close()
-                return output.toString()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            return result
-        }
 
     inner class MyHomeListViewPager(fm: FragmentManager?) : FragmentPagerAdapter(fm!!) {
         override fun getItem(position: Int): Fragment {

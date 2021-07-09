@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="videoItem"
+            type="tianyinews.tianyi.com.tianyinews.bean.VideItem" />
+        <import type="tianyinews.tianyi.com.tianyinews.util.TimeUtil"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_category"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="fitXY"
+            app:imageUrl="@{videoItem.data.cover.feed}"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_centerInParent="true"
+            android:background="#2000"
+            android:gravity="center"
+            android:text="@{videoItem.data.title+'\n'+'#'+videoItem.data.category+'\n'+TimeUtil.durationFormat(videoItem.data.duration)}"
+            android:textColor="@color/white"
+            android:textSize="55px"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="测试文案" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

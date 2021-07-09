@@ -30,11 +30,9 @@ val apiVideoService: HomeService by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZE
     NetworkApi.INSTANCE.getApi(HomeService::class.java, HomeService.VIDEO_URL)
 }
 
+class NetworkApi : BaseNetworkApi() {
 
-
-class NetworkApi: BaseNetworkApi() {
-
-    companion object{
+    companion object {
         val INSTANCE: NetworkApi by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
             NetworkApi()
         }
