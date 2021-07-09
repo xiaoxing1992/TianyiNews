@@ -8,8 +8,6 @@ import android.view.animation.DecelerateInterpolator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import coil.load
-import coil.transform.CircleCropTransformation
 import com.blankj.utilcode.util.ThreadUtils.runOnUiThread
 import com.gyf.immersionbar.ImmersionBar
 import com.trs.channellib.channel.channel.helper.ChannelDataHelepr
@@ -24,17 +22,13 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.Li
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView
 import thinkfreely.changemodelibrary.ChangeModeController
 import tianyinews.tianyi.com.tianyinews.R
-import tianyinews.tianyi.com.tianyinews.activity.MainActivity
-import tianyinews.tianyi.com.tianyinews.activity.MainActivity.UserOnListener
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment
 import tianyinews.tianyi.com.tianyinews.bean.MyChannel
 import tianyinews.tianyi.com.tianyinews.databinding.HomefragmentBinding
-import tianyinews.tianyi.com.tianyinews.db.UserDao
 import tianyinews.tianyi.com.tianyinews.ext.titles.ScaleTransitionPagerTitleView
 import tianyinews.tianyi.com.tianyinews.fragment.childfragment.HomeChildFragment
 import tianyinews.tianyi.com.tianyinews.fragment.childfragment.HomeChildFragment.Companion.newInstance
 import tianyinews.tianyi.com.tianyinews.util.GsonUtil
-import tianyinews.tianyi.com.tianyinews.util.SharedPreferencesUtil
 import tianyinews.tianyi.com.tianyinews.viewmodel.HomeVideModel
 import java.io.ByteArrayOutputStream
 import java.util.*
@@ -59,33 +53,7 @@ class HomeFragment : BaseFragment<HomeVideModel, HomefragmentBinding>(), Channel
 
     override fun initView(savedInstanceState: Bundle?) {
         ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayTitleBackground).init()
-
         dataHelepr.setSwitchView(mDatabind.buttonMoreColumns)
-        val config = SharedPreferencesUtil.getSharedConfig(requireContext())
-        if (config) {
-            val sharedFlag = SharedPreferencesUtil.getSharedFlag(requireContext())
-            when (sharedFlag) {
-                1 -> {
-                    val dao = UserDao(requireContext())
-                    val userBeen = dao.queryUserByQQ()
-                    for (ub in userBeen) {
-                        mDatabind.homeInclude.topHead.load(ub.imgUrl){
-                            size(400, 400)
-                            placeholder(R.mipmap.ic_launcher)
-                            transformations(CircleCropTransformation())
-                        }
-                    }
-                }
-                2 -> {
-                    val dao2 = UserDao(requireContext())
-                    val phoneUserBeen = dao2.queryUserByPhone()
-                    for (pb in phoneUserBeen) {
-                        mDatabind.homeInclude.topHead.setImageResource(R.mipmap.ic_launcher)
-                        //       userOnListener.setIdImg(R.mipmap.ic_launcher);
-                    }
-                }
-            }
-        }
         loadData()
     }
 
@@ -109,33 +77,6 @@ class HomeFragment : BaseFragment<HomeVideModel, HomefragmentBinding>(), Channel
         super.initData()
         mDatabind.homeViewPager.adapter = adapter
         adapter.notifyDataSetChanged()
-        mDatabind.homeInclude.topHead.setOnClickListener {
-            val mainActivity = activity as MainActivity?
-            mainActivity!!.showLeftMenu()
-        }
-        val mainActivity = activity as MainActivity?
-        mainActivity?.getUrl(object : UserOnListener {
-            override fun setUrl(url: String?) {
-                if (url != null) {
-                    if (url == "") {
-                        mDatabind.homeInclude.topHead.setImageResource(R.drawable.default_round_head)
-                    } else {
-                        mDatabind.homeInclude.topHead.load(url){
-                            size(400, 400)
-                            placeholder(R.mipmap.ic_launcher)
-                            transformations(CircleCropTransformation())
-                        }
-                    }
-                }
-            }
-
-
-            override fun setImg(i: Int) {
-                if (i == 101) {
-                    mDatabind.homeInclude.topHead.setImageResource(R.mipmap.ic_launcher)
-                }
-            }
-        })
     }
 
     private fun setPointer() {

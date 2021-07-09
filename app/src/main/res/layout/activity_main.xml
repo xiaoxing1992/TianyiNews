@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="tianyinews.tianyi.com.tianyinews.activity.MainActivity">
 
@@ -13,7 +14,7 @@
         android:id="@+id/main_fl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,14 +31,14 @@
             android:background="#33000000" />
 
         <RadioGroup
-            android:background="?attr/zzbackground"
-            app:backgroundAttr="zzbackground"
             android:id="@+id/main_rb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?attr/zzbackground"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="3dp">
+            android:padding="3dp"
+            app:backgroundAttr="zzbackground">
 
             <RadioButton
                 android:id="@+id/buttom_home_rb_id"
@@ -46,8 +47,8 @@
                 android:layout_weight="1"
                 android:background="@color/touming"
                 android:button="@null"
-                android:drawablePadding="-5dp"
                 android:drawableTop="@drawable/home_bottom_rb_selector"
+                android:drawablePadding="-5dp"
                 android:gravity="center"
                 android:text="首页"
                 android:textColor="@color/bottom_textcolor_selector"
@@ -60,8 +61,8 @@
                 android:layout_weight="1"
                 android:background="@color/touming"
                 android:button="@null"
-                android:drawablePadding="-5dp"
                 android:drawableTop="@drawable/video_bottom_rb_selector"
+                android:drawablePadding="-5dp"
                 android:gravity="center"
                 android:text="开眼视频"
                 android:textColor="@color/bottom_textcolor_selector"
@@ -74,8 +75,8 @@
                 android:layout_weight="1"
                 android:background="@color/touming"
                 android:button="@null"
-                android:drawablePadding="-5dp"
                 android:drawableTop="@drawable/video_bottom_rb_selector"
+                android:drawablePadding="-5dp"
                 android:gravity="center"
                 android:text="阳光宽频"
                 android:textColor="@color/bottom_textcolor_selector"
@@ -88,8 +89,8 @@
                 android:layout_weight="1"
                 android:background="@color/touming"
                 android:button="@null"
-                android:drawablePadding="-5dp"
                 android:drawableTop="@drawable/care_bottom_rb_selector"
+                android:drawablePadding="-5dp"
                 android:gravity="center"
                 android:text="关注"
                 android:textColor="@color/bottom_textcolor_selector"

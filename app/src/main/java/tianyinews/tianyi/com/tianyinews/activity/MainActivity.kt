@@ -11,54 +11,28 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import cn.jzvd.Jzvd
-import coil.load
-import coil.transform.CircleCropTransformation
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu
-import com.umeng.socialize.UMAuthListener
 import com.umeng.socialize.UMShareAPI
 import com.umeng.socialize.bean.SHARE_MEDIA
 import com.umeng.socialize.shareboard.SnsPlatform
 import thinkfreely.changemodelibrary.ChangeModeController
 import tianyinews.tianyi.com.tianyinews.R
-import tianyinews.tianyi.com.tianyinews.activity.MainActivity
-import tianyinews.tianyi.com.tianyinews.db.MyDataBaseHelper
-import tianyinews.tianyi.com.tianyinews.db.UserDao
 import tianyinews.tianyi.com.tianyinews.fragment.CareOldFragment
 import tianyinews.tianyi.com.tianyinews.fragment.HomeFragment
 import tianyinews.tianyi.com.tianyinews.fragment.KaiyanFragment
 import tianyinews.tianyi.com.tianyinews.fragment.VideoOldFragment
 import tianyinews.tianyi.com.tianyinews.util.ConnUtil
-import tianyinews.tianyi.com.tianyinews.util.SharedPreferencesUtil
 import java.util.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
-    private val slidingMenu: SlidingMenu by lazy {
-        SlidingMenu(this).apply {
-            mode = SlidingMenu.LEFT
-            behindOffset = 100
-            setOffsetFadeDegree(0.4f)
-            attachToActivity(this@MainActivity, SlidingMenu.SLIDING_CONTENT)
-            setMenu(R.layout.left_layout)
-        }
-    }
+class MainActivity : AppCompatActivity(){
     private var main_rb: RadioGroup? = null
     private var manager: FragmentManager? = null
     private var homeFragment: HomeFragment? = null
     private var kyFragment: KaiyanFragment? = null
     private var videoFragment: VideoOldFragment? = null
-    private var qq_login_img: ImageView? = null
-    private var qq_user_login_jicheng: RelativeLayout? = null
-    private var qq_user_rl: RelativeLayout? = null
-    private var qq_user_img: ImageView? = null
-    private var qq_user_name: TextView? = null
-    private var flag = false
-
-    //  private boolean isauth;
-    var userOnListener: UserOnListener? = null
     var platforms = ArrayList<SnsPlatform>()
     private val list = arrayOf(SHARE_MEDIA.QQ)
-    private var qq_user_login_jicheng_tv: RelativeLayout? = null
     private var careFragment: CareOldFragment? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         ChangeModeController.getInstance().init(this@MainActivity,R.attr::class.java)
         ChangeModeController.setTheme(this, R.style.DayTheme, R.style.NightTheme)
@@ -98,41 +72,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
         initView()
         initData()
-        //初始化侧滑界面
-        initLeftMenu()
-        val config = SharedPreferencesUtil.getSharedConfig(this@MainActivity)
-        if (config) {
-            val sharedFlag = SharedPreferencesUtil.getSharedFlag(this@MainActivity)
-            when (sharedFlag) {
-                1 -> {
-                    val dao = UserDao(this@MainActivity)
-                    val userBeen = dao.queryUserByQQ()
-                    for (ub in userBeen) {
-                        qq_user_login_jicheng_tv!!.visibility = View.INVISIBLE
-                        qq_user_login_jicheng!!.visibility = View.GONE
-                        qq_user_rl!!.visibility = View.VISIBLE
-                        qq_user_name!!.text = ub.name
-                        qq_user_img?.load(ub.imgUrl){
-                            size(400, 400)
-                            placeholder(R.mipmap.ic_launcher)
-                            transformations(CircleCropTransformation())
-                        }
-                    }
-                }
-                2 -> {
-                    val dao2 = UserDao(this@MainActivity)
-                    val phoneUserBeen = dao2.queryUserByPhone()
-                    for (pb in phoneUserBeen) {
-                        qq_user_login_jicheng_tv!!.visibility = View.INVISIBLE
-                        qq_user_login_jicheng!!.visibility = View.GONE
-                        qq_user_rl!!.visibility = View.VISIBLE
-                        qq_user_name!!.text = pb.phonenumber
-                        qq_user_img!!.setImageResource(R.mipmap.ic_launcher)
-                        //       userOnListener.setIdImg(R.mipmap.ic_launcher);
-                    }
-                }
-            }
-        }
         initPlatforms()
     }
 
@@ -198,71 +137,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun initLeftMenu() {
-        val nights_ll = slidingMenu!!.findViewById<View>(R.id.nights_ll) as LinearLayout
-        val settrings_ll = slidingMenu!!.findViewById<View>(R.id.settrings_ll) as LinearLayout
-        val cellphone_login_img = slidingMenu!!.findViewById<View>(R.id.cellphone_login_img) as ImageView
-        //设置QQ登录授权操作
-        setQqLogin()
-        nights_ll.setOnClickListener(this)
-        settrings_ll.setOnClickListener(this)
-        cellphone_login_img.setOnClickListener(this)
-    }
-
-    //设置QQ登录授权操作
-    private fun setQqLogin() {
-        qq_login_img = slidingMenu!!.findViewById<View>(R.id.qq_login_img) as ImageView
-        qq_login_img!!.setOnClickListener(this)
-        qq_user_login_jicheng = slidingMenu!!.findViewById<View>(R.id.qq_user_login_jicheng) as RelativeLayout
-        qq_user_rl = slidingMenu!!.findViewById<View>(R.id.qq_user_rl) as RelativeLayout
-        qq_user_img = slidingMenu!!.findViewById<View>(R.id.qq_user_img) as ImageView
-        qq_user_name = slidingMenu!!.findViewById<View>(R.id.qq_user_name) as TextView
-        qq_user_login_jicheng_tv = slidingMenu!!.findViewById<View>(R.id.qq_user_login_jicheng_tv) as RelativeLayout
-    }
-
-    var authListener: UMAuthListener = object : UMAuthListener {
-        override fun onStart(share_media: SHARE_MEDIA) {}
-        override fun onComplete(share_media: SHARE_MEDIA, action: Int, data: Map<String, String>) {
-            when (action) {
-                UMAuthListener.ACTION_AUTHORIZE -> UMShareAPI.get(this@MainActivity).getPlatformInfo(this@MainActivity, platforms[0].mPlatform, this)
-                UMAuthListener.ACTION_DELETE -> {
-                }
-                UMAuthListener.ACTION_GET_PROFILE -> {
-                    qq_user_login_jicheng_tv!!.visibility = View.INVISIBLE
-                    qq_user_login_jicheng!!.visibility = View.GONE
-                    qq_user_rl!!.visibility = View.VISIBLE
-                    val name = data["screen_name"]
-                    qq_user_name!!.text = name
-                    /* String gender = data.get("gender");
-                    tvvv_tv.setText(gender);*/
-                    val iconurl = data["iconurl"]
-                    userOnListener!!.setUrl(iconurl)
-                    skinOnListener!!.setSkin(1002)
-                    qq_user_img?.load(iconurl){
-                        size(400, 400)
-                        placeholder(R.mipmap.ic_launcher)
-                        transformations(CircleCropTransformation())
-                    }
-                    //登录成功后将数据保存到本地数据库
-                    SharedPreferencesUtil.putSharedConfig(this@MainActivity, true)
-                    SharedPreferencesUtil.putSharedFlag(this@MainActivity, 1)
-                    val dao = UserDao(this@MainActivity)
-                    dao.insertUserByQQ(data["uid"], name, iconurl)
-                }
-                else -> {
-                }
-            }
-        }
-
-        override fun onError(share_media: SHARE_MEDIA, i: Int, throwable: Throwable) {
-            Toast.makeText(this@MainActivity, "请求失败", Toast.LENGTH_SHORT).show()
-        }
-
-        override fun onCancel(share_media: SHARE_MEDIA, i: Int) {
-            Toast.makeText(this@MainActivity, "请求取消", Toast.LENGTH_SHORT).show()
-        }
-    }
-
     private fun initPlatforms() {
         platforms.clear()
         for (e in list) {
@@ -270,11 +144,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 platforms.add(e.toSnsPlatform())
             }
         }
-    }
-
-    //显示侧滑的方法
-    fun showLeftMenu() {
-        slidingMenu!!.showMenu()
     }
 
     override fun onDestroy() {
@@ -287,42 +156,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         UMShareAPI.get(this@MainActivity).onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CALLPHONE_CODE && resultCode == RESULT_OK) {
-            SharedPreferencesUtil.putSharedFlag(this@MainActivity, 2)
-            SharedPreferencesUtil.putSharedConfig(this@MainActivity, true)
-            qq_user_login_jicheng_tv!!.visibility = View.INVISIBLE
-            qq_user_login_jicheng!!.visibility = View.GONE
-            qq_user_rl!!.visibility = View.VISIBLE
-            val telephone = data!!.getIntExtra("telephone", 0)
-            qq_user_name!!.text = telephone.toString() + ""
-            qq_user_img!!.setImageResource(R.mipmap.ic_launcher)
-            userOnListener!!.setImg(101)
-            skinOnListener!!.setSkin(1000)
-            /*  ImageOptions options = new ImageOptions.Builder()
-                    .setCircular(true)
-                    .setSize(400, 400)
-                    .setLoadingDrawableId(R.mipmap.ic_launcher)
-                    .build();
-            x.image().bind(qq_user_img, R.mipmap.ic_launcher, options);*/
-            //将数据存入数据库
-            val dao = UserDao(this@MainActivity)
-            dao.insertUserByPhone(telephone, "Tianyi", "")
-        } else if (requestCode == SETTINGS_CODE && resultCode == SettingActivity.RESULT_SETTRINGS_CODE) {
-            SharedPreferencesUtil.putSharedConfig(this@MainActivity, false)
-            UMShareAPI.get(this@MainActivity).deleteOauth(this@MainActivity, platforms[0].mPlatform, authListener)
-            qq_user_rl!!.visibility = View.GONE
-            qq_user_login_jicheng_tv!!.visibility = View.VISIBLE
-            qq_user_login_jicheng!!.visibility = View.VISIBLE
-            userOnListener!!.setUrl("")
-            skinOnListener!!.setSkin(1001)
-        } else if (requestCode == SETTINGS_CODE && resultCode == SettingActivity.RESULT_SETTRINGS_CODE_PHONE) {
-            SharedPreferencesUtil.putSharedConfig(this@MainActivity, false)
-            qq_user_rl!!.visibility = View.GONE
-            qq_user_login_jicheng_tv!!.visibility = View.VISIBLE
-            qq_user_login_jicheng!!.visibility = View.VISIBLE
-            userOnListener!!.setUrl("")
-            skinOnListener!!.setSkin(1003)
-        }
     }
 
     public override fun onSaveInstanceState(outState: Bundle) {
@@ -330,47 +163,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         UMShareAPI.get(this@MainActivity).onSaveInstanceState(outState)
     }
 
-    override fun onClick(view: View) {
-        when (view.id) {
-            R.id.qq_login_img -> UMShareAPI.get(this@MainActivity).doOauthVerify(this@MainActivity, platforms[0].mPlatform, authListener)
-            R.id.nights_ll -> flag = if (flag) {
-                ChangeModeController.changeNight(this@MainActivity, R.style.NightTheme)
-                false
-            } else {
-                ChangeModeController.changeDay(this@MainActivity, R.style.DayTheme)
-                true
-            }
-            R.id.cellphone_login_img -> {
-                val intent = Intent(this@MainActivity, CallphoneActivity::class.java)
-                startActivityForResult(intent, CALLPHONE_CODE)
-                overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom)
-            }
-            R.id.settrings_ll -> {
-                val intent2 = Intent(this@MainActivity, SettingActivity::class.java)
-                startActivityForResult(intent2, SETTINGS_CODE)
-                overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom)
-            }
-        }
-    }
-
-    interface UserOnListener {
-        fun setUrl(url: String?)
-        fun setImg(i: Int)
-    }
-
-    fun getUrl(userOnListener: UserOnListener?) {
-        this.userOnListener = userOnListener
-    }
-
-    var skinOnListener: SkinOnListener? = null
-
-    interface SkinOnListener {
-        fun setSkin(i: Int)
-    }
-
-    fun getSkin(skinOnListener: SkinOnListener?) {
-        this.skinOnListener = skinOnListener
-    }
+//    R.id.nights_ll -> flag = if (flag) {
+//        ChangeModeController.changeNight(this@MainActivity, R.style.NightTheme)
+//        false
+//    } else {
+//        ChangeModeController.changeDay(this@MainActivity, R.style.DayTheme)
+//        true
+//    }
 
     override fun onBackPressed() {
         if (Jzvd.backPress()) {

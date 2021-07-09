@@ -19,7 +19,6 @@ public class CareOldFragment extends BaseOldFragment {
 
     private TextView settings_title_name;
     public static ImageView care_zhuantai_img;
-    private MainActivity mainActivity;
 
     @Override
     protected int getLayoutId() {
@@ -31,17 +30,6 @@ public class CareOldFragment extends BaseOldFragment {
     protected void initView(View view) {
         settings_title_name = (TextView) view.findViewById(R.id.settings_title_name);
         care_zhuantai_img = (ImageView) view.findViewById(R.id.care_zhuantai_img);
-        boolean config = SharedPreferencesUtil.getSharedConfig(mContext);
-        mainActivity = (MainActivity) getActivity();
-
-        if (config) {
-            care_zhuantai_img.setVisibility(View.VISIBLE);
-            care_zhuantai_img.setImageResource(R.drawable.nofavorite_loading);
-
-        } else {
-            care_zhuantai_img.setVisibility(View.VISIBLE);
-            care_zhuantai_img.setImageResource(R.drawable.nologin_loading);
-        }
     }
 
 
@@ -50,26 +38,6 @@ public class CareOldFragment extends BaseOldFragment {
     protected void initData() {
         super.initData();
         settings_title_name.setText("收藏");
-        mainActivity.getSkin(new MainActivity.SkinOnListener() {
-            @Override
-            public void setSkin(int i) {
-                if (i == 1000) {
-                    care_zhuantai_img.setVisibility(View.VISIBLE);
-                    care_zhuantai_img.setImageResource(R.drawable.nofavorite_loading);
-                } else if (i == 1001) {
-                    care_zhuantai_img.setVisibility(View.VISIBLE);
-                    care_zhuantai_img.setImageResource(R.drawable.nologin_loading);
-                } else if (i == 1002) {
-                    care_zhuantai_img.setVisibility(View.VISIBLE);
-                    care_zhuantai_img.setImageResource(R.drawable.nofavorite_loading);
-                } else if (i == 1003) {
-                    care_zhuantai_img.setVisibility(View.VISIBLE);
-                    care_zhuantai_img.setImageResource(R.drawable.nologin_loading);
-                }
-
-            }
-        });
-
     }
 
 }

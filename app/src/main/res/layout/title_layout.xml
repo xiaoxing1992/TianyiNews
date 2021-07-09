@@ -15,22 +15,7 @@
         android:orientation="horizontal"
         app:backgroundAttr="ttbackground">
         <!--#893F3F-->
-        <FrameLayout
-            android:id="@+id/top_head_container"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:paddingLeft="10.0dip"
-            android:paddingRight="10.0dip">
 
-            <ImageView
-                android:id="@+id/top_head"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_gravity="center_vertical"
-                android:padding="2.0dip"
-                android:scaleType="fitXY"
-                android:src="@drawable/default_round_head" />
-        </FrameLayout>
 
 
         <LinearLayout
