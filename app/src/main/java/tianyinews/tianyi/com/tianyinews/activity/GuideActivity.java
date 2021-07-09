@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,13 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.blankj.utilcode.util.SizeUtils;
 import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
 
 import tianyinews.tianyi.com.tianyinews.R;
 import tianyinews.tianyi.com.tianyinews.util.CacheUtil;
-import tianyinews.tianyi.com.tianyinews.util.PxDpUtil;
 
 public class GuideActivity extends AppCompatActivity {
 
@@ -73,9 +72,9 @@ public class GuideActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        int dip = PxDpUtil.dip2px(this, 10);
+        int dip = SizeUtils.dp2px(10f);
         Log.e("dip==", dip + "");
-        int dip2 = PxDpUtil.dip2px(this, 18);
+        int dip2 = SizeUtils.dp2px(18f);
 
         int[] a = new int[]{R.drawable.guide_one, R.drawable.guide_two, R.drawable.guide_three, R.drawable.guide_four};
         imgList = new ArrayList<ImageView>();
