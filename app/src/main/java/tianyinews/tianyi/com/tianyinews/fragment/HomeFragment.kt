@@ -20,7 +20,6 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerInd
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView
-import thinkfreely.changemodelibrary.ChangeModeController
 import tianyinews.tianyi.com.tianyinews.R
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment
 import tianyinews.tianyi.com.tianyinews.bean.MyChannel
@@ -80,8 +79,6 @@ class HomeFragment : BaseFragment<HomeVideModel, HomefragmentBinding>(), Channel
     }
 
     private fun setPointer() {
-        //代码设置指示器背景颜色,会出现夜间模式不应用
-        ChangeModeController.getInstance().addBackgroundColor(mDatabind.mainMagicIndicator, R.attr.zzbackground)
         val commonNavigator = CommonNavigator(activity)
         commonNavigator.scrollPivotX = 0.8f
         val commonNavigatorAdapter: CommonNavigatorAdapter = object : CommonNavigatorAdapter() {

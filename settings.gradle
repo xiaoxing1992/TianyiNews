@@ -1,1 +1,1 @@
-include ':app', ':commonlibrary', ':changemodelibrary', ':channellib'
+include ':app', ':commonlibrary', ':channellib'

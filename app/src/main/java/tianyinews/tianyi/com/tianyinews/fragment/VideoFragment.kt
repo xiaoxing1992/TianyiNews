@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import cn.jzvd.Jzvd
 import com.gyf.immersionbar.ImmersionBar
+import com.rz.commonlibrary.base.fragment.BaseVmDbFragment
 import kotlinx.android.synthetic.main.fragment_video.*
 import net.lucode.hackware.magicindicator.ViewPagerHelper
 import net.lucode.hackware.magicindicator.buildins.UIUtil
@@ -22,11 +23,14 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTit
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView
 import tianyinews.tianyi.com.tianyinews.R
+import tianyinews.tianyi.com.tianyinews.base.BaseFragment
 import tianyinews.tianyi.com.tianyinews.base.BaseOldFragment
 import tianyinews.tianyi.com.tianyinews.bean.MyChannel
+import tianyinews.tianyi.com.tianyinews.databinding.FragmentVideoBinding
 import tianyinews.tianyi.com.tianyinews.ext.titles.ScaleTransitionPagerTitleView
 import tianyinews.tianyi.com.tianyinews.fragment.childfragment.VideoChildFragment
 import tianyinews.tianyi.com.tianyinews.util.GsonUtil
+import tianyinews.tianyi.com.tianyinews.viewmodel.VideoViewModel
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -35,15 +39,15 @@ import java.util.*
  * @作者: 任正威
  * @date: 2017/3/14.
  */
-class VideoOldFragment : BaseOldFragment() {
+class VideoFragment : BaseFragment<VideoViewModel,FragmentVideoBinding>() {
+
     private var fragList: ArrayList<BaseOldFragment>? = null
     private val adapter: MyHomeListViewPager by lazy { MyHomeListViewPager(fragmentManager) }
     private var alldata: List<MyChannel> = mutableListOf()
 
+    override fun layoutId(): Int = R.layout.fragment_video
 
-    override fun getLayoutId(): Int = R.layout.fragment_video
-
-    override fun initView(view: View) {
+    override fun initView(savedInstanceState: Bundle?) {
         ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayBackground).statusBarDarkFont(true).init()
     }
 
@@ -148,5 +152,6 @@ class VideoOldFragment : BaseOldFragment() {
         super.onPause()
         Jzvd.releaseAllVideos()
     }
+
 
 }

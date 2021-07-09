@@ -13,37 +13,6 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <!--日间模式 -->
-    <style name="DayTheme" parent="MBTheme">
-        <item name="zzbackground">@color/dayBackground</item>
-        <item name="zzbackgroundDrawable">@drawable/ic_launcher</item>
-        <item name="zztextColor">@color/dayTextColor</item>
-        <item name="zzItemBackground">@color/dayItemBackground</item>
-        <item name="ttbackground">@color/dayTitleBackground</item>
-        <item name="ttbackgroundDrawable">@drawable/widget_title</item>
-        <item name="ttsearchbackgroundDrawable">@drawable/ic_subscibe_search_presseds</item>
-        <item name="homebackgroundSelector">@drawable/home_bottom_rb_night_selector</item>
-
-
-    </style>
-
-
-    <!--夜间模式 -->
-    <style name="NightTheme" parent="MBTheme">
-        <item name="zzbackground">@color/nightBackground</item>
-        <item name="zzbackgroundDrawable">@color/nightBackground</item>
-        <item name="zztextColor">@color/nightTextColor</item>
-        <item name="zzItemBackground">@color/nightItemBackground</item>
-        <item name="ttbackground">@color/nightTitleBackground</item>
-        <item name="ttbackgroundDrawable">@drawable/widget_title_night</item>
-        <item name="ttsearchbackgroundDrawable">@drawable/ic_subscibe_search_presseds_nights</item>
-        <item name="homebackgroundSelector">@drawable/home_bottom_rb_night_selector</item>
-
-        <item name="colorPrimary">@color/colorPrimaryNight</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkNight</item>
-        <item name="colorAccent">@color/colorAccentNight</item>
-    </style>
-
     <style name="left_drawer_item_layout">
         <item name="android:gravity">center_vertical</item>
         <item name="android:paddingLeft">40.0dip</item>

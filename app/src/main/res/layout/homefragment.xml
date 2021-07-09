@@ -19,16 +19,14 @@
             android:id="@+id/rl_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/zzbackground"
-            android:orientation="horizontal"
-            app:backgroundAttr="zzbackground">
+            android:background="@color/dayBackground"
+            android:orientation="horizontal">
 
             <net.lucode.hackware.magicindicator.MagicIndicator
                 android:id="@+id/main_magic_indicator"
                 android:layout_width="0dp"
                 android:layout_height="38dp"
-                android:layout_weight="1"
-                app:backgroundAttr="zzbackground" />
+                android:layout_weight="1" />
 
             <ImageView
                 android:id="@+id/button_more_columns"

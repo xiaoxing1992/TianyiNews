@@ -1,54 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context="tianyinews.tianyi.com.tianyinews.activity.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
-    <FrameLayout
-        android:id="@+id/main_fl"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+    </data>
 
     <LinearLayout
+        android:id="@+id/activity_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        tools:context="tianyinews.tianyi.com.tianyinews.activity.MainActivity">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
-        <ImageView
+        <FrameLayout
+            android:id="@+id/main_fl"
             android:layout_width="match_parent"
-            android:layout_height="0.2dp"
-            android:background="#33000000" />
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
 
         <RadioGroup
             android:id="@+id/main_rb"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/zzbackground"
+            android:layout_height="54dp"
+            android:background="@color/dayBackground"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="3dp"
-            app:backgroundAttr="zzbackground">
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/buttom_home_rb_id"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/touming"
                 android:button="@null"
                 android:drawableTop="@drawable/home_bottom_rb_selector"
-                android:drawablePadding="-5dp"
                 android:gravity="center"
                 android:text="首页"
                 android:textColor="@color/bottom_textcolor_selector"
@@ -57,12 +47,11 @@
             <RadioButton
                 android:id="@+id/buttom_kaiyan_rb_id"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/touming"
                 android:button="@null"
                 android:drawableTop="@drawable/video_bottom_rb_selector"
-                android:drawablePadding="-5dp"
                 android:gravity="center"
                 android:text="开眼视频"
                 android:textColor="@color/bottom_textcolor_selector"
@@ -71,12 +60,11 @@
             <RadioButton
                 android:id="@+id/buttom_video_rb_id"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/touming"
                 android:button="@null"
                 android:drawableTop="@drawable/video_bottom_rb_selector"
-                android:drawablePadding="-5dp"
                 android:gravity="center"
                 android:text="阳光宽频"
                 android:textColor="@color/bottom_textcolor_selector"
@@ -85,12 +73,11 @@
             <RadioButton
                 android:id="@+id/buttom_care_rb_id"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/touming"
                 android:button="@null"
                 android:drawableTop="@drawable/care_bottom_rb_selector"
-                android:drawablePadding="-5dp"
                 android:gravity="center"
                 android:text="关注"
                 android:textColor="@color/bottom_textcolor_selector"
@@ -99,4 +86,4 @@
 
         </RadioGroup>
     </LinearLayout>
-</LinearLayout>
+</layout>
