@@ -24,7 +24,6 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.Li
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView
 import tianyinews.tianyi.com.tianyinews.R
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment
-import tianyinews.tianyi.com.tianyinews.base.BaseOldFragment
 import tianyinews.tianyi.com.tianyinews.bean.MyChannel
 import tianyinews.tianyi.com.tianyinews.databinding.FragmentVideoBinding
 import tianyinews.tianyi.com.tianyinews.ext.titles.ScaleTransitionPagerTitleView
@@ -41,7 +40,7 @@ import java.util.*
  */
 class VideoFragment : BaseFragment<VideoViewModel,FragmentVideoBinding>() {
 
-    private var fragList: ArrayList<BaseOldFragment>? = null
+    private var fragList: ArrayList<BaseFragment<*,*>>? = null
     private val adapter: MyHomeListViewPager by lazy { MyHomeListViewPager(fragmentManager) }
     private var alldata: List<MyChannel> = mutableListOf()
 
