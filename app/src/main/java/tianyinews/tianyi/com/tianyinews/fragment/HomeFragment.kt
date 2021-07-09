@@ -45,7 +45,7 @@ import java.util.*
  * @date: 2017/3/14.
  */
 class HomeFragment : BaseFragment<HomeVideModel, HomefragmentBinding>(), ChannelDataRefreshListenter {
-    private val mDataList: MutableList<String> = ArrayList()
+    private val mDataList: MutableList<String> =  ArrayList()
     private var ids = 1
     private var IdsMap: MutableMap<String, Int> = HashMap()
     private var preIds: MutableList<String?> = ArrayList()
