@@ -39,7 +39,13 @@ data class NewsDataModel(
 
     override val itemType: Int
         get() = when (getImagesSize()) {
-            0 -> NewsMultiItemEntity.TEXT
+            0 -> {
+                if (uniquekey == "ad") {
+                    NewsMultiItemEntity.AD
+                } else {
+                    NewsMultiItemEntity.TEXT
+                }
+            }
             1 -> NewsMultiItemEntity.IMG
             2 -> NewsMultiItemEntity.IMG_TWO
             else -> NewsMultiItemEntity.IMG_THREE

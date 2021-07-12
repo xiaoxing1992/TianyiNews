@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">TianyiNews</string>
+    <string name="app_name">天天聚合</string>
     <string name="left_drawer_no_login_tip">登录后，将推荐给你更多感兴趣的文章</string>
+    <string name="ad_attribution" translatable="false">Ad</string>
 </resources>

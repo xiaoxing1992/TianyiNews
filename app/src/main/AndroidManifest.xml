@@ -45,6 +45,10 @@
             android:value="portrait|landscape" />
 
         <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-6359757152400753~3654115185"/>
+
+        <meta-data
             android:name="UMENG_APPKEY"
             android:value="58c68118f5ade421e0001ae7" />
 
@@ -87,6 +91,10 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.WebActivity"></activity>
+        <activity
+            android:name=".activity.VideoDetailActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="nosensor"></activity>
     </application>
 
 </manifest>

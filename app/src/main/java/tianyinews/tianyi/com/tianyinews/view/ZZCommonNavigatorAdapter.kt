@@ -22,17 +22,20 @@ import tianyinews.tianyi.com.tianyinews.ext.titles.ScaleTransitionPagerTitleView
  * @CreateDate:     2021/7/9 3:21 下午
  * @Description:
  */
-class ZZCommonNavigatorAdapter constructor(val dataList: MutableList<CategoryHotItem>?,
-                                           val viewpager: ViewPager) : CommonNavigatorAdapter() {
+class ZZCommonNavigatorAdapter constructor(
+    private val dataList: MutableList<CategoryHotItem>?,
+    val viewpager: ViewPager,
+    private val indicator: IPagerIndicator
+) : CommonNavigatorAdapter() {
 
 
-    override fun getCount(): Int = dataList?.size?:0
+    override fun getCount(): Int = dataList?.size ?: 0
     override fun getTitleView(context: Context, index: Int): IPagerTitleView {
         return ScaleTransitionPagerTitleView(context).apply {
             textSize = 18f
             normalColor = Color.parseColor("#9e9e9e")
             selectedColor = Color.parseColor("#D43D3D")
-            text = dataList?.get(index)?.name?:""
+            text = dataList?.get(index)?.name ?: ""
             setOnClickListener {
                 viewpager.currentItem = index
             }
@@ -40,9 +43,6 @@ class ZZCommonNavigatorAdapter constructor(val dataList: MutableList<CategoryHot
     }
 
     override fun getIndicator(context: Context): IPagerIndicator {
-        val indicator = DotPagerIndicator(context)
-        indicator.setRadius(SizeUtils.dp2px(3f).toFloat())
-        indicator.setDotColor(ColorUtils.getColor(R.color.chinaHoliDay))
         return indicator
     }
 }

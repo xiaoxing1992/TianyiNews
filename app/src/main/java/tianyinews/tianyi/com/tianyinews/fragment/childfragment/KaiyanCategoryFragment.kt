@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.SizeUtils
 import com.xk.eyepetizer.mvp.model.bean.KzCategory
 import tianyinews.tianyi.com.tianyinews.R
+import tianyinews.tianyi.com.tianyinews.activity.VideoDetailActivity
 import tianyinews.tianyi.com.tianyinews.adapter.KyCategoryAdapter
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment
 import tianyinews.tianyi.com.tianyinews.databinding.FragmentKzCategoryBinding

@@ -1,10 +1,15 @@
 package tianyinews.tianyi.com.tianyinews.adapter
 
 import android.view.View
-import android.widget.ImageView
+import android.widget.*
 import coil.load
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.google.android.gms.ads.AdLoader
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.nativead.MediaView
+import com.google.android.gms.ads.nativead.NativeAdView
 import tianyinews.tianyi.com.tianyinews.R
 import tianyinews.tianyi.com.tianyinews.bean.NewsDataModel
 import tianyinews.tianyi.com.tianyinews.bean.NewsMultiItemEntity
@@ -37,6 +42,10 @@ class MyHomeListViewAdapter : BaseMultiItemQuickAdapter<NewsDataModel, BaseViewH
                 helper.getView<ImageView>(R.id.type_one_three_img02).load(item.thumbnail_pic_s02)
                 helper.getView<ImageView>(R.id.type_one_three_img03).load(item.thumbnail_pic_s03)
             }
+            NewsMultiItemEntity.AD -> {
+                val adview = helper.getView<AdView>(R.id.ad_view)
+                adview.loadAd(AdRequest.Builder().build())
+            }
             else -> {
                 helper.setText(R.id.type_one_title, item.title)
                 helper.setText(R.id.type_one_groupname, item.author_name)
@@ -54,5 +63,6 @@ class MyHomeListViewAdapter : BaseMultiItemQuickAdapter<NewsDataModel, BaseViewH
         addItemType(NewsMultiItemEntity.IMG, R.layout.hometype_one)
         addItemType(NewsMultiItemEntity.IMG_TWO, R.layout.hometype_one_two)
         addItemType(NewsMultiItemEntity.IMG_THREE, R.layout.hometype_one_three)
+        addItemType(NewsMultiItemEntity.AD, R.layout.hometype_ad)
     }
 }

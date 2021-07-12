@@ -1,6 +1,9 @@
 package tianyinews.tianyi.com.tianyinews.fragment
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -8,10 +11,16 @@ import androidx.viewpager.widget.ViewPager
 import cn.jzvd.Jzvd
 import com.alibaba.fastjson.JSON
 import com.blankj.utilcode.util.ConvertUtils
+import com.blankj.utilcode.util.SizeUtils
 import com.gyf.immersionbar.ImmersionBar
 import com.rz.commonlibrary.base.appContext
 import net.lucode.hackware.magicindicator.ViewPagerHelper
+import net.lucode.hackware.magicindicator.buildins.UIUtil
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.BezierPagerIndicator
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.TriangularPagerIndicator
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.WrapPagerIndicator
 import tianyinews.tianyi.com.tianyinews.R
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment
 import tianyinews.tianyi.com.tianyinews.bean.MyChannel
@@ -46,7 +55,23 @@ class KaiyanFragment : BaseFragment<KaiyanViewModel, FragmentKaiyanBinding>() {
             .statusBarColor(R.color.white).statusBarDarkFont(true).init()
 
         mDatabind.viewPager.adapter = adapter
-        val commonNavigatorAdapter = MBCommonNavigatorAdapter(requireActivity(), alldata, mDatabind.viewPager)
+        val commonNavigatorAdapter = MBCommonNavigatorAdapter(
+            alldata,
+            mDatabind.viewPager,
+            MBCommonNavigatorAdapter.TYPE_TITLE_COLORFLIP,
+            WrapPagerIndicator(requireContext()).apply {
+                fillColor = Color.parseColor("#ebe4e3")
+                horizontalPadding = SizeUtils.dp2px(8f)
+                verticalPadding = SizeUtils.dp2px(4f)
+//                mode = LinePagerIndicator.MODE_EXACTLY
+//                lineHeight = UIUtil.dip2px(context, 6.0).toFloat()
+//                lineWidth = UIUtil.dip2px(context, 10.0).toFloat()
+//                roundRadius = UIUtil.dip2px(context, 3.0).toFloat()
+//                startInterpolator = AccelerateInterpolator()
+//                endInterpolator = DecelerateInterpolator(2.0f)
+//                setColors(Color.parseColor("#D43D3D"))
+            }
+        )
         commonNavigator.adapter = commonNavigatorAdapter
         mDatabind.magicindicator.navigator = commonNavigator
 //        commonNavigatorAdapter.notifyDataSetChanged()

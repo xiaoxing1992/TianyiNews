@@ -18,12 +18,16 @@ data class MyChannel(
     var url: String = "",
     var url_footer: String = "",
     var isSubscrible: Int = 0
-) : ChannelEntityCreater, Serializable {
+) : ChannelEntityCreater, Serializable, INavigatorEntityCreater {
 
     override fun createChannelEntity(): ChannelEntity {
         val entity = ChannelEntity()
         entity.isFixed = isFix == 1
         entity.name = title
         return entity
+    }
+
+    override fun getTabTitle(): String {
+        return title
     }
 }

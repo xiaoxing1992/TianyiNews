@@ -6,6 +6,7 @@ import com.kingja.loadsir.core.LoadService
 import com.xk.eyepetizer.mvp.model.bean.KzCategory
 import kotlinx.android.synthetic.main.homechildfragment.*
 import tianyinews.tianyi.com.tianyinews.R
+import tianyinews.tianyi.com.tianyinews.activity.VideoDetailActivity
 import tianyinews.tianyi.com.tianyinews.adapter.KaiyanHotChildAdapter
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment
 import tianyinews.tianyi.com.tianyinews.bean.VideItem
@@ -54,7 +55,7 @@ class KaiyanHotChildFragment : BaseFragment<KaiyanHotChildViewModel, FragmentKai
                 loadsir.showSuccess()
                 refreshLayout!!.finishRefresh()
                 val toMutableList = it.listData?.toMutableList()
-                toMutableList?.add(VideItem("2002",null,"2002"))
+                toMutableList?.add(VideItem("2002", null, "2002"))
                 mAdapter.setList(toMutableList)
             })
         }
@@ -64,6 +65,10 @@ class KaiyanHotChildFragment : BaseFragment<KaiyanHotChildViewModel, FragmentKai
         super.initListener()
         mDatabind.refreshLayout.setOnRefreshListener {
             mViewModel.reuqestData(type)
+        }
+        mAdapter.setOnItemClickListener { adapter, view, position ->
+            val item = mAdapter.getItemOrNull(position) ?: return@setOnItemClickListener
+            VideoDetailActivity.start(requireContext(),item)
         }
     }
 

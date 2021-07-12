@@ -2,15 +2,12 @@ package tianyinews.tianyi.com.tianyinews.view
 
 import android.content.Context
 import android.graphics.Color
-import android.view.animation.AccelerateInterpolator
-import android.view.animation.DecelerateInterpolator
 import androidx.viewpager.widget.ViewPager
-import net.lucode.hackware.magicindicator.buildins.UIUtil
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator
-import tianyinews.tianyi.com.tianyinews.bean.MyChannel
+import tianyinews.tianyi.com.tianyinews.bean.INavigatorEntityCreater
+import tianyinews.tianyi.com.tianyinews.ext.titles.ColorFlipPagerTitleView
 import tianyinews.tianyi.com.tianyinews.ext.titles.ScaleTransitionPagerTitleView
 
 /**
@@ -18,31 +15,72 @@ import tianyinews.tianyi.com.tianyinews.ext.titles.ScaleTransitionPagerTitleView
  * @CreateDate:     2021/7/9 3:21 下午
  * @Description:
  */
-class MBCommonNavigatorAdapter constructor(val context: Context, val dataList: MutableList<MyChannel>, val viewpager: ViewPager) : CommonNavigatorAdapter() {
+class MBCommonNavigatorAdapter<T> constructor(
+    private val dataList: MutableList<T>,
+    val viewpager: ViewPager,
+    val styleType: Int = 1,
+    private val indicator: IPagerIndicator
+) : CommonNavigatorAdapter() {
 
+    companion object {
+        const val TYPE_TITLE_SCALETRANSITION = 1
+        const val TYPE_TITLE_COLORFLIP = 2
+
+
+        const val TYPE_INDICATOR_LINE = 1
+
+
+    }
 
     override fun getCount(): Int = dataList.size
     override fun getTitleView(context: Context, index: Int): IPagerTitleView {
-        return ScaleTransitionPagerTitleView(context).apply {
-            textSize = 18f
-            normalColor = Color.parseColor("#9e9e9e")
-            selectedColor = Color.parseColor("#D43D3D")
-            text = dataList[index].title
-            setOnClickListener {
-                viewpager.currentItem = index
+        return when (styleType) {
+            TYPE_TITLE_SCALETRANSITION -> {
+                ScaleTransitionPagerTitleView(context).apply {
+                    textSize = 14f
+                    normalColor = Color.parseColor("#9e9e9e")
+                    selectedColor = Color.parseColor("#D43D3D")
+                    val t = dataList[index]
+                    if (t is INavigatorEntityCreater) {
+                        text = t.getTabTitle()
+                        setOnClickListener {
+                            viewpager.currentItem = index
+                        }
+                    }
+                }
+            }
+            TYPE_TITLE_COLORFLIP -> {
+                ColorFlipPagerTitleView(context).apply {
+                    textSize = 14f
+                    normalColor = Color.parseColor("#9e9e9e")
+                    selectedColor = Color.parseColor("#D43D3D")
+                    val t = dataList[index]
+                    if (t is INavigatorEntityCreater) {
+                        text = t.getTabTitle()
+                        setOnClickListener {
+                            viewpager.currentItem = index
+                        }
+                    }
+                }
+            }
+            else -> {
+                ScaleTransitionPagerTitleView(context).apply {
+                    textSize = 14f
+                    normalColor = Color.parseColor("#9e9e9e")
+                    selectedColor = Color.parseColor("#D43D3D")
+                    val t = dataList[index]
+                    if (t is INavigatorEntityCreater) {
+                        text = t.getTabTitle()
+                        setOnClickListener {
+                            viewpager.currentItem = index
+                        }
+                    }
+                }
             }
         }
     }
 
-    override fun getIndicator(context: Context?): IPagerIndicator {
-        return LinePagerIndicator(context).apply {
-            mode = LinePagerIndicator.MODE_EXACTLY
-            lineHeight = UIUtil.dip2px(context, 6.0).toFloat()
-            lineWidth = UIUtil.dip2px(context, 10.0).toFloat()
-            roundRadius = UIUtil.dip2px(context, 3.0).toFloat()
-            startInterpolator = AccelerateInterpolator()
-            endInterpolator = DecelerateInterpolator(2.0f)
-            setColors(Color.parseColor("#D43D3D"))
-        }
+    override fun getIndicator(context: Context): IPagerIndicator {
+        return indicator
     }
 }

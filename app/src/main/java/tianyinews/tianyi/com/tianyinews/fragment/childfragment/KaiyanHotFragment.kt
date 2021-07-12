@@ -46,7 +46,12 @@ class KaiyanHotFragment : BaseFragment<KaiyanHotViewModel, FragmentKaiyanHotBind
             liveData.observe(viewLifecycleOwner, Observer {
                 alldata = it.listData?.toMutableList()
                 mDatabind.viewPager?.adapter = adapter
-                val commonNavigatorAdapter = ZZCommonNavigatorAdapter(alldata, mDatabind.viewPager)
+                val commonNavigatorAdapter = ZZCommonNavigatorAdapter(alldata,
+                    mDatabind.viewPager,
+                    DotPagerIndicator(requireContext()).apply {
+                        setRadius(SizeUtils.dp2px(3f).toFloat())
+                        setDotColor(ColorUtils.getColor(R.color.chinaHoliDay))
+                    })
                 val commonNavigator = CommonNavigator(requireActivity()).apply {
                     scrollPivotX = 0.8f
                     leftPadding = SizeUtils.dp2px(36f)
