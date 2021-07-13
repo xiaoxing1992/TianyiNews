@@ -59,4 +59,36 @@
     <color name="nightTitleBackground">#893F3F</color>
     <color name="red_checked_color">#FF4C39</color>
     <color name="red_normal_color">#935656</color>
+
+
+    <!-- A1 -->
+    <color name="A1">#FF191919</color>
+    <!-- A2 -->
+    <color name="A2">#FF282828</color>
+    <!-- A3 -->
+    <color name="A3">#FF4F4F4F</color>
+    <!-- A4 -->
+    <color name="A4">#FF969696</color>
+    <!-- A5 -->
+    <color name="A5">#FFC3C3C3</color>
+    <!-- A6 -->
+    <color name="A6">#FFEBEBEB</color>
+    <!-- A7 -->
+    <color name="A7">#FFF2F2F2</color>
+    <!-- A8 -->
+    <color name="A8">#FFF7F7F7</color>
+    <!-- A9 -->
+    <color name="A9">#FFFFFFFF</color>
+    <!-- A10 -->
+    <color name="A10">#FF1E1E1E</color>
+    <!--A11-->
+    <color name="A11">#FF242424</color>
+    <!-- B1 -->
+    <color name="B1">#FF2781D6</color>
+    <!--B2-->
+    <color name="B2">#FF4B85FD</color>
+    <color name="B290">#1A4B85FD</color>
+
+    <color name="P1">#FF6F6BFD</color>
+    <color name="P190">#1A4B85FD</color>
 </resources>

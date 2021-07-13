@@ -10,7 +10,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.alibaba.fastjson.JSON
 import com.blankj.utilcode.util.ConvertUtils
-import com.blankj.utilcode.util.ThreadUtils.runOnUiThread
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.internal.ads.zzbyx
 import com.gyf.immersionbar.ImmersionBar
 import com.rz.commonlibrary.base.appContext
 import com.trs.channellib.channel.channel.helper.ChannelDataHelepr
@@ -24,15 +25,14 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTit
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView
 import tianyinews.tianyi.com.tianyinews.R
+import tianyinews.tianyi.com.tianyinews.activity.RideVoiceCreateActivity
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment
 import tianyinews.tianyi.com.tianyinews.bean.MyChannel
 import tianyinews.tianyi.com.tianyinews.databinding.HomefragmentBinding
 import tianyinews.tianyi.com.tianyinews.ext.titles.ScaleTransitionPagerTitleView
 import tianyinews.tianyi.com.tianyinews.fragment.childfragment.HomeChildFragment
 import tianyinews.tianyi.com.tianyinews.fragment.childfragment.HomeChildFragment.Companion.newInstance
-import tianyinews.tianyi.com.tianyinews.util.GsonUtil
 import tianyinews.tianyi.com.tianyinews.viewmodel.HomeVideModel
-import java.io.ByteArrayOutputStream
 import java.util.*
 
 /**
@@ -41,7 +41,7 @@ import java.util.*
  * @date: 2017/3/14.
  */
 class HomeFragment : BaseFragment<HomeVideModel, HomefragmentBinding>(), ChannelDataRefreshListenter {
-    private val mDataList: MutableList<String> =  ArrayList()
+    private val mDataList: MutableList<String> = ArrayList()
     private var ids = 1
     private var IdsMap: MutableMap<String, Int> = HashMap()
     private var preIds: MutableList<String?> = ArrayList()
@@ -69,7 +69,7 @@ class HomeFragment : BaseFragment<HomeVideModel, HomefragmentBinding>(), Channel
 
     override fun onResume() {
         super.onResume()
-        if(isFirst.not()){
+        if (isFirst.not()) {
             isFirst = true
             ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayTitleBackground).init()
         }
@@ -79,6 +79,13 @@ class HomeFragment : BaseFragment<HomeVideModel, HomefragmentBinding>(), Channel
         super.initData()
         mDatabind.homeViewPager.adapter = adapter
         adapter.notifyDataSetChanged()
+    }
+
+    override fun initListener() {
+        super.initListener()
+        mDatabind.homeInclude.ivSearch.setOnClickListener {
+            RideVoiceCreateActivity.start(requireContext())
+        }
     }
 
     private fun setPointer() {
@@ -143,7 +150,8 @@ class HomeFragment : BaseFragment<HomeVideModel, HomefragmentBinding>(), Channel
         setPointer()
     }
 
-    internal inner class MyHomeListViewPager(fm: FragmentManager?) : FragmentStatePagerAdapter(fm!!,FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    internal inner class MyHomeListViewPager(fm: FragmentManager?) :
+        FragmentStatePagerAdapter(fm!!, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         override fun getItem(position: Int): Fragment {
             return newInstance(myChannels[position])
         }

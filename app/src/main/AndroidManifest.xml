@@ -95,6 +95,10 @@
             android:name=".activity.VideoDetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="nosensor"></activity>
+        <activity
+            android:name=".activity.RideVoiceCreateActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="nosensor"/>
     </application>
 
 </manifest>

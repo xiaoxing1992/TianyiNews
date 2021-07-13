@@ -7,8 +7,6 @@ import android.content.res.Configuration
 import android.os.Bundle
 import com.gyf.immersionbar.ImmersionBar
 import com.shuyu.gsyvideoplayer.GSYVideoManager
-import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
-import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer
 import tianyinews.tianyi.com.tianyinews.R
 import tianyinews.tianyi.com.tianyinews.base.BaseActivity
 import tianyinews.tianyi.com.tianyinews.bean.VideItem
