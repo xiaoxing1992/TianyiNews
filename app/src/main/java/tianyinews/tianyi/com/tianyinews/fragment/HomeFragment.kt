@@ -10,8 +10,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.alibaba.fastjson.JSON
 import com.blankj.utilcode.util.ConvertUtils
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.internal.ads.zzbyx
 import com.gyf.immersionbar.ImmersionBar
 import com.rz.commonlibrary.base.appContext
 import com.trs.channellib.channel.channel.helper.ChannelDataHelepr
@@ -25,7 +23,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTit
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView
 import tianyinews.tianyi.com.tianyinews.R
-import tianyinews.tianyi.com.tianyinews.activity.RideVoiceCreateActivity
+import tianyinews.tianyi.com.tianyinews.activity.VoiceCreateActivity
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment
 import tianyinews.tianyi.com.tianyinews.bean.MyChannel
 import tianyinews.tianyi.com.tianyinews.databinding.HomefragmentBinding
@@ -84,7 +82,7 @@ class HomeFragment : BaseFragment<HomeVideModel, HomefragmentBinding>(), Channel
     override fun initListener() {
         super.initListener()
         mDatabind.homeInclude.ivSearch.setOnClickListener {
-            RideVoiceCreateActivity.start(requireContext())
+            VoiceCreateActivity.start(requireContext())
         }
     }
 
