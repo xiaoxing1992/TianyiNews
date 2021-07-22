@@ -1,0 +1,23 @@
+[
+  {
+    "title": "周",
+    "channelType": 0,
+    "isFix": 1,
+    "isSubscible": 1,
+    "type": "1"
+  },
+  {
+    "title": "月",
+    "channelType": 0,
+    "isFix": 1,
+    "isSubscible": 1,
+    "type": "2"
+  },
+  {
+    "title": "总",
+    "channelType": 0,
+    "isFix": 1,
+    "isSubscible": 1,
+    "type": "3"
+  }
+]

@@ -3,6 +3,7 @@ package tianyinews.tianyi.com.tianyinews.application
 import androidx.multidex.MultiDex
 import cat.ereza.customactivityoncrash.config.CaocConfig
 import cn.smssdk.SMSSDK
+import com.google.android.gms.ads.MobileAds
 import com.kingja.loadsir.callback.SuccessCallback
 import com.kingja.loadsir.core.LoadSir
 import com.rz.commonlibrary.base.BaseApp
@@ -33,7 +34,7 @@ class MyApplication : BaseApp() {
         myApplication = this
         UMShareAPI.get(this)
         SMSSDK.initSDK(this, "1c65790672734", "bd4224b54238bd1a08663da7db8bfd70")
-
+        MobileAds.initialize(this)
         //防止项目崩溃，崩溃后打开错误界面
         CaocConfig.Builder.create()
             .backgroundMode(CaocConfig.BACKGROUND_MODE_SILENT) //default: CaocConfig.BACKGROUND_MODE_SHOW_CUSTOM

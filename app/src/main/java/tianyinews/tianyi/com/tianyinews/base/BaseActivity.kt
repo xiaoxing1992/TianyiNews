@@ -18,6 +18,7 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : BaseVmDb
 
     abstract override fun initView(savedInstanceState: Bundle?)
 
+    override fun initListener(){}
     /**
      * 创建liveData观察者
      */

@@ -78,6 +78,7 @@ class VideItem(var type: String, val data: Data?, val tag: String) : Serializabl
             "banner2" -> KaiyanRecommendAdapter.TYPE_BANNER
             "textHeader" -> KaiyanRecommendAdapter.TYPE_HEADER
             "video" -> KaiyanRecommendAdapter.TYPE_VIDEO
+            "2002" -> KaiyanRecommendAdapter.TYPE_END
             else -> KaiyanRecommendAdapter.TYPE_OTHER
         }
 }

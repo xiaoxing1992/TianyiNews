@@ -12,4 +12,5 @@ object NewsMultiItemEntity {
     const val IMG = 2
     const val IMG_TWO = 3
     const val IMG_THREE = 4
+    const val AD = 10
 }

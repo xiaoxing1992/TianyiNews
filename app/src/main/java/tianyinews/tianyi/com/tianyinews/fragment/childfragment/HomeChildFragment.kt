@@ -14,11 +14,13 @@ import tianyinews.tianyi.com.tianyinews.activity.WebActivity
 import tianyinews.tianyi.com.tianyinews.adapter.MyHomeListViewAdapter
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment
 import tianyinews.tianyi.com.tianyinews.bean.MyChannel
+import tianyinews.tianyi.com.tianyinews.bean.NewsDataModel
 import tianyinews.tianyi.com.tianyinews.databinding.HomechildfragmentBinding
 import tianyinews.tianyi.com.tianyinews.ext.loadServiceInit
 import tianyinews.tianyi.com.tianyinews.ext.showLoading
 import tianyinews.tianyi.com.tianyinews.ext.showMessage
 import tianyinews.tianyi.com.tianyinews.viewmodel.HomeChildViewModel
+import java.util.*
 
 /**
  * @类的用途:
@@ -33,11 +35,13 @@ class HomeChildFragment : BaseFragment<HomeChildViewModel, HomechildfragmentBind
     private val tv_title: TextView by lazy { headerView.findViewById(R.id.tv_title) }
 
     //界面状态管理者
-    private  val loadsir: LoadService<Any> by lazy { loadServiceInit(mDatabind.refreshLayout) {
-        //点击重试时触发的操作
-        loadsir.showLoading()
-        mViewModel.reuqestData(true, mChannel!!.requestTitle)
-    } }
+    private val loadsir: LoadService<Any> by lazy {
+        loadServiceInit(mDatabind.refreshLayout) {
+            //点击重试时触发的操作
+            loadsir.showLoading()
+            mViewModel.reuqestData(true, mChannel!!.requestTitle)
+        }
+    }
 
     override fun layoutId(): Int = R.layout.homechildfragment
 
@@ -65,7 +69,7 @@ class HomeChildFragment : BaseFragment<HomeChildViewModel, HomechildfragmentBind
         adapter.setOnItemClickListener { ada: BaseQuickAdapter<*, *>, view: View?, position: Int ->
             val item = adapter.getItem(position) ?: return@setOnItemClickListener
             val newUrl = item.url
-            WebActivity.start(requireContext(),newUrl)
+            WebActivity.start(requireContext(), newUrl)
         }
         adapter.setOnItemLongClickListener { adapter: BaseQuickAdapter<*, *>, view: View?, position: Int ->
             showMessage("确定收藏吗？收藏以后更方便阅读精彩内容", "收藏精彩看点", positiveAction = {
@@ -78,11 +82,44 @@ class HomeChildFragment : BaseFragment<HomeChildViewModel, HomechildfragmentBind
         }
     }
 
+    private var insertSpace = 0 // 广告间距
+    private var lastInsertIndex = 0 // 广告最后插入位置
+
+    /**
+     * 插入广告数据
+     */
+    private fun integrateAdToNewsData(list: List<NewsDataModel>?):MutableList<NewsDataModel> {
+        var newsInfoModelList = mutableListOf<NewsDataModel>()
+        try {
+            if (list == null) return mutableListOf()
+            newsInfoModelList =  list.toMutableList()
+            if (insertSpace == 0) {
+                insertSpace = 6
+            }
+            while (lastInsertIndex + insertSpace < newsInfoModelList.size) {
+                val newsInfoModel = NewsDataModel()
+                newsInfoModel.uniquekey = "ad"
+                lastInsertIndex += this.insertSpace
+                newsInfoModelList.add(lastInsertIndex, newsInfoModel)
+                lastInsertIndex++
+                if (insertSpace == 6) {
+                    insertSpace = 9
+                } else if (insertSpace == 9) {
+                    insertSpace = 9
+                }
+            }
+            lastInsertIndex -= newsInfoModelList.size
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return newsInfoModelList
+    }
+
     override fun createObserver() {
         mViewModel.run {
             homeDataState.observe(viewLifecycleOwner, Observer {
                 if (it.isRefresh) {
-                    adapter.setList(it.listData)
+                    adapter.setList(integrateAdToNewsData(it.listData))
                     loadsir.showSuccess()
                     refreshLayout!!.finishRefresh()
                     if (adapter.hasHeaderLayout()) {
@@ -95,7 +132,7 @@ class HomeChildFragment : BaseFragment<HomeChildViewModel, HomechildfragmentBind
                     }, 3000)
                 } else {
                     it.listData?.let {
-                        adapter.addData(it)
+                        adapter.addData(integrateAdToNewsData(it))
                         loadsir.showSuccess()
                     }
 

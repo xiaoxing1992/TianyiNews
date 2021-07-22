@@ -16,6 +16,7 @@ import com.zhpan.indicator.enums.IndicatorSlideMode
 import com.zhpan.indicator.enums.IndicatorStyle
 import kotlinx.android.synthetic.main.homechildfragment.*
 import tianyinews.tianyi.com.tianyinews.R
+import tianyinews.tianyi.com.tianyinews.activity.VideoDetailActivity
 import tianyinews.tianyi.com.tianyinews.adapter.KaiyanBannerAdapter
 import tianyinews.tianyi.com.tianyinews.adapter.KaiyanHomeAdapter
 import tianyinews.tianyi.com.tianyinews.adapter.KaiyanRecommendAdapter
@@ -81,7 +82,10 @@ class KaiyanHomeFragment : BaseFragment<KzHomeViewModel, FragmentKzHomeBinding>(
             setPageStyle(PageStyle.MULTI_PAGE_SCALE)
             setScrollDuration(800)
             setRevealWidth(ConvertUtils.dp2px(10f), ConvertUtils.dp2px(10f))
-//            setOnPageClickListener { _: View, position: Int -> itemClick(position) }
+            setOnPageClickListener { _: View, position: Int ->
+                val item = mViewPager.data[position]?:return@setOnPageClickListener
+                VideoDetailActivity.start(requireContext(),item)
+            }
             setInterval(3000)
             create()
         }
@@ -105,6 +109,11 @@ class KaiyanHomeFragment : BaseFragment<KzHomeViewModel, FragmentKzHomeBinding>(
         mDatabind.refreshLayout.setOnLoadMoreListener {
             //获取网络数据
             mViewModel?.requestMoreData()
+        }
+
+        mAdapter.setOnItemClickListener { adapter, view, position ->
+            val item = mAdapter.getItemOrNull(position) ?: return@setOnItemClickListener
+            VideoDetailActivity.start(requireContext(),item)
         }
     }
 

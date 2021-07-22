@@ -17,7 +17,7 @@ object ImageViewAdapter {
     @JvmStatic
     fun setImageUrl(imageView: ImageView, url: String) {
         imageView.load(url) {
-            placeholder(R.mipmap.ic_launcher)
+            placeholder(R.drawable.image_placeholder)
         }
     }
 

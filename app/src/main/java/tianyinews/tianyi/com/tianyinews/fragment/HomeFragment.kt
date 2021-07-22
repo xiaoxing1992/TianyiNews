@@ -8,8 +8,10 @@ import android.view.animation.DecelerateInterpolator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.blankj.utilcode.util.ThreadUtils.runOnUiThread
+import com.alibaba.fastjson.JSON
+import com.blankj.utilcode.util.ConvertUtils
 import com.gyf.immersionbar.ImmersionBar
+import com.rz.commonlibrary.base.appContext
 import com.trs.channellib.channel.channel.helper.ChannelDataHelepr
 import com.trs.channellib.channel.channel.helper.ChannelDataHelepr.ChannelDataRefreshListenter
 import net.lucode.hackware.magicindicator.ViewPagerHelper
@@ -21,15 +23,14 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTit
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView
 import tianyinews.tianyi.com.tianyinews.R
+import tianyinews.tianyi.com.tianyinews.activity.VoiceCreateActivity
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment
 import tianyinews.tianyi.com.tianyinews.bean.MyChannel
 import tianyinews.tianyi.com.tianyinews.databinding.HomefragmentBinding
 import tianyinews.tianyi.com.tianyinews.ext.titles.ScaleTransitionPagerTitleView
 import tianyinews.tianyi.com.tianyinews.fragment.childfragment.HomeChildFragment
 import tianyinews.tianyi.com.tianyinews.fragment.childfragment.HomeChildFragment.Companion.newInstance
-import tianyinews.tianyi.com.tianyinews.util.GsonUtil
 import tianyinews.tianyi.com.tianyinews.viewmodel.HomeVideModel
-import java.io.ByteArrayOutputStream
 import java.util.*
 
 /**
@@ -38,7 +39,7 @@ import java.util.*
  * @date: 2017/3/14.
  */
 class HomeFragment : BaseFragment<HomeVideModel, HomefragmentBinding>(), ChannelDataRefreshListenter {
-    private val mDataList: MutableList<String> =  ArrayList()
+    private val mDataList: MutableList<String> = ArrayList()
     private var ids = 1
     private var IdsMap: MutableMap<String, Int> = HashMap()
     private var preIds: MutableList<String?> = ArrayList()
@@ -66,7 +67,7 @@ class HomeFragment : BaseFragment<HomeVideModel, HomefragmentBinding>(), Channel
 
     override fun onResume() {
         super.onResume()
-        if(isFirst.not()){
+        if (isFirst.not()) {
             isFirst = true
             ImmersionBar.with(this).statusBarColorTransformEnable(false).statusBarColor(R.color.dayTitleBackground).init()
         }
@@ -76,6 +77,13 @@ class HomeFragment : BaseFragment<HomeVideModel, HomefragmentBinding>(), Channel
         super.initData()
         mDatabind.homeViewPager.adapter = adapter
         adapter.notifyDataSetChanged()
+    }
+
+    override fun initListener() {
+        super.initListener()
+        mDatabind.homeInclude.ivSearch.setOnClickListener {
+            VoiceCreateActivity.start(requireContext())
+        }
     }
 
     private fun setPointer() {
@@ -123,27 +131,25 @@ class HomeFragment : BaseFragment<HomeVideModel, HomefragmentBinding>(), Channel
 
     override fun onChannelSeleted(update: Boolean, posisiton: Int) {}
     private fun loadData() {
-        Thread {
-            val data = fromRaw
-            val alldata = GsonUtil.jsonToBeanList<List<MyChannel>>(data, MyChannel::class.java)
-            val showChannels = dataHelepr.getShowChannels(alldata)
-            runOnUiThread {
-                myChannels.clear()
-                myChannels.addAll(showChannels)
-                adapter.notifyDataSetChanged()
-                if (needShowPosition != -1) {
-                    mDatabind.homeViewPager.currentItem = needShowPosition
-                    needShowPosition = -1
-                }
-                for (i in myChannels.indices) {
-                    mDataList.add(myChannels[i].title)
-                }
-                setPointer()
-            }
-        }.start()
+        val open = appContext.resources.openRawResource(R.raw.news_list)
+        val json = ConvertUtils.inputStream2String(open, "UTF-8")
+        val alldata = JSON.parseArray(json, MyChannel::class.java)
+        val showChannels = dataHelepr.getShowChannels(alldata)
+        myChannels.clear()
+        myChannels.addAll(showChannels)
+        adapter.notifyDataSetChanged()
+        if (needShowPosition != -1) {
+            mDatabind.homeViewPager.currentItem = needShowPosition
+            needShowPosition = -1
+        }
+        for (i in myChannels.indices) {
+            mDataList.add(myChannels[i].title)
+        }
+        setPointer()
     }
 
-    internal inner class MyHomeListViewPager(fm: FragmentManager?) : FragmentStatePagerAdapter(fm!!,FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    internal inner class MyHomeListViewPager(fm: FragmentManager?) :
+        FragmentStatePagerAdapter(fm!!, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         override fun getItem(position: Int): Fragment {
             return newInstance(myChannels[position])
         }
@@ -193,24 +199,4 @@ class HomeFragment : BaseFragment<HomeVideModel, HomefragmentBinding>(), Channel
             }
         }
     }
-
-    private val fromRaw: String
-        private get() {
-            val result = ""
-            try {
-                val input = resources.openRawResource(R.raw.news_list)
-                val output = ByteArrayOutputStream()
-                val buffer = ByteArray(1024)
-                var length = 0
-                while (input.read(buffer).also { length = it } != -1) {
-                    output.write(buffer, 0, length)
-                }
-                output.close()
-                input.close()
-                return output.toString()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            return result
-        }
 }
