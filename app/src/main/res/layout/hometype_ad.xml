@@ -8,8 +8,8 @@
     <com.google.android.gms.ads.AdView
         android:id="@+id/ad_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:adSize="SMART_BANNER"
+        android:layout_height="100dp"
+        app:adSize="BANNER"
         app:adUnitId="ca-app-pub-6359757152400753/4661549875"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

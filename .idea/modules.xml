@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/TianyiNews.iml" filepath="$PROJECT_DIR$/.idea/TianyiNews.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TianyiNews.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TianyiNews.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TianyiNews.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/TianyiNews.buildSrc.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/channellib/TianyiNews.channellib.iml" filepath="$PROJECT_DIR$/.idea/modules/channellib/TianyiNews.channellib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/commonlibrary/TianyiNews.commonlibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/commonlibrary/TianyiNews.commonlibrary.iml" />
     </modules>
