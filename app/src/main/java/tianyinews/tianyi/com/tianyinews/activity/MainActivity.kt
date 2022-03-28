@@ -3,8 +3,13 @@ package tianyinews.tianyi.com.tianyinews.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Debug
+import android.os.Trace
 import androidx.fragment.app.Fragment
 import cn.jzvd.Jzvd
+import com.blankj.utilcode.util.LogUtils
+import dalvik.system.DexClassLoader
+import okio.*
 import tianyinews.tianyi.com.tianyinews.R
 import tianyinews.tianyi.com.tianyinews.base.BaseActivity
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment
@@ -13,14 +18,21 @@ import tianyinews.tianyi.com.tianyinews.fragment.CareFragment
 import tianyinews.tianyi.com.tianyinews.fragment.HomeFragment
 import tianyinews.tianyi.com.tianyinews.fragment.KaiyanFragment
 import tianyinews.tianyi.com.tianyinews.fragment.VideoFragment
+import tianyinews.tianyi.com.tianyinews.util.CacheUtil
+import tianyinews.tianyi.com.tianyinews.util.SettingUtil
 import tianyinews.tianyi.com.tianyinews.viewmodel.MainViewModel
+import java.io.File
 
-class MainActivity : BaseActivity<MainViewModel,ActivityMainBinding>(){
+class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     private var currentFragment = R.id.buttom_home_rb_id
     private val tabsId = listOf(R.id.buttom_home_rb_id, R.id.buttom_kaiyan_rb_id, R.id.buttom_video_rb_id, R.id.buttom_care_rb_id)
 
-    override fun layoutId(): Int  = R.layout.activity_main
+    override fun layoutId(): Int {
+        Trace.beginSection("onCreate()")
+        return R.layout.activity_main
+    }
+
     override fun initView(savedInstanceState: Bundle?) {
         mDatabind.buttomHomeRbId.isChecked = true
         chooseFragment(R.id.buttom_home_rb_id)
@@ -37,6 +49,10 @@ class MainActivity : BaseActivity<MainViewModel,ActivityMainBinding>(){
         mDatabind.buttomCareRbId.setOnClickListener {
             chooseFragment(R.id.buttom_care_rb_id)
         }
+
+
+        Trace.endSection()
+
     }
 
     private fun chooseFragment(checkedId: Int) {
@@ -56,7 +72,7 @@ class MainActivity : BaseActivity<MainViewModel,ActivityMainBinding>(){
 
         tabsId.forEach { tab ->
 
-            val aFragment = supportFragmentManager.findFragmentByTag(tab.toString()) as BaseFragment<*,*>?
+            val aFragment = supportFragmentManager.findFragmentByTag(tab.toString()) as BaseFragment<*, *>?
 
             if (tab == checkedId) {
 //                aFragment.currentFragment=aFragment::class.java

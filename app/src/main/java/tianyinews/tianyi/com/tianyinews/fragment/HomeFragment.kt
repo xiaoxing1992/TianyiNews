@@ -10,10 +10,13 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.alibaba.fastjson.JSON
 import com.blankj.utilcode.util.ConvertUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.gyf.immersionbar.ImmersionBar
 import com.rz.commonlibrary.base.appContext
 import com.trs.channellib.channel.channel.helper.ChannelDataHelepr
 import com.trs.channellib.channel.channel.helper.ChannelDataHelepr.ChannelDataRefreshListenter
+import dalvik.system.BaseDexClassLoader
+import dalvik.system.DexClassLoader
 import net.lucode.hackware.magicindicator.ViewPagerHelper
 import net.lucode.hackware.magicindicator.buildins.UIUtil
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator
@@ -22,6 +25,10 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerInd
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView
+import okio.Sink
+import okio.buffer
+import okio.sink
+import okio.source
 import tianyinews.tianyi.com.tianyinews.R
 import tianyinews.tianyi.com.tianyinews.activity.VoiceCreateActivity
 import tianyinews.tianyi.com.tianyinews.base.BaseFragment
@@ -31,6 +38,7 @@ import tianyinews.tianyi.com.tianyinews.ext.titles.ScaleTransitionPagerTitleView
 import tianyinews.tianyi.com.tianyinews.fragment.childfragment.HomeChildFragment
 import tianyinews.tianyi.com.tianyinews.fragment.childfragment.HomeChildFragment.Companion.newInstance
 import tianyinews.tianyi.com.tianyinews.viewmodel.HomeVideModel
+import java.io.File
 import java.util.*
 
 /**
@@ -81,8 +89,25 @@ class HomeFragment : BaseFragment<HomeVideModel, HomefragmentBinding>(), Channel
 
     override fun initListener() {
         super.initListener()
+        mDatabind.homeInclude.ivSearch.setOnLongClickListener {
+            ToastUtils.showShort(TestUtil().test())
+            return@setOnLongClickListener false
+        }
         mDatabind.homeInclude.ivSearch.setOnClickListener {
-            VoiceCreateActivity.start(requireContext())
+//            VoiceCreateActivity.start(requireContext())
+//
+            var apk = File("${requireContext().cacheDir}/hot_fix.dex")
+            var sink: Sink?=null
+            try {
+                var source = requireContext().assets.open("apk/hot_fix.dex").source()
+                sink = apk.sink().buffer()
+                sink.writeAll(source)
+            } catch (e: Exception) {
+            }finally {
+                sink?.close()
+            }
+
+
         }
     }
 

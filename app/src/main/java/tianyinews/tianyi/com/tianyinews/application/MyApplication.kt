@@ -25,12 +25,10 @@ class MyApplication : BaseApp() {
         super.onCreate()
         MultiDex.install(this)
         //界面加载管理 初始化
-        LoadSir.beginBuilder()
-            .addCallback(LoadingCallback()) //加载
+        LoadSir.beginBuilder().addCallback(LoadingCallback()) //加载
             .addCallback(ErrorCallback()) //错误
             .addCallback(EmptyCallback()) //空
-            .setDefaultCallback(SuccessCallback::class.java)
-            .commit()
+            .setDefaultCallback(SuccessCallback::class.java).commit()
         myApplication = this
         UMShareAPI.get(this)
         SMSSDK.initSDK(this, "1c65790672734", "bd4224b54238bd1a08663da7db8bfd70")

@@ -12,7 +12,7 @@ import tianyinews.tianyi.com.tianyinews.ext.showLoadingExt
  * @CreateDate:     2021/7/6 5:10 下午
  * @Description:
  */
-abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : BaseVmDbActivity<VM, DB>() {
+abstract class  BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : BaseVmDbActivity<VM, DB>() {
 
     abstract override fun layoutId(): Int
 
