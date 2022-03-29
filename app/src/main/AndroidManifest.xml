@@ -68,7 +68,7 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/lumos_theme.splash"
+            android:theme="@style/ThemeSplash"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" >
 
             <intent-filter>
@@ -117,6 +117,16 @@
             android:name=".activity.VoiceDetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="nosensor" />
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false">
+
+            <meta-data
+                android:name="tianyinews.tianyi.com.tianyinews.initializer.ApplicationInitializer"
+                android:value="androidx.startup" />
+        </provider>
     </application>
 
 </manifest>
